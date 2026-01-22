@@ -1,4 +1,0 @@
-repository "Rich in the Dungeon/Rich in the Dungeon@1375587362317@cloud"
-  path "/"
-    br "/main"
-    co "/main"
