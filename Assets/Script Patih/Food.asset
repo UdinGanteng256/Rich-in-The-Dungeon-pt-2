@@ -18,5 +18,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   width: 1
   height: 1
-  itemType: 0
+  itemType: 2
   valueAmount: 20

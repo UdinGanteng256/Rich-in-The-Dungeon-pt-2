@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4871b64faf59a4cd18de8e6d51459eee, type: 3}
-  m_Name: GoldNugget
+  m_Name: Diamond
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  id: gold_01
+  id: diamond_01
   displayName: 
   description: 
   icon: {fileID: 2655818883376932089, guid: 705edbea0e9d09d4cac7d6bb181b52d4, type: 3}

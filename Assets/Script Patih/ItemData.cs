@@ -1,11 +1,10 @@
 using UnityEngine;
 
-// Kategori sesuai requestmu
 public enum ItemType
 {
-    Resource,   // Emas, Batu (Untuk dijual/crafting)
-    Tool,       // Pickaxe (Untuk nambang)
-    Food        // Makanan (Untuk nambah stamina)
+    Resource,   // Item crafting / jual
+    Tool,       // Alat (mining, dll)
+    Food        // Konsumsi (stamina, dll)
 }
 
 [CreateAssetMenu(menuName = "Inventory System/Item Data")]
@@ -13,29 +12,34 @@ public class ItemData : ScriptableObject
 {
     public string id;
     public string displayName;
-    [TextArea(3, 3)] public string description;
-    
-    [Header("Visual & Size")]
+
+    [TextArea(3, 3)]
+    public string description;
+
+    [Header("Visual")]
     public Sprite icon;
     public int width = 1;
     public int height = 1;
-    
-    [Header("Game Data")]
+
+    [Header("Gameplay")]
     public ItemType itemType;
-    
-    // Nilai kegunaan item
-    // Jika Tool = Damage ke batu
-    // Jika Food = Jumlah Stamina yang diisi
-    // Jika Resource = Harga Jual
-    public int valueAmount; 
+
+    // Nilai berdasarkan tipe item
+    public int valueAmount;
+
+    private bool[,] cachedShape;
 
     public bool[,] GetShape()
     {
-        return new bool[width, height]; 
+        if (cachedShape == null)
+            cachedShape = new bool[width, height];
+
+        return cachedShape;
     }
-    
+
+
     public bool IsOccupied(int x, int y)
     {
-       return true; 
+        return true;
     }
 }

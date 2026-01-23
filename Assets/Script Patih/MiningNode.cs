@@ -1,64 +1,38 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem; // WAJIB ADA
 
 public class MiningNode : MonoBehaviour
 {
     [Header("Statistik Batu")]
-    public int durability = 3; 
-    public GameObject lootPrefab; 
+    public int durability = 3;
+    public GameObject lootPrefab;
 
-    [Header("Visual Feedback")]
-    public float shakeAmount = 0.1f; 
+    [Header("Visual")]
+    public float shakeAmount = 0.1f;
     public SpriteRenderer spriteRenderer;
 
     private int currentHealth;
     private Vector3 originalPos;
     private bool isShaking = false;
-    private Camera mainCamera; // Tambahan untuk Raycast
 
-    void Start()
+    private void Start()
     {
         currentHealth = durability;
         originalPos = transform.position;
-        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        // Cache kamera utama biar ringan
-        mainCamera = Camera.main;
+
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    // Dipanggil oleh PlayerAction saat pemain menambang
+    public void TakeDamage()
     {
-        // Deteksi Klik Kiri (Manual via Script)
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            CheckHit();
-        }
-    }
-
-    void CheckHit()
-    {
-        // 1. Ubah posisi mouse di layar ke dunia game
-        Vector2 mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        
-        // 2. Tembakkan Laser
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-        // 3. Cek apakah laser kena SAYA (Batu ini)?
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
-        {
-            TakeDamage();
-        }
-    }
-
-    void TakeDamage()
-    {
-        // Logika Pukul Batu (Sama seperti sebelumnya)
         currentHealth--;
 
-        if (!isShaking) StartCoroutine(ShakeEffect());
+        if (!isShaking)
+            StartCoroutine(ShakeEffect());
 
-        Debug.Log($"Batu dipukul! Sisa nyawa: {currentHealth}");
+        Debug.Log($"Batu dipukul! HP tersisa: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -66,27 +40,27 @@ public class MiningNode : MonoBehaviour
         }
     }
 
+    // Hancurkan batu dan keluarkan loot
     void BreakRock()
     {
         if (lootPrefab != null)
         {
-            Vector3 spawnPos = transform.position + (Vector3.up * 0.5f); 
+            Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
             Instantiate(lootPrefab, spawnPos, Quaternion.identity);
         }
 
-        Debug.Log("Batu Hancur!");
         Destroy(gameObject);
     }
 
+    // Efek goyang & flash saat batu dipukul
     IEnumerator ShakeEffect()
     {
         isShaking = true;
-        float elapsed = 0.0f;
-        float duration = 0.1f;
 
-        spriteRenderer.color = new Color(1f, 0.8f, 0.8f); 
+        float elapsed = 0f;
+        spriteRenderer.color = new Color(1f, 0.8f, 0.8f);
 
-        while (elapsed < duration)
+        while (elapsed < 0.1f)
         {
             float x = Random.Range(-1f, 1f) * shakeAmount;
             float y = Random.Range(-1f, 1f) * shakeAmount;
