@@ -3,81 +3,68 @@ using UnityEngine;
 public class InventoryGrid : MonoBehaviour
 {
     [Header("Settings")]
-    public int gridSizeWidth = 8;  // Lebar Tas (Kolom)
-    public int gridSizeHeight = 4; // Tinggi Tas (Baris)
+    public int gridSizeWidth = 8;
+    public int gridSizeHeight = 4;
 
     [Header("Debug / Testing")]
-    public ItemData itemUntukDites; // Slot untuk menyeret item RustyPickaxe tadi
+    public ItemData itemUntukDites;
 
     // Ini array 2 dimensi untuk menyimpan data isi tas
     private ItemData[,] inventoryGrid;
 
     private void Awake()
     {
-        // Menyiapkan slot kosong sesuai ukuran
+        // 1. Siapkan Tas (Array) dulu! (WAJIB PERTAMA)
         inventoryGrid = new ItemData[gridSizeWidth, gridSizeHeight];
-    }
 
-    private void Start()
-    {
-        // --- FITUR TEST OTOMATIS ---
-        // Saat game mulai, sistem langsung mencoba memasukkan item tes.
+        // 2. Baru setelah tas siap, kita coba masukkan item test
         if (itemUntukDites != null)
         {
-            Debug.Log($"Mencoba memasukkan {itemUntukDites.name}...");
+            Debug.Log($"[Awake] Mencoba memasukkan {itemUntukDites.name}...");
             bool berhasil = AutoAddItem(itemUntukDites);
 
-            if (berhasil) Debug.Log("SUKSES! Item masuk ke tas.");
+            if (berhasil) Debug.Log("SUKSES! Item masuk ke tas saat Awake.");
             else Debug.LogError("GAGAL! Item tidak muat atau penuh.");
         }
     }
 
-    // Fungsi untuk mencari slot kosong secara otomatis
     public bool AutoAddItem(ItemData item)
     {
-        // Cek satu per satu dari pojok kiri bawah (0,0)
         for (int y = 0; y < gridSizeHeight; y++)
         {
             for (int x = 0; x < gridSizeWidth; x++)
             {
-                // Jika di posisi (x,y) muat...
                 if (CheckAvailableSpace(x, y, item))
                 {
-                    PlaceItem(item, x, y); // ...masukkan itemnya!
+                    PlaceItem(item, x, y);
                     return true;
                 }
             }
         }
-        return false; // Tas penuh
+        return false;
     }
 
-    // Fungsi Matematika: Cek apakah item muat di koordinat tertentu
     public bool CheckAvailableSpace(int posX, int posY, ItemData item)
     {
-        // 1. Cek Batas Tas (Jangan sampai tembus dinding)
         if (posX < 0 || posY < 0) return false;
         if (posX + item.width > gridSizeWidth || posY + item.height > gridSizeHeight) return false;
 
-        // 2. Cek Tabrakan dengan item lain
         for (int x = 0; x < item.width; x++)
         {
             for (int y = 0; y < item.height; y++)
             {
-                // Jika bentuk item padat di titik ini...
                 if (item.IsOccupied(x, y))
                 {
-                    // ...dan slot di tas sudah ada isinya
                     if (inventoryGrid[posX + x, posY + y] != null)
                     {
-                        return false; // Tabrakan!
+                        return false;
                     }
                 }
             }
         }
-        return true; // Aman, kosong
+        return true;
     }
 
-    // Fungsi untuk menyimpan item ke array
     public void PlaceItem(ItemData item, int posX, int posY)
     {
         for (int x = 0; x < item.width; x++)
@@ -91,5 +78,13 @@ public class InventoryGrid : MonoBehaviour
             }
         }
         Debug.Log($"Item {item.name} ditaruh di posisi: {posX}, {posY}");
+    }
+
+    // Helper function yang dibutuhkan oleh InventoryUI
+    public ItemData GetItemAt(int x, int y)
+    {
+        if (x >= 0 && x < gridSizeWidth && y >= 0 && y < gridSizeHeight)
+            return inventoryGrid[x, y];
+        return null;
     }
 }
