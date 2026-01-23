@@ -1,28 +1,41 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "RichInDungeon/Item")]
+// Kategori sesuai requestmu
+public enum ItemType
+{
+    Resource,   // Emas, Batu (Untuk dijual/crafting)
+    Tool,       // Pickaxe (Untuk nambang)
+    Food        // Makanan (Untuk nambah stamina)
+}
+
+[CreateAssetMenu(menuName = "Inventory System/Item Data")]
 public class ItemData : ScriptableObject
 {
-    [Header("Visuals")]
     public string id;
+    public string displayName;
+    [TextArea(3, 3)] public string description;
+    
+    [Header("Visual & Size")]
     public Sprite icon;
-
-    [Header("Grid Shape")]
-    // Width and Height of the item in grid cells
     public int width = 1;
     public int height = 1;
+    
+    [Header("Game Data")]
+    public ItemType itemType;
+    
+    // Nilai kegunaan item
+    // Jika Tool = Damage ke batu
+    // Jika Food = Jumlah Stamina yang diisi
+    // Jika Resource = Harga Jual
+    public int valueAmount; 
 
-    // We flatten the 2D shape into a 1D array for easier Inspector editing
-    // Example: A 2x2 L-shape would be defined by a bool array.
-    // In the Inspector, we can check boxes to define the shape.
-    public bool[] shapeLayout; 
-
-    // Helper to get the 2D shape at runtime
+    public bool[,] GetShape()
+    {
+        return new bool[width, height]; 
+    }
+    
     public bool IsOccupied(int x, int y)
     {
-        int index = y * width + x;
-        if (index >= 0 && index < shapeLayout.Length)
-            return shapeLayout[index];
-        return false;
+       return true; 
     }
 }
