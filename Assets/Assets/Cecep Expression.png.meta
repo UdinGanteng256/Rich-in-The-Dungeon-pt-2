@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 3aee4ee5fcca9ec409dcfcc3c87f5863
+guid: ef4c304ea77a41c4d8ecbe9ccee2df1f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 788435507506333041
-    second: Stone Settings_0
+      213: -4067502677837762631
+    second: Cecep Expression_0
+  - first:
+      213: -1857688650866607112
+    second: Cecep Expression_1
+  - first:
+      213: -5403450967403943293
+    second: Cecep Expression_2
+  - first:
+      213: 4317379920700512612
+    second: Cecep Expression_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stone Settings_0
+      name: Cecep Expression_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 32
-        height: 31
+        x: 5
+        y: 40
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1754831bae511fa00800000000000000
-      internalID: 788435507506333041
+      spriteID: 9bfa7847dd35d87c0800000000000000
+      internalID: -4067502677837762631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cecep Expression_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 40
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb32d5b30a2836e0800000000000000
+      internalID: -1857688650866607112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cecep Expression_2
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 10
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38aa5ae49f51305b0800000000000000
+      internalID: -5403450967403943293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cecep Expression_3
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 9
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46912c5d92a6aeb30800000000000000
+      internalID: 4317379920700512612
       vertices: []
       indices: 
       edges: []
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Stone Settings_0: 788435507506333041
+      Cecep Expression_0: -4067502677837762631
+      Cecep Expression_1: -1857688650866607112
+      Cecep Expression_2: -5403450967403943293
+      Cecep Expression_3: 4317379920700512612
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
