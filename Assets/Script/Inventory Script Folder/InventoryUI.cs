@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro; 
 
 public class InventoryUI : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class InventoryUI : MonoBehaviour
 
     [Header("UI")]
     public GameObject inventoryWindowObj;
+    public TextMeshProUGUI totalValueText; // Tambahkan di Inspector
     private bool isInventoryOpen = true;
 
     void Start()
@@ -38,13 +40,10 @@ public class InventoryUI : MonoBehaviour
 
     void GenerateGridVisuals()
     {
-        // Clear existing slots
         foreach (Transform child in gridContainer)
             Destroy(child.gameObject);
 
-        int totalSlots =
-            inventoryBackend.gridSizeWidth *
-            inventoryBackend.gridSizeHeight;
+        int totalSlots = inventoryBackend.gridSizeWidth * inventoryBackend.gridSizeHeight;
 
         for (int i = 0; i < totalSlots; i++)
             Instantiate(slotPrefab, gridContainer);
@@ -56,7 +55,7 @@ public class InventoryUI : MonoBehaviour
         foreach (Transform child in itemsLayer)
             Destroy(child.gameObject);
 
-        HashSet<ItemData> processedItems = new HashSet<ItemData>();
+        HashSet<ItemInstance> processedItems = new HashSet<ItemInstance>();
         GridLayoutGroup gridLayout = gridContainer.GetComponent<GridLayoutGroup>();
 
         float cellSizeX = gridLayout ? gridLayout.cellSize.x : 50f;
@@ -68,7 +67,7 @@ public class InventoryUI : MonoBehaviour
         {
             for (int y = 0; y < inventoryBackend.gridSizeHeight; y++)
             {
-                ItemData item = inventoryBackend.GetItemAt(x, y);
+                ItemInstance item = inventoryBackend.GetItemAt(x, y);
 
                 if (item == null || processedItems.Contains(item))
                     continue;
@@ -82,10 +81,13 @@ public class InventoryUI : MonoBehaviour
                 processedItems.Add(item);
             }
         }
+
+        // Update total value display
+        UpdateTotalValueDisplay();
     }
 
     void CreateItemObject(
-        ItemData item,
+        ItemInstance item,
         int x, int y,
         float sizeX, float sizeY,
         float gapX, float gapY
@@ -94,7 +96,7 @@ public class InventoryUI : MonoBehaviour
         GameObject newItem = Instantiate(itemPrefab, itemsLayer);
         RectTransform rect = newItem.GetComponent<RectTransform>();
 
-        // Size based on item shape
+        // Size berdasarkan instance item (bukan ItemData)
         float totalWidth  = (item.width * sizeX) + ((item.width - 1) * gapX);
         float totalHeight = (item.height * sizeY) + ((item.height - 1) * gapY);
         rect.sizeDelta = new Vector2(totalWidth, totalHeight);
@@ -105,39 +107,56 @@ public class InventoryUI : MonoBehaviour
             -y * (sizeY + gapY)
         );
 
-        if (item.icon != null)
-            newItem.GetComponent<Image>().sprite = item.icon;
+        // Set icon
+        if (item.itemData.icon != null)
+            newItem.GetComponent<Image>().sprite = item.itemData.icon;
 
+        // Set drag script
         InventoryDrag dragScript = newItem.GetComponent<InventoryDrag>();
         if (dragScript != null)
+        {
             dragScript.SetGridPosition(x, y);
+            dragScript.SetItemInstance(item);
+        }
+
+        // FITUR BARU: Tampilkan size & value pada item
+        TextMeshProUGUI itemInfoText = newItem.GetComponentInChildren<TextMeshProUGUI>();
+        if (itemInfoText != null)
+        {
+            itemInfoText.text = $"{item.width}x{item.height}\n${item.calculatedValue}";
+            itemInfoText.fontSize = 12;
+            itemInfoText.color = Color.white;
+            itemInfoText.alignment = TextAlignmentOptions.Center;
+        }
+    }
+
+    void UpdateTotalValueDisplay()
+    {
+        if (totalValueText != null)
+        {
+            int totalValue = inventoryBackend.GetTotalInventoryValue();
+            totalValueText.text = $"Total Value: ${totalValue}";
+        }
     }
 
     // Accept item dropped from hotbar
-    public bool TryAddFromHotbar(ItemData item, Vector2 screenPosition)
+    public bool TryAddFromHotbar(ItemInstance item, Vector2 screenPosition)
     {
-        RectTransform gridRect =
-            gridContainer.GetComponent<RectTransform>();
+        RectTransform gridRect = gridContainer.GetComponent<RectTransform>();
 
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 gridRect, screenPosition, null, out Vector2 localPoint))
             return false;
 
-        GridLayoutGroup gridLayout =
-            gridContainer.GetComponent<GridLayoutGroup>();
+        GridLayoutGroup gridLayout = gridContainer.GetComponent<GridLayoutGroup>();
 
         float cellSizeX = gridLayout.cellSize.x;
         float cellSizeY = gridLayout.cellSize.y;
         float spacingX  = gridLayout.spacing.x;
         float spacingY  = gridLayout.spacing.y;
 
-        int targetX = Mathf.FloorToInt(
-            localPoint.x / (cellSizeX + spacingX)
-        );
-
-        int targetY = Mathf.FloorToInt(
-            -localPoint.y / (cellSizeY + spacingY)
-        );
+        int targetX = Mathf.FloorToInt(localPoint.x / (cellSizeX + spacingX));
+        int targetY = Mathf.FloorToInt(-localPoint.y / (cellSizeY + spacingY));
 
         if (targetX < 0 || targetX >= inventoryBackend.gridSizeWidth ||
             targetY < 0 || targetY >= inventoryBackend.gridSizeHeight)

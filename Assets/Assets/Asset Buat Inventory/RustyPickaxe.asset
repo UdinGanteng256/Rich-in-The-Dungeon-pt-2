@@ -15,7 +15,7 @@ MonoBehaviour:
   id: pickaxe_01
   displayName: 
   description: 
-  icon: {fileID: 8959118705387878318, guid: 75a62108736c4406d9d6b4c15601703c, type: 3}
+  icon: {fileID: 21300000, guid: f716b46af59beaf46a76ea358d7c9103, type: 3}
   width: 2
   height: 3
   itemType: 1

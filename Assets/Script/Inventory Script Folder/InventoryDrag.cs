@@ -15,11 +15,10 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public int gridY;
     private Vector2 grabOffset;
     
-    private ItemData myItemData;
+    private ItemInstance myItemInstance;
     private float tileSizeX;
     private float tileSizeY;
 
-    // --- FITUR BARU: Bendera Sukses ---
     public bool dropSuccessful = false; 
 
     private void Awake()
@@ -38,14 +37,18 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         gridY = y;
     }
 
-    public ItemData GetItemData()
+    public void SetItemInstance(ItemInstance instance)
     {
-        return myItemData;
+        myItemInstance = instance;
+    }
+
+    public ItemInstance GetItemInstance()
+    {
+        return myItemInstance;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // Reset status sukses setiap kali mulai drag
         dropSuccessful = false; 
 
         originalParent = transform.parent;
@@ -61,12 +64,11 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         );
         grabOffset = rectTransform.anchoredPosition - localMousePos;
 
-        myItemData = inventoryBackend.GetItemAt(gridX, gridY);
+        myItemInstance = inventoryBackend.GetItemAt(gridX, gridY);
 
-        // Hapus sementara dari backend saat diangkat
-        if (myItemData != null)
+        if (myItemInstance != null)
         {
-            inventoryBackend.RemoveItem(myItemData, gridX, gridY);
+            inventoryBackend.RemoveItem(myItemInstance, gridX, gridY);
         }
 
         canvasGroup.alpha = 0.6f;
@@ -91,29 +93,24 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         
-        // --- CEK APAKAH SUDAH DITERIMA ACTIVE SLOT? ---
         if (dropSuccessful)
         {
-            // Kalau sukses diterima Slot Active, HANCURKAN objek drag ini.
-            // (Karena visualnya sudah pindah ke icon di Slot Active)
             Destroy(gameObject); 
-            return; // Stop di sini, jangan jalankan kode di bawah
+            return;
         }
 
-        // --- KALO GAK DITERIMA DI MANA-MANA, BARU CEK GRID ---
         transform.SetParent(originalParent);
 
         int newX = Mathf.RoundToInt(rectTransform.anchoredPosition.x / tileSizeX);
         int newY = Mathf.RoundToInt(-rectTransform.anchoredPosition.y / tileSizeY);
 
-        if (inventoryBackend.CheckAvailableSpace(newX, newY, myItemData))
+        if (inventoryBackend.CheckAvailableSpace(newX, newY, myItemInstance))
         {
-            inventoryBackend.PlaceItem(myItemData, newX, newY);
+            inventoryBackend.PlaceItem(myItemInstance, newX, newY);
         }
         else
         {
-            // Balik ke posisi asal
-            inventoryBackend.PlaceItem(myItemData, gridX, gridY);
+            inventoryBackend.PlaceItem(myItemInstance, gridX, gridY);
         }
 
         inventoryUI.RefreshInventoryItems();
