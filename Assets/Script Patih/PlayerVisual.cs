@@ -5,6 +5,9 @@ public class PlayerVisual : MonoBehaviour
     [Header("Visual")]
     public SpriteRenderer handRenderer;
 
+    // Animasi
+    [SerializeField] private Animator animator;
+
     public void UpdateHandSprite(ItemData item)
     {
         if (item == null)
@@ -24,6 +27,7 @@ public class PlayerVisual : MonoBehaviour
     public void PlayMiningAnimation()
     {
         StartCoroutine(SimpleSwingEffect());
+        animator.SetBool("isMining", true);
     }
 
     System.Collections.IEnumerator SimpleSwingEffect()

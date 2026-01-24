@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private bool isFacingRight = true;
     private Rigidbody2D rb;
+    // Animasi
+    [SerializeField] private Animator animator;
 
     void Start()
     {
@@ -32,6 +34,16 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         else if (moveX < 0 && isFacingRight)
             Flip();
+
+        // Animasi
+        if (moveInput != Vector2.zero)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 
     void FixedUpdate()
