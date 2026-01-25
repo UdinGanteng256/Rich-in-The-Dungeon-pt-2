@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 1790596929b554d4790e61cfd7a79b90
+guid: c83379b1597a54f038cb089b80a43eb8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8825108782256925945
-    second: Grid Hotbar & Selector_0
-  - first:
-      213: 976213062421185641
-    second: Grid Hotbar & Selector_1
-  - first:
-      213: 1782173006039925507
-    second: Grid Hotbar & Selector_2
-  - first:
-      213: -2716628228162587580
-    second: Grid Hotbar & Selector_3
-  - first:
-      213: -1395004486920649320
-    second: Grid Hotbar & Selector_4
+      213: 1428892310142603471
+    second: Backpack_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 70, y: 0, z: 2, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -96,19 +84,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,6 +98,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -177,45 +165,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grid Hotbar & Selector_0
+      name: Backpack_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 24
-        width: 64
-        height: 64
+        x: 21
+        y: 5
+        width: 110
+        height: 129
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7035569e15ae68580800000000000000
-      internalID: -8825108782256925945
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grid Hotbar & Selector_1
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 19
-        width: 74
-        height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 96406baab943c8d00800000000000000
-      internalID: 976213062421185641
+      spriteID: fc056584cf174d310800000000000000
+      internalID: 1428892310142603471
       vertices: []
       indices: 
       edges: []
@@ -224,20 +190,17 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Grid Hotbar & Selector_0: -8825108782256925945
-      Grid Hotbar & Selector_1: 976213062421185641
+      Backpack_0: 1428892310142603471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

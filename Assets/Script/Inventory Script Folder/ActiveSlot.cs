@@ -79,7 +79,7 @@ public class ActiveSlot : MonoBehaviour, IDropHandler
 
             if (itemInfoText != null)
             {
-                itemInfoText.text = $"{currentItem.width}x{currentItem.height} | ${currentItem.calculatedValue}";
+                itemInfoText.text = $"${currentItem.calculatedValue}";
                 itemInfoText.enabled = true;
             }
         }
