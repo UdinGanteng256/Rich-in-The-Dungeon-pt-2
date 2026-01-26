@@ -15,8 +15,10 @@ MonoBehaviour:
   id: 
   displayName: 
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 6644880488703526344, guid: 4a30f57ee309ac741909321ac3a85b40, type: 3}
   width: 1
   height: 1
   itemType: 2
+  isSellable: 1
+  basePricePerSlot: 5
   valueAmount: 20

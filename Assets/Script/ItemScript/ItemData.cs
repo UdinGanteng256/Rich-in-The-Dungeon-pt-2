@@ -28,7 +28,6 @@ public class ItemData : ScriptableObject
     public bool isSellable = true;
     public int basePricePerSlot = 0;
 
-    // Nilai berdasarkan tipe item
     public int valueAmount;
 
     private bool[,] cachedShape;

@@ -15,13 +15,15 @@ public class PlayerAction : MonoBehaviour
     [Header("References")]
     public PlayerStats playerStats;
     public PlayerVisual playerVisual;
-    private PlayerMovement playerMovement;
+    private PlayerMovement playerMovement; 
 
     private Camera mainCamera;
+
     void Start()
     {
         mainCamera = Camera.main;
 
+        // Auto-assign references
         if (playerVisual == null) playerVisual = FindObjectOfType<PlayerVisual>();
         if (playerStats == null) playerStats = FindObjectOfType<PlayerStats>();
         if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
@@ -40,7 +42,6 @@ public class PlayerAction : MonoBehaviour
             PerformAction();
     }
 
-    // --- Helper untuk Merchant ---
     public ActiveSlot GetCurrentActiveSlot()
     {
         if (selectedSlotIndex != -1 && selectedSlotIndex < hotbarSlots.Length)
@@ -63,10 +64,9 @@ public class PlayerAction : MonoBehaviour
         {
             hotbarSlots[i].SetHighlight(i == selectedSlotIndex);
         }
-        UpdatePlayerHand();
         
-        // ✅ TAMBAHAN: Deteksi apakah slot berisi senjata
-        UpdateArmedState();
+        UpdatePlayerHand();
+        UpdateArmedState(); 
     }
 
     void UpdatePlayerHand()
@@ -84,13 +84,13 @@ public class PlayerAction : MonoBehaviour
         
         playerVisual.UpdateHandSprite(item?.itemData);
     }
+
     void UpdateArmedState()
     {
         if (playerMovement == null) return;
 
         if (selectedSlotIndex == -1)
         {
-            // Tidak membawa senjata
             playerMovement.SetArmedState(0f);
             return;
         }
@@ -104,7 +104,7 @@ public class PlayerAction : MonoBehaviour
             return;
         }
 
-        // ✅ Cek apakah item adalah senjata
+        // Jika ItemType == Tool, set animasi Armed (1f), jika tidak (0f)
         float isArmed = item.itemData.itemType == ItemType.Tool ? 1f : 0f;
         playerMovement.SetArmedState(isArmed);
     }
@@ -123,9 +123,13 @@ public class PlayerAction : MonoBehaviour
         switch (itemData.itemType)
         {
             case ItemType.Food:
+                Debug.Log($"Makan {itemData.displayName} (Value: {itemInstance.calculatedValue})");
+                
                 if (playerStats != null) playerStats.EatFood(itemInstance.calculatedValue);
-                currentSlot.ClearSlot();
+                
+                currentSlot.ClearSlot(); 
                 UpdatePlayerHand();
+                UpdateArmedState(); 
                 break;
 
             case ItemType.Tool:

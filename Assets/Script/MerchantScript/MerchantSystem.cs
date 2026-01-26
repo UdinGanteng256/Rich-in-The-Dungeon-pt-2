@@ -25,16 +25,13 @@ public class MerchantSystem : MonoBehaviour
 
     void Start()
     {
-        playerStats = FindObjectOfType<PlayerStats>();
-        inventoryGrid = FindObjectOfType<InventoryGrid>();
-        inventoryUI = FindObjectOfType<InventoryUI>();
+        playerStats = FindFirstObjectByType<PlayerStats>();
+        inventoryGrid = FindFirstObjectByType<InventoryGrid>();
+        inventoryUI = FindFirstObjectByType<InventoryUI>();
 
         CloseAllShops();
         GenerateShopItems();
     }
-
-    // Sell
-
     public void SellAllInventory()
     {
         List<ItemInstance> allItems = inventoryGrid.GetAllItems();
@@ -65,7 +62,7 @@ public class MerchantSystem : MonoBehaviour
 
     public void SellHeldItem()
     {
-        PlayerAction playerAction = FindObjectOfType<PlayerAction>();
+        PlayerAction playerAction = FindFirstObjectByType<PlayerAction>();
         if (playerAction == null) return;
 
         ActiveSlot currentSlot = playerAction.GetCurrentActiveSlot(); 
@@ -75,25 +72,33 @@ public class MerchantSystem : MonoBehaviour
 
         if (heldItem != null)
         {
+            SellItem(heldItem);
+
             if (heldItem.itemData.isSellable)
             {
-                int price = heldItem.calculatedValue;
-                playerStats.AddMoney(price);
-                
                 currentSlot.ClearSlot();
                 playerAction.SendMessage("UpdatePlayerHand", SendMessageOptions.DontRequireReceiver);
-
-                UpdateFeedback($"Menjual {heldItem.itemData.displayName} seharga ${price}");
-            }
-            else
-            {
-                UpdateFeedback("Item ini tidak bisa dijual!");
             }
         }
         else
         {
             UpdateFeedback("Tangan kosong!");
         }
+    }
+
+    public void SellItem(ItemInstance item)
+    {
+        if (!isTradingActive) return;
+
+        if (!item.itemData.isSellable)
+        {
+            UpdateFeedback("Item ini tidak bisa dijual!");
+            return;
+        }
+
+        int sellPrice = item.calculatedValue;
+        playerStats.AddMoney(sellPrice);
+        UpdateFeedback($"Terjual: {item.itemData.displayName} (+${sellPrice})");
     }
 
     void RemoveItemFromGrid(ItemInstance itemTarget)
@@ -111,8 +116,6 @@ public class MerchantSystem : MonoBehaviour
         }
     }
 
-    // Buy
-
     public void BuyItem(ItemData item, int price)
     {
         if (playerStats.currentMoney >= price)
@@ -128,15 +131,13 @@ public class MerchantSystem : MonoBehaviour
         else Debug.Log("Uang tidak cukup!");
     }
 
-    // Ui Management
 
     public void OpenBuyMode()
     {
         isTradingActive = true;
         isSellingMode = false;
 
-        merchantWindow.SetActive(true); 
-        inventoryUI.ToggleInventory(true); 
+        merchantWindow.SetActive(true);
         UpdateFeedback("Pilih barang untuk dibeli");
     }
 

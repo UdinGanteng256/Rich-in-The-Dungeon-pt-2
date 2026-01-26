@@ -4,26 +4,22 @@ using System;
 [Serializable]
 public class ItemInstance
 {
-    public ItemData itemData;           // Referensi ke ScriptableObject
-    public int width;                   // Size unik untuk instance ini
+    public ItemData itemData;           
+    public int width;                   
     public int height;
-    public int calculatedValue;         // Harga berdasarkan size
-    public string instanceId;           // ID unik untuk instance ini
+    public int calculatedValue;         
+    public string instanceId;           
     
-    // Constructor dengan size random
+    // Constructor
     public ItemInstance(ItemData data)
     {
         itemData = data;
         instanceId = Guid.NewGuid().ToString();
         
-        // Generate random size berdasarkan item type
-        GenerateRandomSize();
-        
-        // Hitung harga berdasarkan luas
+        GenerateSize();
         CalculateValue();
     }
     
-    // Constructor dengan size spesifik
     public ItemInstance(ItemData data, int w, int h)
     {
         itemData = data;
@@ -33,9 +29,8 @@ public class ItemInstance
         CalculateValue();
     }
     
-    void GenerateRandomSize()
+    void GenerateSize()
     {
-        // Size berbeda berdasarkan tipe item
         switch (itemData.itemType)
         {
             case ItemType.Resource:
@@ -45,26 +40,26 @@ public class ItemInstance
                 break;
                 
             case ItemType.Tool:
+                // Tool Tetap
                 width = itemData.width;
                 height = itemData.height;
                 break;
                 
             case ItemType.Food:
-                width = UnityEngine.Random.Range(1, 3);
-                height = UnityEngine.Random.Range(1, 3);
+                width = itemData.width;
+                height = itemData.height;
+                break;
+                
+            default:
+                width = 1;
+                height = 1;
                 break;
         }
     }
     
     void CalculateValue()
     {
-        // Harga = base value x luas area
         int area = width * height;
-        calculatedValue = itemData.valueAmount * area;
-    }
-    
-    public bool IsOccupied(int x, int y)
-    {
-        return x < width && y < height;
+        calculatedValue = itemData.valueAmount * area; // Pastikan valueAmount di ItemData > 0
     }
 }

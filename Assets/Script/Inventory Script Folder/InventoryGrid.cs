@@ -22,13 +22,9 @@ public class InventoryGrid : MonoBehaviour
         if (startingItem != null)
         {
             ItemInstance newItem = new ItemInstance(startingItem);
-            
-            // Masukkan ke Grid
             if (AutoAddItem(newItem))
             {
                 Debug.Log($"item {startingItem.displayName} berhasil masuk inventory.");
-                
-                // Refresh UI agar icon muncul
                 InventoryUI ui = FindObjectOfType<InventoryUI>();
                 if (ui != null) ui.RefreshInventoryItems();
             }
@@ -39,9 +35,29 @@ public class InventoryGrid : MonoBehaviour
         }
     }
 
+    public List<ItemInstance> GetAllItems()
+    {
+        List<ItemInstance> items = new List<ItemInstance>();
+        HashSet<string> processedIds = new HashSet<string>();
+
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                ItemInstance item = inventoryGrid[x, y];
+                if (item != null && !processedIds.Contains(item.instanceId))
+                {
+                    items.Add(item);
+                    processedIds.Add(item.instanceId);
+                }
+            }
+        }
+        return items;
+    }
+    // ------------------------------------------------
+
     public bool AutoAddItem(ItemInstance item)
     {
-        // Safety Check
         if (item == null || item.itemData == null) return false;
 
         for (int y = 0; y < gridSizeHeight; y++)
@@ -58,7 +74,6 @@ public class InventoryGrid : MonoBehaviour
         return false;
     }
 
-    // Overload untuk ItemData
     public bool AutoAddItem(ItemData itemData)
     {
         return AutoAddItem(new ItemInstance(itemData));
@@ -66,21 +81,15 @@ public class InventoryGrid : MonoBehaviour
 
     public bool CheckAvailableSpace(int posX, int posY, ItemInstance item)
     {
-        // Validasi batas map
         if (posX < 0 || posY < 0) return false;
         if (posX + item.width > gridSizeWidth) return false;
         if (posY + item.height > gridSizeHeight) return false;
 
-        // Validasi tabrakan item lain
         for (int x = 0; x < item.width; x++)
         {
             for (int y = 0; y < item.height; y++)
             {
-                // Cek apakah slot grid sudah terisi
-                if (inventoryGrid[posX + x, posY + y] != null)
-                {
-                    return false;
-                }
+                if (inventoryGrid[posX + x, posY + y] != null) return false;
             }
         }
         return true;
@@ -100,9 +109,7 @@ public class InventoryGrid : MonoBehaviour
     public ItemInstance GetItemAt(int x, int y)
     {
         if (x >= 0 && x < gridSizeWidth && y >= 0 && y < gridSizeHeight)
-        {
             return inventoryGrid[x, y];
-        }
         return null;
     }
 
@@ -117,9 +124,7 @@ public class InventoryGrid : MonoBehaviour
                 if (oldX + x < gridSizeWidth && oldY + y < gridSizeHeight)
                 {
                     if (inventoryGrid[oldX + x, oldY + y] == item)
-                    {
                         inventoryGrid[oldX + x, oldY + y] = null;
-                    }
                 }
             }
         }

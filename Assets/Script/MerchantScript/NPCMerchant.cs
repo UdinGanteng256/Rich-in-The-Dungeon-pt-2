@@ -3,89 +3,109 @@ using UnityEngine.InputSystem;
 
 public class NPCMerchant : MonoBehaviour
 {
-    [Header("Dialog UI")]
-    public GameObject interactHint; // Press E to Interact
-    public GameObject dialogPanel;  // Panel (Buy, Sell, Nevermind)
+    [Header("Dialog UI References")]
+    public GameObject interactHint;
+    public GameObject mainDialogPanel;
+    public GameObject sellOptionPanel;
 
-    private bool playerInRange = false;
+    private bool playerInRange;
     private MerchantSystem merchantSystem;
-    private InventoryUI inventoryUI;
 
     void Start()
     {
-        merchantSystem = FindObjectOfType<MerchantSystem>();
-        inventoryUI = FindObjectOfType<InventoryUI>();
+        merchantSystem = FindFirstObjectByType<MerchantSystem>();
 
-        if (interactHint != null) interactHint.SetActive(false);
-        if (dialogPanel != null) dialogPanel.SetActive(false);
+        if (interactHint) interactHint.SetActive(false);
+        if (mainDialogPanel) mainDialogPanel.SetActive(false);
+        if (sellOptionPanel) sellOptionPanel.SetActive(false);
     }
 
     void Update()
     {
-        // Detection 
-        if (playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
+        if (!playerInRange) return;
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (!dialogPanel.activeSelf)
-            {
-                OpenDialog();
-            }
+            bool isMainOpen = mainDialogPanel && mainDialogPanel.activeSelf;
+            bool isSellOpen = sellOptionPanel && sellOptionPanel.activeSelf;
+
+            if (!isMainOpen && !isSellOpen)
+                OpenMainMenu();
             else
-            {
-                CloseDialog();
-            }
+                CloseAllDialogs();
         }
     }
 
-    // Logic
-    public void OpenDialog()
+    void OpenMainMenu()
     {
-        dialogPanel.SetActive(true);
-        interactHint.SetActive(false); 
+        if (mainDialogPanel) mainDialogPanel.SetActive(true);
+        if (sellOptionPanel) sellOptionPanel.SetActive(false);
+        if (interactHint) interactHint.SetActive(false);
     }
 
-    public void CloseDialog()
+    void OpenSellMenu()
     {
-        dialogPanel.SetActive(false);
-        if(playerInRange) interactHint.SetActive(true);
-        
-        merchantSystem.CloseAllShops();
+        if (mainDialogPanel) mainDialogPanel.SetActive(false);
+        if (sellOptionPanel) sellOptionPanel.SetActive(true);
     }
 
-    public void OnButtonBuy()
+    public void CloseAllDialogs()
     {
-        dialogPanel.SetActive(false); 
-        merchantSystem.OpenBuyMode(); 
+        if (mainDialogPanel) mainDialogPanel.SetActive(false);
+        if (sellOptionPanel) sellOptionPanel.SetActive(false);
+
+        if (interactHint && playerInRange)
+            interactHint.SetActive(true);
+
+        merchantSystem?.CloseAllShops();
     }
 
-    public void OnButtonSell()
+    public void OnBtnBuy()
     {
-        dialogPanel.SetActive(false); 
-        merchantSystem.OpenSellMode(); 
+        CloseAllDialogs();
+        merchantSystem?.OpenBuyMode();
     }
 
-    public void OnButtonNevermind()
+    public void OnBtnSellOptions()
     {
-        CloseDialog();
+        OpenSellMenu();
+    }
+
+    public void OnBtnNevermind()
+    {
+        CloseAllDialogs();
+    }
+
+    public void OnBtnSellAllInventory()
+    {
+        merchantSystem?.SellAllInventory();
+    }
+
+    public void OnBtnSellHeldItem()
+    {
+        merchantSystem?.SellHeldItem();
+    }
+
+    public void OnBtnBack()
+    {
+        OpenMainMenu();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-            if (interactHint != null) interactHint.SetActive(true);
-        }
+        if (!other.CompareTag("Player")) return;
+
+        playerInRange = true;
+        if (interactHint) interactHint.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            if (interactHint != null) interactHint.SetActive(false);
-            if (dialogPanel != null) dialogPanel.SetActive(false);
-            
-            merchantSystem.CloseAllShops();
-        }
+        if (!other.CompareTag("Player")) return;
+
+        playerInRange = false;
+        if (interactHint) interactHint.SetActive(false);
+
+        CloseAllDialogs();
     }
 }
