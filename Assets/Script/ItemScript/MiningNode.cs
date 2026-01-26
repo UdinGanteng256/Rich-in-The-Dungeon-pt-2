@@ -69,7 +69,7 @@ public class MiningNode : MonoBehaviour
                 rb.AddForce(force, ForceMode2D.Impulse);
             }
             
-            Debug.Log("Rock destroyed! Dropped 1 resource with random size.");
+            Debug.Log("Rock destroyed!");
         }
 
         Destroy(gameObject);

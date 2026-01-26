@@ -74,19 +74,13 @@ public class PlayerAction : MonoBehaviour
 
     void PerformAction()
     {
-        if (selectedSlotIndex == -1) return;
+          if (selectedSlotIndex == -1) return;
 
         ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
         ItemInstance itemInstance = currentSlot.GetItem();
 
-        if (itemInstance == null)
+        if (itemInstance == null || itemInstance.itemData == null)
         {
-            Debug.Log($"Slot {selectedSlotIndex + 1} kosong.");
-            return;
-        }
-        if (itemInstance.itemData == null)
-        {
-            Debug.LogError("DATA CORRUPT: Item Instance ada, tapi ItemData null!");
             return;
         }
 

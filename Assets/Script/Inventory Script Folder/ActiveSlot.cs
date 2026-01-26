@@ -27,8 +27,12 @@ public class ActiveSlot : MonoBehaviour, IDropHandler
         if(highlightBorder != null) highlightBorder.enabled = false;
     }
 
-    public ItemInstance GetItem()
+     public ItemInstance GetItem()
     {
+        if (currentItem != null && currentItem.itemData == null)
+        {
+            return null;
+        }
         return currentItem;
     }
 
