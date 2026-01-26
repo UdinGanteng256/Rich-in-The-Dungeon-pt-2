@@ -19,6 +19,9 @@ public class PlayerAction : MonoBehaviour
 
     private Camera mainCamera;
 
+    [SerializeField] private Animator animator;
+    public ItemData pickaxe;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -40,6 +43,8 @@ public class PlayerAction : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
             PerformAction();
+
+        UpdateArmedState();
     }
 
     public ActiveSlot GetCurrentActiveSlot()
@@ -85,28 +90,18 @@ public class PlayerAction : MonoBehaviour
         playerVisual.UpdateHandSprite(item?.itemData);
     }
 
+
     void UpdateArmedState()
     {
-        if (playerMovement == null) return;
-
         if (selectedSlotIndex == -1)
         {
-            playerMovement.SetArmedState(0f);
+            animator.SetFloat("isArmed", 0f);
             return;
         }
 
         ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
-        ItemInstance item = currentSlot.GetItem();
+        ItemInstance itemInstance = currentSlot.GetItem();
 
-        if (item == null || item.itemData == null)
-        {
-            playerMovement.SetArmedState(0f);
-            return;
-        }
-
-        // Jika ItemType == Tool, set animasi Armed (1f), jika tidak (0f)
-        float isArmed = item.itemData.itemType == ItemType.Tool ? 1f : 0f;
-        playerMovement.SetArmedState(isArmed);
     }
 
     void PerformAction()
@@ -134,6 +129,8 @@ public class PlayerAction : MonoBehaviour
 
             case ItemType.Tool:
                 if (playerStats == null) return;
+
+                animator.SetFloat("isArmed", 1f);
 
                 if (!playerStats.HasStamina())
                 {

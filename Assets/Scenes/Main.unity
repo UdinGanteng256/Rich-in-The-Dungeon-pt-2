@@ -1810,6 +1810,8 @@ MonoBehaviour:
   playerBodyLocation: {fileID: 926478463}
   playerStats: {fileID: 507551022}
   playerVisual: {fileID: 926478461}
+  animator: {fileID: 926478467}
+  pickaxe: {fileID: 11400000, guid: 3dbfa13e6a7d14e46bb4ecc569d4c16b, type: 2}
 --- !u!1 &550741821
 GameObject:
   m_ObjectHideFlags: 0
@@ -4095,6 +4097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 3
+  pickaxe: {fileID: 0}
   animator: {fileID: 926478467}
 --- !u!95 &926478467
 Animator:
@@ -7486,7 +7489,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1797638713
 Canvas:
   m_ObjectHideFlags: 0

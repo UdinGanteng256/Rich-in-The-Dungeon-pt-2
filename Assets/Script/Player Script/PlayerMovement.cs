@@ -9,8 +9,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private bool isFacingRight = true;
     private Rigidbody2D rb;
+    public ItemData pickaxe;
     // Animasi
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
 
     void Start()
     {
@@ -37,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Update walking animation
         animator.SetBool("isWalking", moveInput != Vector2.zero);
+
+        if (pickaxe != null)
+        {
+            animator.SetFloat("isArmed", 1f);
+        }
     }
 
     void FixedUpdate()
@@ -51,11 +57,5 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-    }
-
-    // Metode untuk update armed state
-    public void SetArmedState(float isArmed)
-    {
-        animator.SetFloat("isArmed", isArmed);
     }
 }
