@@ -74,7 +74,7 @@ public class PlayerAction : MonoBehaviour
 
     void PerformAction()
     {
-          if (selectedSlotIndex == -1) return;
+        if (selectedSlotIndex == -1) return;
 
         ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
         ItemInstance itemInstance = currentSlot.GetItem();
@@ -109,7 +109,10 @@ public class PlayerAction : MonoBehaviour
                     return;
                 }
 
-                if (playerVisual != null) playerVisual.PlayMiningAnimation();
+                // --- BAGIAN INI DIHAPUS (Animasi) ---
+                // if (playerVisual != null) playerVisual.PlayMiningAnimation();
+                
+                // Langsung mining
                 TryMineRock();
                 break;
 
