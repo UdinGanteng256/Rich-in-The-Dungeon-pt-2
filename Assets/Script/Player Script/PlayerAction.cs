@@ -40,6 +40,16 @@ public class PlayerAction : MonoBehaviour
             PerformAction();
     }
 
+    // --- Helper untuk Merchant ---
+    public ActiveSlot GetCurrentActiveSlot()
+    {
+        if (selectedSlotIndex != -1 && selectedSlotIndex < hotbarSlots.Length)
+        {
+            return hotbarSlots[selectedSlotIndex];
+        }
+        return null; 
+    }
+
     void ToggleSlot(int index)
     {
         if (index < 0 || index >= hotbarSlots.Length) return;
@@ -72,7 +82,6 @@ public class PlayerAction : MonoBehaviour
         ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
         ItemInstance item = currentSlot.GetItem();
         
-        // Safety check null
         playerVisual.UpdateHandSprite(item?.itemData);
     }
     void UpdateArmedState()
@@ -107,29 +116,20 @@ public class PlayerAction : MonoBehaviour
         ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
         ItemInstance itemInstance = currentSlot.GetItem();
 
-        if (itemInstance == null || itemInstance.itemData == null)
-        {
-            return;
-        }
+        if (itemInstance == null || itemInstance.itemData == null) return;
 
         ItemData itemData = itemInstance.itemData;
 
         switch (itemData.itemType)
         {
             case ItemType.Food:
-                // Safety check playerStats
                 if (playerStats != null) playerStats.EatFood(itemInstance.calculatedValue);
                 currentSlot.ClearSlot();
                 UpdatePlayerHand();
                 break;
 
             case ItemType.Tool:
-                // Safety check playerStats
-                if (playerStats == null)
-                {
-                    Debug.LogError("PlayerStats belum di-assign di PlayerAction!");
-                    return;
-                }
+                if (playerStats == null) return;
 
                 if (!playerStats.HasStamina())
                 {
@@ -137,15 +137,11 @@ public class PlayerAction : MonoBehaviour
                     return;
                 }
 
-                // --- BAGIAN INI DIHAPUS (Animasi) ---
-                // if (playerVisual != null) playerVisual.PlayMiningAnimation();
-                
-                // Langsung mining
                 TryMineRock();
                 break;
 
             case ItemType.Resource:
-                Debug.Log($"Resource tidak bisa dipakai langsung.");
+                Debug.Log($"Resource tidak bisa dipakai.");
                 break;
         }
     }
@@ -160,11 +156,7 @@ public class PlayerAction : MonoBehaviour
         if (rock == null) return;
 
         float distance = Vector2.Distance(playerBodyLocation.position, hit.point);
-        if (distance > miningRange)
-        {
-            Debug.Log("Target terlalu jauh.");
-            return;
-        }
+        if (distance > miningRange) return;
 
         rock.TakeDamage();
         if (playerStats != null) playerStats.ConsumeStaminaForMining();
