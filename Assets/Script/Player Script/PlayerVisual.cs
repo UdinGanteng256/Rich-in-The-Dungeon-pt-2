@@ -6,7 +6,7 @@ public class PlayerVisual : MonoBehaviour
     public SpriteRenderer handRenderer;
 
     // Animasi
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
 
     public void UpdateHandSprite(ItemData item)
     {
@@ -27,11 +27,12 @@ public class PlayerVisual : MonoBehaviour
     public void PlayMiningAnimation()
     {
         StartCoroutine(SimpleSwingEffect());
-        animator.SetBool("isMining", true);
     }
 
     System.Collections.IEnumerator SimpleSwingEffect()
     {
+        animator.SetBool("isMining", true);
+        
         Quaternion startRotation =
             handRenderer.transform.localRotation;
 
@@ -41,5 +42,6 @@ public class PlayerVisual : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         handRenderer.transform.localRotation = startRotation;
+        animator.SetBool("isMining", false);
     }
 }
