@@ -91,7 +91,7 @@ public class PlayerAction : MonoBehaviour
         if (selectedSlotIndex == -1)
         {
             // Tidak membawa senjata
-            playerMovement.SetArmedState(false);
+            playerMovement.SetArmedState(0f);
             return;
         }
 
@@ -100,12 +100,12 @@ public class PlayerAction : MonoBehaviour
 
         if (item == null || item.itemData == null)
         {
-            playerMovement.SetArmedState(false);
+            playerMovement.SetArmedState(0f);
             return;
         }
 
         // ✅ Cek apakah item adalah senjata
-        bool isArmed = item.itemData.itemType == ItemType.Tool;
+        float isArmed = item.itemData.itemType == ItemType.Tool ? 1f : 0f;
         playerMovement.SetArmedState(isArmed);
     }
 

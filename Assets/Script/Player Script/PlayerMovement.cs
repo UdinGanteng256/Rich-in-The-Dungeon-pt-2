@@ -54,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Metode untuk update armed state
-    public void SetArmedState(bool armed)
+    public void SetArmedState(float isArmed)
     {
-        animator.SetBool("isArmed", armed);
+        animator.SetFloat("isArmed", isArmed);
     }
 }
