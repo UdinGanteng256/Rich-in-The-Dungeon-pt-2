@@ -38,11 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Update walking animation
         animator.SetBool("isWalking", moveInput != Vector2.zero);
-
-        if (pickaxe != null)
-        {
-            animator.SetFloat("isArmed", 1f);
-        }
     }
 
     void FixedUpdate()

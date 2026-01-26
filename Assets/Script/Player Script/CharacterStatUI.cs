@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; // Wajib untuk akses Image
+using UnityEngine.UI; 
 
 public class CharacterStatsUI : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class CharacterStatsUI : MonoBehaviour
         if (playerStats == null) return;
 
         if (moneyText != null)
-            moneyText.text = $"$ {playerStats.currentMoney}";
+            moneyText.text = $"{playerStats.currentMoney}";
 
         if (staminaImage != null)
         {

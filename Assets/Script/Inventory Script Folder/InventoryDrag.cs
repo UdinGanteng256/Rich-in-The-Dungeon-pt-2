@@ -47,26 +47,20 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         return myItemInstance;
     }
 
-    // ... (Bagian atas script sama) ...
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        // Cek Klik Kanan
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             MerchantSystem merchant = FindObjectOfType<MerchantSystem>();
             
-            // Pastikan Merchant aktif (Bisa mode Jual atau Beli, player bebas jual kapan aja selama di merchant)
             if (merchant != null && merchant.isTradingActive)
             {
-                // --- PENGECEKAN PICKAXE / ITEM PENTING ---
                 if (myItemInstance.itemData.isSellable == false)
                 {
                     Debug.Log("Item ini spesial/penting, tidak bisa dijual!");
-                    return; // Batalkan proses jual
+                    return; 
                 }
 
-                // Kalau lolos, baru jual
                 merchant.SellItem(myItemInstance);
 
                 inventoryBackend.RemoveItem(myItemInstance, gridX, gridY);
@@ -124,6 +118,8 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         
         if (dropSuccessful)
         {
+            UpdatePlayerVisuals();
+            
             Destroy(gameObject); 
             return;
         }
@@ -143,5 +139,15 @@ public class InventoryDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
 
         inventoryUI.RefreshInventoryItems();
+        UpdatePlayerVisuals();
+    }
+
+    private void UpdatePlayerVisuals()
+    {
+        PlayerAction playerAction = FindObjectOfType<PlayerAction>();
+        if (playerAction != null)
+        {
+            playerAction.ForceUpdateVisuals();
+        }
     }
 }

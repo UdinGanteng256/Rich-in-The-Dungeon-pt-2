@@ -17,6 +17,9 @@ public class PlayerAction : MonoBehaviour
     public PlayerVisual playerVisual;
     private PlayerMovement playerMovement; 
 
+    [Header("Mining Settings")]
+    public LayerMask miningLayer;
+
     private Camera mainCamera;
 
     [SerializeField] private Animator animator;
@@ -43,8 +46,6 @@ public class PlayerAction : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
             PerformAction();
-
-        UpdateArmedState();
     }
 
     public ActiveSlot GetCurrentActiveSlot()
@@ -54,6 +55,12 @@ public class PlayerAction : MonoBehaviour
             return hotbarSlots[selectedSlotIndex];
         }
         return null; 
+    }
+
+    public void ForceUpdateVisuals()
+    { 
+        UpdatePlayerHand();
+        UpdateArmedState();
     }
 
     void ToggleSlot(int index)
@@ -74,6 +81,9 @@ public class PlayerAction : MonoBehaviour
         UpdateArmedState(); 
     }
 
+
+    
+
     void UpdatePlayerHand()
     {
         if (playerVisual == null) return;
@@ -90,9 +100,10 @@ public class PlayerAction : MonoBehaviour
         playerVisual.UpdateHandSprite(item?.itemData);
     }
 
-
     void UpdateArmedState()
     {
+        if (animator == null) return;
+
         if (selectedSlotIndex == -1)
         {
             animator.SetFloat("isArmed", 0f);
@@ -102,6 +113,14 @@ public class PlayerAction : MonoBehaviour
         ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
         ItemInstance itemInstance = currentSlot.GetItem();
 
+        if (itemInstance != null && itemInstance.itemData != null && itemInstance.itemData.itemType == ItemType.Tool)
+        {
+            animator.SetFloat("isArmed", 1f);
+        }
+        else
+        {
+            animator.SetFloat("isArmed", 0f);
+        }
     }
 
     void PerformAction()
@@ -123,13 +142,13 @@ public class PlayerAction : MonoBehaviour
                 if (playerStats != null) playerStats.EatFood(itemInstance.calculatedValue);
                 
                 currentSlot.ClearSlot(); 
+                
                 UpdatePlayerHand();
                 UpdateArmedState(); 
                 break;
 
             case ItemType.Tool:
-                if (playerStats == null) return;
-
+                if (playerStats == null) return; // cogzi cogzi
                 animator.SetFloat("isArmed", 1f);
 
                 if (!playerStats.HasStamina())
@@ -150,14 +169,28 @@ public class PlayerAction : MonoBehaviour
     void TryMineRock()
     {
         Vector2 mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f, miningLayer);
 
-        if (hit.collider == null) return;
+        if (hit.collider == null) 
+        {
+            Debug.Log("Raycast tidak kena apa-apa");
+            return;
+        }
+
         MiningNode rock = hit.collider.GetComponent<MiningNode>();
-        if (rock == null) return;
+        if (rock == null) 
+        {
+            Debug.Log($"Kena object: {hit.collider.name}, tapi bukan MiningNode.");
+            return;
+        }
 
         float distance = Vector2.Distance(playerBodyLocation.position, hit.point);
-        if (distance > miningRange) return;
+        if (distance > miningRange) 
+        {
+            Debug.Log("Terlalu jauh untuk mining.");
+            return;
+        }
 
         rock.TakeDamage();
         if (playerStats != null) playerStats.ConsumeStaminaForMining();
