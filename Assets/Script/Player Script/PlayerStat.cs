@@ -11,6 +11,9 @@ public class PlayerStats : MonoBehaviour
     [Header("Settings")]
     public float baseMiningCost = 10f; 
 
+    [Header("Ekonomi")]
+    public int currentMoney = 0; 
+
     [Header("UI Reference")]
     public Image staminaBar;  
 
@@ -20,6 +23,29 @@ public class PlayerStats : MonoBehaviour
         UpdateUI();
     }
 
+    // --- Transaksi Duit ---
+    public void AddMoney(int amount)
+    {
+        currentMoney += amount;
+        Debug.Log($"Uang bertambah: +${amount}. Total: ${currentMoney}");
+    }
+
+    public bool SpendMoney(int amount)
+    {
+        if (currentMoney >= amount)
+        {
+            currentMoney -= amount;
+            Debug.Log($"Belanja sukses: -${amount}. Sisa: ${currentMoney}");
+            return true;
+        }
+        else
+        {
+            Debug.Log("Uang tidak cukup!");
+            return false;
+        }
+    } 
+
+    // --- Stamina System ---
     public void ConsumeStaminaForMining()
     {
         float reduction = (strength - 1) * 1f; 

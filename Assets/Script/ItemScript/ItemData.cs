@@ -24,6 +24,10 @@ public class ItemData : ScriptableObject
     [Header("Gameplay")]
     public ItemType itemType;
 
+    [Header("Economy")]
+    public bool isSellable = true;
+    public int basePricePerSlot = 0;
+
     // Nilai berdasarkan tipe item
     public int valueAmount;
 
