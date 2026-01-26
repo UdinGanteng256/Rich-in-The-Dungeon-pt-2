@@ -35,15 +35,8 @@ public class PlayerMovement : MonoBehaviour
         else if (moveX < 0 && isFacingRight)
             Flip();
 
-        // Animasi
-        if (moveInput != Vector2.zero)
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
+        // Update walking animation
+        animator.SetBool("isWalking", moveInput != Vector2.zero);
     }
 
     void FixedUpdate()
@@ -58,5 +51,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    // Metode untuk update armed state
+    public void SetArmedState(bool armed)
+    {
+        animator.SetBool("isArmed", armed);
     }
 }

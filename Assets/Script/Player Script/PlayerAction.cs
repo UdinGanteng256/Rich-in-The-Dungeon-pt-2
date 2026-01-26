@@ -15,15 +15,16 @@ public class PlayerAction : MonoBehaviour
     [Header("References")]
     public PlayerStats playerStats;
     public PlayerVisual playerVisual;
+    private PlayerMovement playerMovement;
 
     private Camera mainCamera;
-
     void Start()
     {
         mainCamera = Camera.main;
 
         if (playerVisual == null) playerVisual = FindObjectOfType<PlayerVisual>();
         if (playerStats == null) playerStats = FindObjectOfType<PlayerStats>();
+        if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
         if (playerBodyLocation == null) playerBodyLocation = transform;
 
         SelectSlot(-1);
@@ -53,6 +54,9 @@ public class PlayerAction : MonoBehaviour
             hotbarSlots[i].SetHighlight(i == selectedSlotIndex);
         }
         UpdatePlayerHand();
+        
+        // ✅ TAMBAHAN: Deteksi apakah slot berisi senjata
+        UpdateArmedState();
     }
 
     void UpdatePlayerHand()
@@ -70,6 +74,30 @@ public class PlayerAction : MonoBehaviour
         
         // Safety check null
         playerVisual.UpdateHandSprite(item?.itemData);
+    }
+    void UpdateArmedState()
+    {
+        if (playerMovement == null) return;
+
+        if (selectedSlotIndex == -1)
+        {
+            // Tidak membawa senjata
+            playerMovement.SetArmedState(false);
+            return;
+        }
+
+        ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
+        ItemInstance item = currentSlot.GetItem();
+
+        if (item == null || item.itemData == null)
+        {
+            playerMovement.SetArmedState(false);
+            return;
+        }
+
+        // ✅ Cek apakah item adalah senjata
+        bool isArmed = item.itemData.itemType == ItemType.Tool;
+        playerMovement.SetArmedState(isArmed);
     }
 
     void PerformAction()

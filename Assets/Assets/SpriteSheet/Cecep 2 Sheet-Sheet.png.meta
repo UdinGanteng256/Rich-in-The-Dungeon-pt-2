@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 39bb73df927f77045b4e45f162c458fa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5195579338002561191
+    second: -Cecep 2 Sheet-Sheet_0
+  - first:
+      213: 2828692861206098262
+    second: -Cecep 2 Sheet-Sheet_1
+  - first:
+      213: -5405143748990280472
+    second: -Cecep 2 Sheet-Sheet_2
+  - first:
+      213: -3635788673297010537
+    second: -Cecep 2 Sheet-Sheet_3
+  - first:
+      213: 4655016677093090754
+    second: -Cecep 2 Sheet-Sheet_4
+  - first:
+      213: -7956959749229873411
+    second: -Cecep 2 Sheet-Sheet_5
+  - first:
+      213: -4581189574332122436
+    second: -Cecep 2 Sheet-Sheet_6
+  - first:
+      213: -344332255251318468
+    second: -Cecep 2 Sheet-Sheet_7
+  - first:
+      213: -2816995268227181229
+    second: -Cecep 2 Sheet-Sheet_8
+  - first:
+      213: 5477388659107536194
+    second: -Cecep 2 Sheet-Sheet_9
+  - first:
+      213: -9067078478048925604
+    second: -Cecep 2 Sheet-Sheet_10
+  - first:
+      213: -5399642050648033986
+    second: -Cecep 2 Sheet-Sheet_11
+  - first:
+      213: -8693933479964512424
+    second: -Cecep 2 Sheet-Sheet_12
+  - first:
+      213: -887596939983361594
+    second: -Cecep 2 Sheet-Sheet_13
+  - first:
+      213: -2235953520009310712
+    second: -Cecep 2 Sheet-Sheet_14
+  - first:
+      213: 143560509555000473
+    second: -Cecep 2 Sheet-Sheet_15
+  - first:
+      213: -8854548527813053900
+    second: -Cecep 2 Sheet-Sheet_16
+  - first:
+      213: -8113875720928998178
+    second: -Cecep 2 Sheet-Sheet_17
+  - first:
+      213: 2770040126391516618
+    second: -Cecep 2 Sheet-Sheet_18
+  - first:
+      213: -7982191262929945236
+    second: -Cecep 2 Sheet-Sheet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 5
+        width: 28
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a8700c61e76a1840800000000000000
+      internalID: 5195579338002561191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 5
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6517fd29b29814720800000000000000
+      internalID: 2828692861206098262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 5
+        width: 28
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ecd281e5621df4b0800000000000000
+      internalID: -5405143748990280472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 5
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7903eb107751b8dc0800000000000000
+      internalID: -3635788673297010537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 5
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c527a52101f99040800000000000000
+      internalID: 4655016677093090754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 5
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df6721f0443339190800000000000000
+      internalID: -7956959749229873411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 5
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbaf535ba585c60c0800000000000000
+      internalID: -4581189574332122436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 5
+        width: 28
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c39390163afa83bf0800000000000000
+      internalID: -344332255251318468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 5
+        width: 28
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 355dc578ab508e8d0800000000000000
+      internalID: -2816995268227181229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 5
+        width: 28
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24d9bda07f7930c40800000000000000
+      internalID: 5477388659107536194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 5
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c58ed45e9244b2280800000000000000
+      internalID: -9067078478048925604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 5
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e35bcd8d92e9015b0800000000000000
+      internalID: -5399642050648033986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 5
+        width: 38
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85fe6d9ff81f85780800000000000000
+      internalID: -8693933479964512424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 5
+        width: 34
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c96198294f9ea3f0800000000000000
+      internalID: -887596939983361594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 5
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e8f81ce1c48f0e0800000000000000
+      internalID: -2235953520009310712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 5
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 994ccc7d5870ef100800000000000000
+      internalID: 143560509555000473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 5
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 432be3107035e1580800000000000000
+      internalID: -8854548527813053900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 5
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edc4c5e5509b56f80800000000000000
+      internalID: -8113875720928998178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 5
+        width: 38
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acdf42391d8217620800000000000000
+      internalID: 2770040126391516618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: -Cecep 2 Sheet-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 5
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6d75db765f893190800000000000000
+      internalID: -7982191262929945236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      -Cecep 2 Sheet-Sheet_0: 5195579338002561191
+      -Cecep 2 Sheet-Sheet_1: 2828692861206098262
+      -Cecep 2 Sheet-Sheet_10: -9067078478048925604
+      -Cecep 2 Sheet-Sheet_11: -5399642050648033986
+      -Cecep 2 Sheet-Sheet_12: -8693933479964512424
+      -Cecep 2 Sheet-Sheet_13: -887596939983361594
+      -Cecep 2 Sheet-Sheet_14: -2235953520009310712
+      -Cecep 2 Sheet-Sheet_15: 143560509555000473
+      -Cecep 2 Sheet-Sheet_16: -8854548527813053900
+      -Cecep 2 Sheet-Sheet_17: -8113875720928998178
+      -Cecep 2 Sheet-Sheet_18: 2770040126391516618
+      -Cecep 2 Sheet-Sheet_19: -7982191262929945236
+      -Cecep 2 Sheet-Sheet_2: -5405143748990280472
+      -Cecep 2 Sheet-Sheet_3: -3635788673297010537
+      -Cecep 2 Sheet-Sheet_4: 4655016677093090754
+      -Cecep 2 Sheet-Sheet_5: -7956959749229873411
+      -Cecep 2 Sheet-Sheet_6: -4581189574332122436
+      -Cecep 2 Sheet-Sheet_7: -344332255251318468
+      -Cecep 2 Sheet-Sheet_8: -2816995268227181229
+      -Cecep 2 Sheet-Sheet_9: 5477388659107536194
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
