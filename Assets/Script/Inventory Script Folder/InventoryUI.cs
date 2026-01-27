@@ -33,7 +33,6 @@ public class InventoryUI : MonoBehaviour
     public void ToggleInventory(bool status)
     {
         isInventoryOpen = status;
-
         if (inventoryWindowObj != null)
             inventoryWindowObj.SetActive(isInventoryOpen);
     }
@@ -71,12 +70,7 @@ public class InventoryUI : MonoBehaviour
                 if (item == null || processedItems.Contains(item))
                     continue;
 
-                CreateItemObject(
-                    item, x, y,
-                    cellSizeX, cellSizeY,
-                    spacingX, spacingY
-                );
-
+                CreateItemObject(item, x, y, cellSizeX, cellSizeY, spacingX, spacingY);
                 processedItems.Add(item);
             }
         }
@@ -84,12 +78,7 @@ public class InventoryUI : MonoBehaviour
         UpdateTotalValueDisplay();
     }
 
-    void CreateItemObject(
-        ItemInstance item,
-        int x, int y,
-        float sizeX, float sizeY,
-        float gapX, float gapY
-    )
+    void CreateItemObject(ItemInstance item, int x, int y, float sizeX, float sizeY, float gapX, float gapY)
     {
         GameObject newItem = Instantiate(itemPrefab, itemsLayer);
         RectTransform rect = newItem.GetComponent<RectTransform>();
@@ -98,10 +87,7 @@ public class InventoryUI : MonoBehaviour
         float totalHeight = (item.height * sizeY) + ((item.height - 1) * gapY);
         rect.sizeDelta = new Vector2(totalWidth, totalHeight);
 
-        rect.anchoredPosition = new Vector2(
-            x * (sizeX + gapX),
-            -y * (sizeY + gapY)
-        );
+        rect.anchoredPosition = new Vector2(x * (sizeX + gapX), -y * (sizeY + gapY));
 
         if (item.itemData.icon != null)
             newItem.GetComponent<Image>().sprite = item.itemData.icon;
@@ -116,9 +102,17 @@ public class InventoryUI : MonoBehaviour
         TextMeshProUGUI itemInfoText = newItem.GetComponentInChildren<TextMeshProUGUI>();
         if (itemInfoText != null)
         {
-            itemInfoText.text = $"{item.calculatedValue}"; 
+            if (item.itemData.isSellable)
+            {
+                itemInfoText.text = $"${item.calculatedValue}";
+                itemInfoText.color = Color.white;
+            }
+            else
+            {
+                itemInfoText.text = ""; 
+            }
+            
             itemInfoText.fontSize = 12;
-            itemInfoText.color = Color.white;
             itemInfoText.alignment = TextAlignmentOptions.Center;
         }
     }
@@ -127,7 +121,26 @@ public class InventoryUI : MonoBehaviour
     {
         if (totalValueText == null) return;
 
-        int totalValue = inventoryBackend.GetTotalInventoryValue();
+        int totalValue = 0;
+
+        HashSet<ItemInstance> countedItems = new HashSet<ItemInstance>(); 
+        
+        for (int x = 0; x < inventoryBackend.gridSizeWidth; x++)
+        {
+            for (int y = 0; y < inventoryBackend.gridSizeHeight; y++)
+            {
+                ItemInstance item = inventoryBackend.GetItemAt(x, y);
+                
+                if (item != null && !countedItems.Contains(item))
+                {
+                    if (item.itemData.isSellable) 
+                    {
+                        totalValue += item.calculatedValue;
+                    }
+                    countedItems.Add(item);
+                }
+            }
+        }
 
         PlayerAction playerAction = FindObjectOfType<PlayerAction>();
         if (playerAction != null && playerAction.hotbarSlots != null)
@@ -137,10 +150,12 @@ public class InventoryUI : MonoBehaviour
                 if (slot != null)
                 {
                     ItemInstance item = slot.GetItem();
-                    // Cek item data
                     if (item != null && item.itemData != null)
                     {
-                        totalValue += item.calculatedValue;
+                        if (item.itemData.isSellable)
+                        {
+                            totalValue += item.calculatedValue;
+                        }
                     }
                 }
             }

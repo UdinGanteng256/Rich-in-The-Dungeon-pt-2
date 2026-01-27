@@ -33,14 +33,17 @@ public class MerchantSystem : MonoBehaviour
         GenerateShopItems();
     }
     
+
     public void SellAllInventory()
     {
-        List<ItemInstance> allItems = inventoryGrid.GetAllItems();
         int totalEarnings = 0;
         int itemsSold = 0;
 
-        foreach (ItemInstance item in allItems)
+        List<ItemInstance> allItems = inventoryGrid.GetAllItems();
+        
+        for (int i = allItems.Count - 1; i >= 0; i--) 
         {
+            ItemInstance item = allItems[i];
             if (item.itemData.isSellable)
             {
                 totalEarnings += item.calculatedValue;
@@ -49,6 +52,24 @@ public class MerchantSystem : MonoBehaviour
             }
         }
 
+        PlayerAction playerAction = FindFirstObjectByType<PlayerAction>();
+        if (playerAction != null)
+        {
+            foreach (var slot in playerAction.hotbarSlots)
+            {
+                ItemInstance item = slot.GetItem();
+                if (item != null && item.itemData != null && item.itemData.isSellable)
+                {
+                    totalEarnings += item.calculatedValue;
+                    itemsSold++;
+                    slot.ClearSlot(); 
+                }
+            }
+
+            playerAction.ForceUpdateVisuals();
+        }
+
+        // 3. Kesimpulan Transaksi
         if (itemsSold > 0)
         {
             playerStats.AddMoney(totalEarnings);
@@ -79,6 +100,7 @@ public class MerchantSystem : MonoBehaviour
             {
                 currentSlot.ClearSlot();
                 playerAction.SendMessage("UpdatePlayerHand", SendMessageOptions.DontRequireReceiver);
+                if(inventoryUI != null) inventoryUI.RefreshInventoryItems();
             }
         }
         else
@@ -132,21 +154,18 @@ public class MerchantSystem : MonoBehaviour
         else Debug.Log("Uang tidak cukup!");
     }
 
-
     public void OpenBuyMode()
     {
         isTradingActive = true;
         isSellingMode = false;
-
         merchantWindow.SetActive(true);
-        UpdateFeedback("Pilih barang untuk dibeli");
+        UpdateFeedback("Choose item you want to Buya");
     }
 
     public void OpenSellMode()
     {
         isTradingActive = true;
         isSellingMode = true;
-
         merchantWindow.SetActive(false); 
         inventoryUI.ToggleInventory(true); 
         UpdateFeedback("Klik Kanan item / Pilih opsi jual");
@@ -178,7 +197,7 @@ public class MerchantSystem : MonoBehaviour
 
             int buyPrice = item.basePricePerSlot * 2; 
             TextMeshProUGUI priceText = newSlot.transform.Find("PriceText").GetComponent<TextMeshProUGUI>();
-            priceText.text = $"${buyPrice}";
+            priceText.text = $"P{buyPrice}";
 
             Button btn = newSlot.GetComponent<Button>();
             btn.onClick.AddListener(() => BuyItem(item, buyPrice));
