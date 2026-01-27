@@ -3,8 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class HotbarDrag : MonoBehaviour,
-    IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -16,6 +15,8 @@ public class HotbarDrag : MonoBehaviour,
     private ActiveSlot myActiveSlot;
     private InventoryUI inventoryUI;
     private bool isDragging = false;
+    
+    public bool dropSuccessful = false; 
 
     void Awake()
     {
@@ -27,83 +28,86 @@ public class HotbarDrag : MonoBehaviour,
         inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public ActiveSlot GetSourceSlot()
     {
-        if (eventData.button != PointerEventData.InputButton.Right) return;
-        
-        // PAKE GETTER
-        ItemInstance item = myActiveSlot.GetItem();
-        if (item == null) return;
-
-        InventoryGrid inventoryBackend = inventoryUI.inventoryBackend;
-        bool success = inventoryBackend.AutoAddItem(item);
-
-        if (success)
-        {
-            Debug.Log($"Item {item.itemData.displayName} dikembalikan ke inventory");
-            myActiveSlot.ClearSlot();
-            inventoryUI.RefreshInventoryItems();
-
-            PlayerAction playerAction = FindObjectOfType<PlayerAction>();
-            if (playerAction != null)
-                playerAction.SendMessage("UpdatePlayerHand", SendMessageOptions.DontRequireReceiver);
-        }
-        else
-        {
-            Debug.Log("Inventory penuh! Tidak bisa mengembalikan item.");
-        }
+        return myActiveSlot;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (myActiveSlot.GetItem() == null) return;
 
+        dropSuccessful = false;
         isDragging = true;
         originalPos = rectTransform.anchoredPosition;
         originalParent = transform.parent;
 
+        // Bikin agak transparan pas didrag
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
-
+        
+        // Pindah ke Canvas biar ada di layer paling atas
         transform.SetParent(canvas.transform, true);
     }
 
     public void OnDrag(PointerEventData eventData)
-    {        if (myActiveSlot.GetItem() == null || !isDragging) return;
-
+    {        
+        if (myActiveSlot.GetItem() == null || !isDragging) return;
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ItemInstance item = myActiveSlot.GetItem();
-        if (item == null) return;
-
         isDragging = false;
+        
+        // [FIX PENTING] Kembalikan Alpha ke 1 (Normal) APAPUN YANG TERJADI
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        Vector2 mousePos = Mouse.current.position.ReadValue();
-        
-        bool success = inventoryUI.TryAddFromHotbar(item, mousePos);
-
-        if (success)
+        // 1. Jika Swap Sukses (diurus oleh ActiveSlot lain)
+        if (dropSuccessful)
         {
-            Debug.Log($"Item {item.itemData.displayName} dikembalikan ke inventory");
-            myActiveSlot.ClearSlot();
-
+            // Kembalikan parent ke slot asalnya
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = Vector2.zero;
+            
+            // Paksa update visual tangan
+            UpdatePlayerHand(); 
+            return;
+        }
 
-            PlayerAction playerAction = FindObjectOfType<PlayerAction>();
-            if (playerAction != null)
-                playerAction.SendMessage("UpdatePlayerHand", SendMessageOptions.DontRequireReceiver);
+        // 2. Logic kembalikan ke Inventory kalau didrop di tanah
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        ItemInstance item = myActiveSlot.GetItem();
+
+        if (item != null)
+        {
+            bool success = inventoryUI.TryAddFromHotbar(item, mousePos);
+
+            if (success)
+            {
+                Debug.Log("Item dikembalikan ke Inventory.");
+                myActiveSlot.ClearSlot();
+                UpdatePlayerHand();
+            }
+            else
+            {
+                // Kalau gagal masuk inventory (penuh/invalid), balik ke slot hotbar
+                transform.SetParent(originalParent);
+                rectTransform.anchoredPosition = Vector2.zero;
+            }
         }
         else
         {
+            // Safety net
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = Vector2.zero;
-            Debug.Log("Tidak bisa menempatkan item di sana");
         }
+    }
+
+    void UpdatePlayerHand()
+    {
+        PlayerAction playerAction = FindObjectOfType<PlayerAction>();
+        if (playerAction != null) playerAction.ForceUpdateVisuals();
     }
 }

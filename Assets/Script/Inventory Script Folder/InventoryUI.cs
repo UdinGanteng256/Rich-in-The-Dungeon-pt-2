@@ -15,7 +15,7 @@ public class InventoryUI : MonoBehaviour
 
     [Header("UI")]
     public GameObject inventoryWindowObj;
-    public TextMeshProUGUI totalValueText; // Tambahkan di Inspector
+    public TextMeshProUGUI totalValueText; 
     private bool isInventoryOpen = true;
 
     void Start()
@@ -51,7 +51,6 @@ public class InventoryUI : MonoBehaviour
 
     public void RefreshInventoryItems()
     {
-        // Clear item visuals
         foreach (Transform child in itemsLayer)
             Destroy(child.gameObject);
 
@@ -82,7 +81,6 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
-        // Update total value display
         UpdateTotalValueDisplay();
     }
 
@@ -96,22 +94,18 @@ public class InventoryUI : MonoBehaviour
         GameObject newItem = Instantiate(itemPrefab, itemsLayer);
         RectTransform rect = newItem.GetComponent<RectTransform>();
 
-        // Size berdasarkan instance item (bukan ItemData)
         float totalWidth  = (item.width * sizeX) + ((item.width - 1) * gapX);
         float totalHeight = (item.height * sizeY) + ((item.height - 1) * gapY);
         rect.sizeDelta = new Vector2(totalWidth, totalHeight);
 
-        // Position in grid
         rect.anchoredPosition = new Vector2(
             x * (sizeX + gapX),
             -y * (sizeY + gapY)
         );
 
-        // Set icon
         if (item.itemData.icon != null)
             newItem.GetComponent<Image>().sprite = item.itemData.icon;
 
-        // Set drag script
         InventoryDrag dragScript = newItem.GetComponent<InventoryDrag>();
         if (dragScript != null)
         {
@@ -119,11 +113,10 @@ public class InventoryUI : MonoBehaviour
             dragScript.SetItemInstance(item);
         }
 
-        // FITUR BARU: Tampilkan size & value pada item
         TextMeshProUGUI itemInfoText = newItem.GetComponentInChildren<TextMeshProUGUI>();
         if (itemInfoText != null)
         {
-            itemInfoText.text = $"{item.width}x{item.height}\n${item.calculatedValue}";
+            itemInfoText.text = $"{item.calculatedValue}"; 
             itemInfoText.fontSize = 12;
             itemInfoText.color = Color.white;
             itemInfoText.alignment = TextAlignmentOptions.Center;
@@ -132,14 +125,30 @@ public class InventoryUI : MonoBehaviour
 
     void UpdateTotalValueDisplay()
     {
-        if (totalValueText != null)
+        if (totalValueText == null) return;
+
+        int totalValue = inventoryBackend.GetTotalInventoryValue();
+
+        PlayerAction playerAction = FindObjectOfType<PlayerAction>();
+        if (playerAction != null && playerAction.hotbarSlots != null)
         {
-            int totalValue = inventoryBackend.GetTotalInventoryValue();
-            totalValueText.text = $"Total Value: ${totalValue}";
+            foreach (var slot in playerAction.hotbarSlots)
+            {
+                if (slot != null)
+                {
+                    ItemInstance item = slot.GetItem();
+                    // Cek item data
+                    if (item != null && item.itemData != null)
+                    {
+                        totalValue += item.calculatedValue;
+                    }
+                }
+            }
         }
+
+        totalValueText.text = $"Total Value: ${totalValue}";
     }
 
-    // Accept item dropped from hotbar
     public bool TryAddFromHotbar(ItemInstance item, Vector2 screenPosition)
     {
         RectTransform gridRect = gridContainer.GetComponent<RectTransform>();

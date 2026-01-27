@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class PlayerAction : MonoBehaviour
 {
     [Header("Hotbar")]
     public ActiveSlot[] hotbarSlots;
-
     private int selectedSlotIndex = -1;
 
     [Header("Action Settings")]
@@ -15,52 +16,67 @@ public class PlayerAction : MonoBehaviour
     [Header("References")]
     public PlayerStats playerStats;
     public PlayerVisual playerVisual;
-    private PlayerMovement playerMovement; 
+    private PlayerMovement playerMovement;
 
     [Header("Mining Settings")]
     public LayerMask miningLayer;
 
+    [SerializeField] private Animator animator;
     private Camera mainCamera;
 
-    [SerializeField] private Animator animator;
-    public ItemData pickaxe;
-
+    #region Unity Lifecycle
     void Start()
     {
         mainCamera = Camera.main;
 
-        // Auto-assign references
-        if (playerVisual == null) playerVisual = FindObjectOfType<PlayerVisual>();
-        if (playerStats == null) playerStats = FindObjectOfType<PlayerStats>();
-        if (playerMovement == null) playerMovement = GetComponent<PlayerMovement>();
-        if (playerBodyLocation == null) playerBodyLocation = transform;
+        playerVisual ??= FindObjectOfType<PlayerVisual>();
+        playerStats ??= FindObjectOfType<PlayerStats>();
+        playerMovement ??= GetComponent<PlayerMovement>();
+        playerBodyLocation ??= transform;
 
+        InitializeHotbarSlots();
         SelectSlot(-1);
     }
 
     void Update()
     {
+        HandleHotbarInput();
+        HandleActionInput();
+    }
+    #endregion
+
+    #region Input Handling
+    void HandleHotbarInput()
+    {
         if (Keyboard.current.digit1Key.wasPressedThisFrame) ToggleSlot(0);
         if (Keyboard.current.digit2Key.wasPressedThisFrame) ToggleSlot(1);
         if (Keyboard.current.digit3Key.wasPressedThisFrame) ToggleSlot(2);
-
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-            PerformAction();
     }
 
-    public ActiveSlot GetCurrentActiveSlot()
+    void HandleActionInput()
     {
-        if (selectedSlotIndex != -1 && selectedSlotIndex < hotbarSlots.Length)
+        if (!Mouse.current.leftButton.wasPressedThisFrame) return;
+
+        // Kalo ada raycast yang nutupin jadi ga bisa diklik
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        PerformAction();
+    }
+    #endregion
+
+    #region Hotbar Logic
+    void InitializeHotbarSlots()
+    {
+        for (int i = 0; i < hotbarSlots.Length; i++)
         {
-            return hotbarSlots[selectedSlotIndex];
+            if (hotbarSlots[i] != null)
+                hotbarSlots[i].slotIndex = i;
         }
-        return null; 
     }
 
-    public void ForceUpdateVisuals()
-    { 
-        UpdatePlayerHand();
-        UpdateArmedState();
+    public void OnHotbarSlotClicked(int index)
+    {
+        ToggleSlot(index);
     }
 
     void ToggleSlot(int index)
@@ -69,135 +85,116 @@ public class PlayerAction : MonoBehaviour
         SelectSlot(selectedSlotIndex == index ? -1 : index);
     }
 
-    void SelectSlot(int index)
+    public void SelectSlot(int index)
     {
         selectedSlotIndex = index;
+
         for (int i = 0; i < hotbarSlots.Length; i++)
         {
             hotbarSlots[i].SetHighlight(i == selectedSlotIndex);
         }
-        
+
         UpdatePlayerHand();
-        UpdateArmedState(); 
+        UpdateArmedState();
     }
 
+    public ActiveSlot GetCurrentActiveSlot()
+    {
+        if (selectedSlotIndex < 0 || selectedSlotIndex >= hotbarSlots.Length)
+            return null;
 
-    
+        return hotbarSlots[selectedSlotIndex];
+    }
+    #endregion
 
+    #region Visual & Animation
     void UpdatePlayerHand()
     {
         if (playerVisual == null) return;
 
-        if (selectedSlotIndex == -1)
-        {
-            playerVisual.UpdateHandSprite(null);
-            return;
-        }
+        ItemInstance item = selectedSlotIndex == -1
+            ? null
+            : hotbarSlots[selectedSlotIndex].GetItem();
 
-        ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
-        ItemInstance item = currentSlot.GetItem();
-        
         playerVisual.UpdateHandSprite(item?.itemData);
     }
 
     void UpdateArmedState()
     {
-        if (animator == null) return;
+        if (animator == null) return; 
 
-        if (selectedSlotIndex == -1)
-        {
-            animator.SetFloat("isArmed", 0f);
-            return;
-        }
+        bool isArmed =
+            selectedSlotIndex != -1 &&
+            hotbarSlots[selectedSlotIndex].GetItem()?.itemData?.itemType == ItemType.Tool;
 
-        ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
-        ItemInstance itemInstance = currentSlot.GetItem();
-
-        if (itemInstance != null && itemInstance.itemData != null && itemInstance.itemData.itemType == ItemType.Tool)
-        {
-            animator.SetFloat("isArmed", 1f);
-        }
-        else
-        {
-            animator.SetFloat("isArmed", 0f);
-        }
+        animator.SetFloat("isArmed", isArmed ? 1f : 0f);
     }
 
+    public void ForceUpdateVisuals()
+    {
+        UpdatePlayerHand();
+        UpdateArmedState();
+
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        if (ui != null) ui.RefreshInventoryItems();
+    }
+    #endregion
+
+    #region Action Logic
     void PerformAction()
     {
-        if (selectedSlotIndex == -1) return;
+        ActiveSlot currentSlot = GetCurrentActiveSlot();
+        if (currentSlot == null) return;
 
-        ActiveSlot currentSlot = hotbarSlots[selectedSlotIndex];
         ItemInstance itemInstance = currentSlot.GetItem();
+        if (itemInstance?.itemData == null) return;
 
-        if (itemInstance == null || itemInstance.itemData == null) return;
-
-        ItemData itemData = itemInstance.itemData;
-
-        switch (itemData.itemType)
+        switch (itemInstance.itemData.itemType)
         {
             case ItemType.Food:
-                Debug.Log($"Makan {itemData.displayName} (Value: {itemInstance.calculatedValue})");
-                
-                if (playerStats != null) playerStats.EatFood(itemInstance.calculatedValue);
-                
-                currentSlot.ClearSlot(); 
-                
-                UpdatePlayerHand();
-                UpdateArmedState(); 
+                ConsumeFood(itemInstance, currentSlot);
                 break;
 
             case ItemType.Tool:
-                if (playerStats == null) return; // cogzi cogzi // aowkwkwkkw aga gapaham gw bagian ginian
-                animator.SetFloat("isArmed", 1f);
-
-                if (!playerStats.HasStamina())
-                {
-                    Debug.Log("Stamina habis.");
-                    return;
-                }
-
-                TryMineRock();
-                break;
-
-            case ItemType.Resource:
-                Debug.Log($"Resource tidak bisa dipakai.");
+                TryUseTool();
                 break;
         }
     }
 
+    void ConsumeFood(ItemInstance item, ActiveSlot slot)
+    {
+        if (playerStats == null) return;
+
+        playerStats.EatFood(item.calculatedValue);
+        slot.ClearSlot();
+        ForceUpdateVisuals();
+    }
+
+    void TryUseTool()
+    {
+        if (playerStats == null || !playerStats.HasStamina()) return;
+
+        TryMineRock();
+    }
+    #endregion
+
+    #region Mining
     void TryMineRock()
     {
         Vector2 mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f, miningLayer);
 
-        if (hit.collider == null) 
-        {
-            Debug.Log("Raycast tidak kena apa-apa");
-            return;
-        }
+        if (hit.collider == null) return;
 
         MiningNode rock = hit.collider.GetComponent<MiningNode>();
-        if (rock == null) 
-        {
-            Debug.Log($"Kena object: {hit.collider.name}, tapi bukan MiningNode.");
-            return;
-        }
+        if (rock == null) return;
 
         float distance = Vector2.Distance(playerBodyLocation.position, hit.point);
-        if (distance > miningRange) 
-        {
-            Debug.Log("Terlalu jauh untuk mining.");
-            return;
-        }
+        if (distance > miningRange) return;
 
         rock.TakeDamage();
-        if (playerStats != null) playerStats.ConsumeStaminaForMining();
-        {
-            animator.SetTrigger("Mining");
-            Debug.Log("Mining berhasil dilakukan.");
-            return;
-        }
+        playerStats.ConsumeStaminaForMining();
+        animator?.SetTrigger("Mining");
     }
+    #endregion
 }

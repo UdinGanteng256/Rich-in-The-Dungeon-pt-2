@@ -32,6 +32,7 @@ public class MerchantSystem : MonoBehaviour
         CloseAllShops();
         GenerateShopItems();
     }
+    
     public void SellAllInventory()
     {
         List<ItemInstance> allItems = inventoryGrid.GetAllItems();
