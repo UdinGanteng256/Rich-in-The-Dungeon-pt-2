@@ -1773,7 +1773,7 @@ MonoBehaviour:
   maxStamina: 100
   currentStamina: 5
   baseMiningCost: 10
-  currentMoney: 500
+  currentMoney: 50
   staminaBar: {fileID: 1902211603}
 --- !u!4 &507551023
 Transform:

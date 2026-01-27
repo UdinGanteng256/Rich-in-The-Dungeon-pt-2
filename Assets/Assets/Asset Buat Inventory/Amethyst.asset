@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4871b64faf59a4cd18de8e6d51459eee, type: 3}
-  m_Name: Ruby
+  m_Name: Amethyst
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 
   displayName: 
   description: 
-  icon: {fileID: -4622283339285158890, guid: fca7c2df36d9a38429d3b9c250b8cffa, type: 3}
-  width: 10
-  height: 10
+  icon: {fileID: -6760471406004971263, guid: fca7c2df36d9a38429d3b9c250b8cffa, type: 3}
+  width: 1
+  height: 1
   itemType: 0
   isSellable: 1
   basePricePerSlot: 0
-  valueAmount: 4
+  valueAmount: 6
