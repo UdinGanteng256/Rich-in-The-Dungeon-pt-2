@@ -148,7 +148,7 @@ public class PlayerAction : MonoBehaviour
                 break;
 
             case ItemType.Tool:
-                if (playerStats == null) return; // cogzi cogzi
+                if (playerStats == null) return; // cogzi cogzi // aowkwkwkkw aga gapaham gw bagian ginian
                 animator.SetFloat("isArmed", 1f);
 
                 if (!playerStats.HasStamina())
@@ -194,5 +194,10 @@ public class PlayerAction : MonoBehaviour
 
         rock.TakeDamage();
         if (playerStats != null) playerStats.ConsumeStaminaForMining();
+        {
+            animator.SetTrigger("Mining");
+            Debug.Log("Mining berhasil dilakukan.");
+            return;
+        }
     }
 }
