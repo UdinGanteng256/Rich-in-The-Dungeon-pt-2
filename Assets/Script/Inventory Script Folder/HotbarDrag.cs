@@ -42,11 +42,9 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         originalPos = rectTransform.anchoredPosition;
         originalParent = transform.parent;
 
-        // Bikin agak transparan pas didrag
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
         
-        // Pindah ke Canvas biar ada di layer paling atas
         transform.SetParent(canvas.transform, true);
     }
 
@@ -60,23 +58,18 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         isDragging = false;
         
-        // [FIX PENTING] Kembalikan Alpha ke 1 (Normal) APAPUN YANG TERJADI
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        // 1. Jika Swap Sukses (diurus oleh ActiveSlot lain)
         if (dropSuccessful)
         {
-            // Kembalikan parent ke slot asalnya
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = Vector2.zero;
             
-            // Paksa update visual tangan
             UpdatePlayerHand(); 
             return;
         }
 
-        // 2. Logic kembalikan ke Inventory kalau didrop di tanah
         Vector2 mousePos = Mouse.current.position.ReadValue();
         ItemInstance item = myActiveSlot.GetItem();
 
@@ -92,14 +85,12 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             }
             else
             {
-                // Kalau gagal masuk inventory (penuh/invalid), balik ke slot hotbar
                 transform.SetParent(originalParent);
                 rectTransform.anchoredPosition = Vector2.zero;
             }
         }
         else
         {
-            // Safety net
             transform.SetParent(originalParent);
             rectTransform.anchoredPosition = Vector2.zero;
         }
