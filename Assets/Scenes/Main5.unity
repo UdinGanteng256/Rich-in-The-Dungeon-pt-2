@@ -782,6 +782,8 @@ MonoBehaviour:
   randomSizeOnDrop: 1
   shakeAmount: 0.1
   spriteRenderer: {fileID: 0}
+  hitVFX: {fileID: 0}
+  breakVFX: {fileID: 0}
 --- !u!61 &106973248
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8224,7 +8226,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 91234a47c984fc3479983f5bcfd58b3a, type: 2}
+  - {fileID: 2100000, guid: 2321ac9ed56abc3418d7434eec1de184, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9214,6 +9216,8 @@ MonoBehaviour:
   randomSizeOnDrop: 1
   shakeAmount: 0.1
   spriteRenderer: {fileID: 0}
+  hitVFX: {fileID: 0}
+  breakVFX: {fileID: 0}
 --- !u!212 &2111708366
 SpriteRenderer:
   serializedVersion: 2
