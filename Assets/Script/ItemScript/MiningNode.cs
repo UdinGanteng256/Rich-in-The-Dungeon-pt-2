@@ -13,11 +13,8 @@ public class MiningNode : MonoBehaviour
     [Header("Visual & VFX")]
     public float shakeAmount = 0.1f;
     public SpriteRenderer spriteRenderer;
-    
-    [Tooltip("Effect pas batu dipukul (Debu/Percikan)")]
     public GameObject hitVFX; 
     
-    [Tooltip("Effect pas batu hancur lebur (Ledakan batu)")]
     public GameObject breakVFX;
 
     private int currentHealth;
