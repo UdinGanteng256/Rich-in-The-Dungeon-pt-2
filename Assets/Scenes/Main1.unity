@@ -667,6 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb338e0301bb49298936551b68fbb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HotbarDrag
+  dropSuccessful: 0
 --- !u!225 &260127744
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -945,7 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1312,81 +1313,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &420790711
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 420790715}
-  - component: {fileID: 420790713}
-  - component: {fileID: 420790714}
-  m_Layer: 0
-  m_Name: 
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &420790713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420790711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &420790714
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420790711}
-  m_CullTransparentMesh: 1
---- !u!224 &420790715
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420790711}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &422279656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,6 +1372,7 @@ MonoBehaviour:
     height: 0
     calculatedValue: 0
     instanceId: 
+  slotIndex: 0
   iconImage: {fileID: 925490879}
   itemInfoText: {fileID: 777531872}
   highlightBorder: {fileID: 1621833193}
@@ -1814,7 +1741,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   animator: {fileID: 926478467}
-  pickaxe: {fileID: 11400000, guid: 3dbfa13e6a7d14e46bb4ecc569d4c16b, type: 2}
 --- !u!1 &550741821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +1951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3137,7 +3063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &787521779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3234,7 +3160,6 @@ GameObject:
   - component: {fileID: 810508966}
   - component: {fileID: 810508965}
   - component: {fileID: 810508969}
-  - component: {fileID: 810508968}
   - component: {fileID: 810508970}
   m_Layer: 0
   m_Name: Main Camera
@@ -3317,22 +3242,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &810508968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810508964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.Physics2DRaycaster
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxRayIntersections: 0
 --- !u!114 &810508969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3938,6 +3847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb338e0301bb49298936551b68fbb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HotbarDrag
+  dropSuccessful: 0
 --- !u!225 &925490882
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4376,7 +4286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -486, y: -587}
+  m_AnchoredPosition: {x: -324, y: -585}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045701861
@@ -6429,6 +6339,7 @@ MonoBehaviour:
     height: 0
     calculatedValue: 0
     instanceId: 
+  slotIndex: 0
   iconImage: {fileID: 2013253269}
   itemInfoText: {fileID: 286273888}
   highlightBorder: {fileID: 1209226656}
@@ -7113,7 +7024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1740931709}
   - component: {fileID: 1740931710}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BatasCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8270,7 +8181,7 @@ GameObject:
   - component: {fileID: 1978379763}
   - component: {fileID: 1978379765}
   - component: {fileID: 1978379764}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Coin_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8286,7 +8197,7 @@ Transform:
   m_GameObject: {fileID: 1978379762}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1121.3333, y: -826.4286, z: 0}
+  m_LocalPosition: {x: -1120.32, y: -826.38, z: 0}
   m_LocalScale: {x: 3.333333, y: 1.4285715, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8605,6 +8516,7 @@ MonoBehaviour:
     height: 0
     calculatedValue: 0
     instanceId: 
+  slotIndex: 0
   iconImage: {fileID: 260127741}
   itemInfoText: {fileID: 1215877366}
   highlightBorder: {fileID: 1363802352}
@@ -8913,6 +8825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb338e0301bb49298936551b68fbb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HotbarDrag
+  dropSuccessful: 0
 --- !u!225 &2013253272
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9563,7 +9476,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 420790715}
   - {fileID: 810508967}
   - {fileID: 1898581767}
   - {fileID: 1788070297}
