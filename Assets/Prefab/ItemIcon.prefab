@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7264398152036957352}
   - component: {fileID: 891941082388988781}
   m_Layer: 5
-  m_Name: ItemIcon
+  m_Name: itemicon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,6 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e10ea87c4ccc453a985052b0ffd2149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryDrag
+  gridX: 0
+  gridY: 0
+  dropSuccessful: 0
 --- !u!225 &891941082388988781
 CanvasGroup:
   m_ObjectHideFlags: 0
