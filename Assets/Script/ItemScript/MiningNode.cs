@@ -11,9 +11,15 @@ public class MiningNode : MonoBehaviour
     [Tooltip("Resource akan drop SATU item dengan size random")]
     public bool randomSizeOnDrop = true;
 
-    [Header("Visual")]
+    [Header("Visual & VFX")]
     public float shakeAmount = 0.1f;
     public SpriteRenderer spriteRenderer;
+    
+    [Tooltip("Effect pas batu dipukul (Debu/Percikan)")]
+    public GameObject hitVFX; 
+    
+    [Tooltip("Effect pas batu hancur lebur (Ledakan batu)")]
+    public GameObject breakVFX;
 
     private int currentHealth;
     private Vector3 originalPos;
@@ -32,6 +38,12 @@ public class MiningNode : MonoBehaviour
     {
         currentHealth--;
 
+        // 1. Mainkan Effect Hit (Debu pukulan)
+        if (hitVFX != null)
+        {
+            Instantiate(hitVFX, transform.position, Quaternion.identity);
+        }
+
         if (!isShaking)
             StartCoroutine(ShakeEffect());
 
@@ -45,20 +57,23 @@ public class MiningNode : MonoBehaviour
 
     void BreakRock()
     {
+        // 2. Mainkan Effect Hancur (Pecahan batu)
+        if (breakVFX != null)
+        {
+            Instantiate(breakVFX, transform.position, Quaternion.identity);
+        }
+
         if (lootPrefab != null)
         {
-            // DROP HANYA 1 RESOURCE dengan size random
             Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
             GameObject loot = Instantiate(lootPrefab, spawnPos, Quaternion.identity);
             
-            // Set agar loot menggunakan random size
             LootObject lootScript = loot.GetComponent<LootObject>();
             if (lootScript != null)
             {
                 lootScript.useRandomSize = randomSizeOnDrop;
             }
             
-            // Tambahkan efek fisik (opsional)
             Rigidbody2D rb = loot.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -68,8 +83,6 @@ public class MiningNode : MonoBehaviour
                 );
                 rb.AddForce(force, ForceMode2D.Impulse);
             }
-            
-            Debug.Log("Rock destroyed!");
         }
 
         Destroy(gameObject);
@@ -78,9 +91,13 @@ public class MiningNode : MonoBehaviour
     IEnumerator ShakeEffect()
     {
         isShaking = true;
-
         float elapsed = 0f;
-        spriteRenderer.color = new Color(1f, 0.8f, 0.8f);
+        
+        // Simpan warna asli (jaga-jaga kalau batunya gak putih)
+        Color originalColor = spriteRenderer.color;
+        
+        // Efek Flash Merah
+        spriteRenderer.color = new Color(1f, 0.7f, 0.7f); 
 
         while (elapsed < 0.1f)
         {
@@ -94,7 +111,7 @@ public class MiningNode : MonoBehaviour
         }
 
         transform.position = originalPos;
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = originalColor; // Balikin warna semula
         isShaking = false;
     }
 }
