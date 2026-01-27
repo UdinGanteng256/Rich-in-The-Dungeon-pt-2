@@ -51,6 +51,6 @@ public class PauseManager : MonoBehaviour
        //     MusicManager.Instance.ResetStateOnRestart();
        // }
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("StartScene");
     }
 }
