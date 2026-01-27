@@ -1884,7 +1884,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 22.042944, y: -0.19609857}
+  m_Offset: {x: 19.051325, y: -0.19609857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1894,7 +1894,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 43.863476, y: 7.2685647}
+  m_Size: {x: 49.846714, y: 7.2685647}
   m_EdgeRadius: 0
 --- !u!4 &503798211
 Transform:
@@ -2080,6 +2080,7 @@ MonoBehaviour:
   rockPrefabs:
   - {fileID: 8057046592617947070, guid: 42f9ca38f10de4b468163b0343bdd82e, type: 3}
   - {fileID: 6576011774376058864, guid: 8ae03b92323bcfa46aae952e46330c4f, type: 3}
+  - {fileID: 2446673356799835388, guid: 82de07fd872f2c24da908162d4013e3a, type: 3}
   totalRocksToSpawn: 7
   spawnArea: {fileID: 503798210}
   obstacleLayer:
@@ -2419,6 +2420,8 @@ MonoBehaviour:
   randomSizeOnDrop: 1
   shakeAmount: 0.1
   spriteRenderer: {fileID: 0}
+  hitVFX: {fileID: 0}
+  breakVFX: {fileID: 0}
 --- !u!212 &703989199
 SpriteRenderer:
   serializedVersion: 2
@@ -4884,6 +4887,8 @@ MonoBehaviour:
   randomSizeOnDrop: 1
   shakeAmount: 0.1
   spriteRenderer: {fileID: 0}
+  hitVFX: {fileID: 0}
+  breakVFX: {fileID: 0}
 --- !u!61 &1230660975
 BoxCollider2D:
   m_ObjectHideFlags: 0

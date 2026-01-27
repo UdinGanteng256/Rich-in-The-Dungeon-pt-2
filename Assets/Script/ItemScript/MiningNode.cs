@@ -8,7 +8,6 @@ public class MiningNode : MonoBehaviour
     public GameObject lootPrefab;
     
     [Header("Drop Settings")]
-    [Tooltip("Resource akan drop SATU item dengan size random")]
     public bool randomSizeOnDrop = true;
 
     [Header("Visual & VFX")]
@@ -38,7 +37,6 @@ public class MiningNode : MonoBehaviour
     {
         currentHealth--;
 
-        // 1. Mainkan Effect Hit (Debu pukulan)
         if (hitVFX != null)
         {
             Instantiate(hitVFX, transform.position, Quaternion.identity);
@@ -57,7 +55,6 @@ public class MiningNode : MonoBehaviour
 
     void BreakRock()
     {
-        // 2. Mainkan Effect Hancur (Pecahan batu)
         if (breakVFX != null)
         {
             Instantiate(breakVFX, transform.position, Quaternion.identity);
@@ -93,10 +90,8 @@ public class MiningNode : MonoBehaviour
         isShaking = true;
         float elapsed = 0f;
         
-        // Simpan warna asli (jaga-jaga kalau batunya gak putih)
         Color originalColor = spriteRenderer.color;
         
-        // Efek Flash Merah
         spriteRenderer.color = new Color(1f, 0.7f, 0.7f); 
 
         while (elapsed < 0.1f)
@@ -111,7 +106,7 @@ public class MiningNode : MonoBehaviour
         }
 
         transform.position = originalPos;
-        spriteRenderer.color = originalColor; // Balikin warna semula
+        spriteRenderer.color = originalColor; 
         isShaking = false;
     }
 }

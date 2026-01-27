@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerAction : MonoBehaviour
@@ -12,6 +13,9 @@ public class PlayerAction : MonoBehaviour
     [Header("Action Settings")]
     public float miningRange = 2.5f;
     public Transform playerBodyLocation;
+
+    [Tooltip("Delay.")]
+    public float hitDelay = 0.4f;
 
     [Header("References")]
     public PlayerStats playerStats;
@@ -34,7 +38,7 @@ public class PlayerAction : MonoBehaviour
         playerMovement ??= GetComponent<PlayerMovement>();
         playerBodyLocation ??= transform;
 
-        InitializeHotbarSlots();
+        InitializeHotbar();
         SelectSlot(-1);
     }
 
@@ -56,16 +60,14 @@ public class PlayerAction : MonoBehaviour
     void HandleActionInput()
     {
         if (!Mouse.current.leftButton.wasPressedThisFrame) return;
-
-        // Kalo ada raycast yang nutupin jadi ga bisa diklik
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         PerformAction();
     }
     #endregion
 
-    #region Hotbar Logic
-    void InitializeHotbarSlots()
+    #region Hotbar
+    void InitializeHotbar()
     {
         for (int i = 0; i < hotbarSlots.Length; i++)
         {
@@ -112,20 +114,16 @@ public class PlayerAction : MonoBehaviour
     {
         if (playerVisual == null) return;
 
-        ItemInstance item = selectedSlotIndex == -1
-            ? null
-            : hotbarSlots[selectedSlotIndex].GetItem();
-
+        ItemInstance item = GetCurrentActiveSlot()?.GetItem();
         playerVisual.UpdateHandSprite(item?.itemData);
     }
 
     void UpdateArmedState()
     {
-        if (animator == null) return; 
+        if (animator == null) return;
 
         bool isArmed =
-            selectedSlotIndex != -1 &&
-            hotbarSlots[selectedSlotIndex].GetItem()?.itemData?.itemType == ItemType.Tool;
+            GetCurrentActiveSlot()?.GetItem()?.itemData?.itemType == ItemType.Tool;
 
         animator.SetFloat("isArmed", isArmed ? 1f : 0f);
     }
@@ -143,20 +141,20 @@ public class PlayerAction : MonoBehaviour
     #region Action Logic
     void PerformAction()
     {
-        ActiveSlot currentSlot = GetCurrentActiveSlot();
-        if (currentSlot == null) return;
+        ActiveSlot slot = GetCurrentActiveSlot();
+        if (slot == null) return;
 
-        ItemInstance itemInstance = currentSlot.GetItem();
+        ItemInstance itemInstance = slot.GetItem();
         if (itemInstance?.itemData == null) return;
 
         switch (itemInstance.itemData.itemType)
         {
             case ItemType.Food:
-                ConsumeFood(itemInstance, currentSlot);
+                ConsumeFood(itemInstance, slot);
                 break;
 
             case ItemType.Tool:
-                TryUseTool();
+                UseTool();
                 break;
         }
     }
@@ -170,16 +168,15 @@ public class PlayerAction : MonoBehaviour
         ForceUpdateVisuals();
     }
 
-    void TryUseTool()
+    void UseTool()
     {
         if (playerStats == null || !playerStats.HasStamina()) return;
-
-        TryMineRock();
+        TryMine();
     }
     #endregion
 
     #region Mining
-    void TryMineRock()
+    void TryMine()
     {
         Vector2 mousePos = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f, miningLayer);
@@ -192,9 +189,18 @@ public class PlayerAction : MonoBehaviour
         float distance = Vector2.Distance(playerBodyLocation.position, hit.point);
         if (distance > miningRange) return;
 
-        rock.TakeDamage();
-        playerStats.ConsumeStaminaForMining();
         animator?.SetTrigger("Mining");
+        StartCoroutine(ApplyMiningHit(rock));
+    }
+
+    IEnumerator ApplyMiningHit(MiningNode rock)
+    {
+        yield return new WaitForSeconds(hitDelay);
+
+        if (rock == null) yield break;
+
+        rock.TakeDamage();
+        playerStats?.ConsumeStaminaForMining();
     }
     #endregion
 }
