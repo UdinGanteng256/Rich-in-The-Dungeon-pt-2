@@ -11174,7 +11174,7 @@ MonoBehaviour:
   - name: Emerald
     prefab: {fileID: 6576011774376058864, guid: 8ae03b92323bcfa46aae952e46330c4f, type: 3}
     chance: 30
-  totalRocksToSpawn: 7
+  totalRocksToSpawn: 10
   spawnArea: {fileID: 1080630419}
   obstacleLayer:
     serializedVersion: 2
