@@ -1,0 +1,639 @@
+fileFormatVersion: 2
+guid: 5674ff6661a057a4b801abb2ad3ad45b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6670359831309991329
+    second: CecepHold_0
+  - first:
+      213: -4609288732386906364
+    second: CecepHold_1
+  - first:
+      213: -4836307399249798821
+    second: CecepHold_2
+  - first:
+      213: -886198097665875454
+    second: CecepHold_3
+  - first:
+      213: 2304096903488281048
+    second: CecepHold_4
+  - first:
+      213: -4166873988955948437
+    second: CecepHold_5
+  - first:
+      213: 202030136263583818
+    second: CecepHold_6
+  - first:
+      213: 6984674591304051429
+    second: CecepHold_7
+  - first:
+      213: 2596898160842209538
+    second: CecepHold_8
+  - first:
+      213: -8685711816318925062
+    second: CecepHold_9
+  - first:
+      213: 489339592483188238
+    second: CecepHold_10
+  - first:
+      213: 5193463699213989631
+    second: CecepHold_11
+  - first:
+      213: -1626869576168218963
+    second: CecepHold_12
+  - first:
+      213: 3474582743460810692
+    second: CecepHold_13
+  - first:
+      213: 2516452039652594835
+    second: CecepHold_14
+  - first:
+      213: -2148802282904931044
+    second: CecepHold_15
+  - first:
+      213: -389178559374408572
+    second: CecepHold_16
+  - first:
+      213: 1975506159880417945
+    second: CecepHold_17
+  - first:
+      213: -1908378481893916336
+    second: CecepHold_18
+  - first:
+      213: 4415040476391697517
+    second: CecepHold_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CecepHold_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 6
+        width: 26
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f52cbb2131f1e63a0800000000000000
+      internalID: -6670359831309991329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 6
+        width: 26
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40f2ed6a1548800c0800000000000000
+      internalID: -4609288732386906364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 6
+        width: 26
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b595f135b0cf1ecb0800000000000000
+      internalID: -4836307399249798821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 6
+        width: 26
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 202aff3868793b3f0800000000000000
+      internalID: -886198097665875454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_4
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 6
+        width: 26
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d91f741debc9ff10800000000000000
+      internalID: 2304096903488281048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_5
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 6
+        width: 26
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6a37702f2a4c26c0800000000000000
+      internalID: -4166873988955948437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_6
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 6
+        width: 26
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a482ae9a651cdc200800000000000000
+      internalID: 202030136263583818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_7
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 6
+        width: 26
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eaef5ec88c8ee060800000000000000
+      internalID: 6984674591304051429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_8
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 6
+        width: 26
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2097dda4e190a0420800000000000000
+      internalID: 2596898160842209538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_9
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 6
+        width: 26
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af6c5e63f17267780800000000000000
+      internalID: -8685711816318925062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_10
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 6
+        width: 26
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0eae7844cb7ac600800000000000000
+      internalID: 489339592483188238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_11
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 6
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff63981e7b3e21840800000000000000
+      internalID: 5193463699213989631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_12
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 6
+        width: 36
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dae5a907db23c69e0800000000000000
+      internalID: -1626869576168218963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_13
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 6
+        width: 32
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cf0fa69892383030800000000000000
+      internalID: 3474582743460810692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_14
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 6
+        width: 38
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 394dccd1ccb3ce220800000000000000
+      internalID: 2516452039652594835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_15
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 6
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1537e265bbed22e0800000000000000
+      internalID: -2148802282904931044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_16
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 6
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4844a46892c599af0800000000000000
+      internalID: -389178559374408572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_17
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 6
+        width: 38
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 992b44fb2686a6b10800000000000000
+      internalID: 1975506159880417945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_18
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 6
+        width: 36
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 051c6b9b1e31485e0800000000000000
+      internalID: -1908378481893916336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CecepHold_19
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 6
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6c6c40ebef554d30800000000000000
+      internalID: 4415040476391697517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 471dce73916d26b4f89d582db026befc
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      CecepHold_0: -6670359831309991329
+      CecepHold_1: -4609288732386906364
+      CecepHold_10: 489339592483188238
+      CecepHold_11: 5193463699213989631
+      CecepHold_12: -1626869576168218963
+      CecepHold_13: 3474582743460810692
+      CecepHold_14: 2516452039652594835
+      CecepHold_15: -2148802282904931044
+      CecepHold_16: -389178559374408572
+      CecepHold_17: 1975506159880417945
+      CecepHold_18: -1908378481893916336
+      CecepHold_19: 4415040476391697517
+      CecepHold_2: -4836307399249798821
+      CecepHold_3: -886198097665875454
+      CecepHold_4: 2304096903488281048
+      CecepHold_5: -4166873988955948437
+      CecepHold_6: 202030136263583818
+      CecepHold_7: 6984674591304051429
+      CecepHold_8: 2596898160842209538
+      CecepHold_9: -8685711816318925062
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
