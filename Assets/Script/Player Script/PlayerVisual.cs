@@ -5,22 +5,24 @@ public class PlayerVisual : MonoBehaviour
     [Header("Visual")]
     public SpriteRenderer handRenderer;
 
-    // Animasi
     [SerializeField] public Animator animator;
 
     public void UpdateHandSprite(ItemData item)
     {
+        if (handRenderer == null) 
+        {
+            Debug.LogWarning("Slot blm diisi");
+            return;
+        }
+
         if (item == null)
         {
             handRenderer.sprite = null;
-            handRenderer.enabled = false;
+            handRenderer.enabled = false; 
             return;
         }
 
         handRenderer.sprite = item.icon;
         handRenderer.enabled = true;
-
-        if (handRenderer == null) return;
-
     }
 }
