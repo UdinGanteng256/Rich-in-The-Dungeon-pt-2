@@ -3560,7 +3560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c2b4d81ca19b442ac445c6b1d53d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  mainMixer: {fileID: 24100000, guid: 9517e67f1a7d50a469423227e8d39466, type: 2}
+  mainMixer: {fileID: 24100000, guid: bf6100a76aeb2c540b7a92cb34096011, type: 2}
   musicSource: {fileID: 1251439217}
   ambienceSource: {fileID: 1251439217}
   sfxSource: {fileID: 1251439217}
