@@ -8,19 +8,19 @@ public class LootObject : MonoBehaviour
     public ItemData itemData;
     
     [Header("Random Size")]
-    public bool useRandomSize = true; // Toggle random size
-    public int fixedWidth = 1;        // Jika tidak random
+    public bool useRandomSize = true; 
+    public int fixedWidth = 1; 
     public int fixedHeight = 1;
 
     [Header("Visual Info")]
-    public TextMeshPro infoText; // World space text untuk info loot
+    public TextMeshPro infoText; 
     public SpriteRenderer spriteRenderer;
 
     private InventoryGrid inventoryBackend;
     private InventoryUI inventoryUI;
     private Camera mainCamera;
     
-    private ItemInstance generatedInstance; // Instance yang akan masuk inventory
+    private ItemInstance generatedInstance;
 
     private void Start()
     {
@@ -40,12 +40,10 @@ public class LootObject : MonoBehaviour
     {
         if (useRandomSize)
         {
-            // Buat instance dengan random size
             generatedInstance = new ItemInstance(itemData);
         }
         else
         {
-            // Buat instance dengan size tetap
             generatedInstance = new ItemInstance(itemData, fixedWidth, fixedHeight);
         }
 
@@ -54,18 +52,15 @@ public class LootObject : MonoBehaviour
 
     void UpdateVisualInfo()
     {
-        // Set icon sprite
         if (spriteRenderer != null && itemData.icon != null)
         {
             spriteRenderer.sprite = itemData.icon;
             
-            // Scale sprite based on size
             float scaleX = generatedInstance.width * 0.5f;
             float scaleY = generatedInstance.height * 0.5f;
             transform.localScale = new Vector3(scaleX, scaleY, 1f);
         }
 
-        // Set info text
         if (infoText != null)
         {
             infoText.text = $"{generatedInstance.width}x{generatedInstance.height}\n${generatedInstance.calculatedValue}";
@@ -95,7 +90,6 @@ public class LootObject : MonoBehaviour
 
     void CollectItem()
     {
-        // Gunakan instance yang sudah digenerate
         bool berhasilMasuk = inventoryBackend.AutoAddItem(generatedInstance);
 
         if (berhasilMasuk)

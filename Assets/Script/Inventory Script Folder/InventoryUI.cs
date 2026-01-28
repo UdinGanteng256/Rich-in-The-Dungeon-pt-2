@@ -38,13 +38,21 @@ public class InventoryUI : MonoBehaviour
     public void ToggleInventoryButton()
     {
         ToggleInventory(!isInventoryOpen);
+
     }
 
     public void ToggleInventory(bool status)
+    
     {
         isInventoryOpen = status;
+
         if (inventoryWindowObj != null)
             inventoryWindowObj.SetActive(isInventoryOpen);
+        
+        if (status == true && AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.sfxBackpackOpen);
+        }
     }
 
     void GenerateGridVisuals()
