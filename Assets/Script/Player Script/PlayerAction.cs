@@ -96,6 +96,8 @@ public class PlayerAction : MonoBehaviour
             hotbarSlots[i].SetHighlight(i == selectedSlotIndex);
         }
 
+        AudioManager.instance.PlaySFX(AudioManager.instance.sfxEquipItem);
+
         UpdatePlayerHand();
         UpdateArmedState();
     }
@@ -152,7 +154,6 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        // Kirim angka 0, 1, atau 2 ke Animator
         animator.SetFloat("isArmed", armedValue);
     }
     #endregion
@@ -181,6 +182,22 @@ public class PlayerAction : MonoBehaviour
     void ConsumeFood(ItemInstance item, ActiveSlot slot)
     {
         if (playerStats == null) return;
+
+        if (AudioManager.instance != null)
+        {
+            string foodName = item.itemData.name;
+
+            if (foodName == "Coklat")
+            {
+                AudioManager.instance.PlaySFX(AudioManager.instance.sfxEatChocolate);
+            }
+            else if (foodName == "Mie Ayam")
+            {
+                AudioManager.instance.PlaySFX(AudioManager.instance.sfxEatNoodle);
+            }
+        }
+
+        if (animator != null) animator.SetTrigger("Eat"); 
 
         playerStats.EatFood(item.calculatedValue);
         slot.ClearSlot();
@@ -220,6 +237,8 @@ public class PlayerAction : MonoBehaviour
 
         rock.TakeDamage();
         playerStats?.ConsumeStaminaForMining();
+
+        AudioManager.instance.PlaySFX(AudioManager.instance.sfxRockHit);
     }
     #endregion
 }

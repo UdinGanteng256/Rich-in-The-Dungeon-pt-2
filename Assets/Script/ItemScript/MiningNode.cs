@@ -57,6 +57,16 @@ public class MiningNode : MonoBehaviour
             Instantiate(breakVFX, transform.position, Quaternion.identity);
         }
 
+        if (breakVFX != null)
+        {
+            Instantiate(breakVFX, transform.position, Quaternion.identity);
+        }
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.sfxRockBreak);
+        }
+
         if (lootPrefab != null)
         {
             Vector3 spawnPos = transform.position + Vector3.up * 0.5f;

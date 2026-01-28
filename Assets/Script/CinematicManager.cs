@@ -23,6 +23,11 @@ public class CinematicManager : MonoBehaviour
         mainMenuPanel.SetActive(true);
         videoScreenObj.SetActive(false);
         choicePanel.SetActive(false);
+        
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuBGM);
+        }
 
         videoPlayer.isLooping = false; 
         videoPlayer.loopPointReached += OnVideoFinished;
@@ -33,6 +38,11 @@ public class CinematicManager : MonoBehaviour
         mainMenuPanel.SetActive(false); 
         videoScreenObj.SetActive(true); 
         
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StopAllMusic(); 
+        }
+        
         PlayVideo(introVideo); 
     }
 
@@ -40,17 +50,20 @@ public class CinematicManager : MonoBehaviour
     {
         if (vp.clip == introVideo)
         {
-
             vp.Stop(); 
             videoScreenObj.SetActive(false); 
-            
             choicePanel.SetActive(true);
         }
         else if (vp.clip == badEndingVideo)
         {
-            vp.Stop();
+
             videoScreenObj.SetActive(false); 
             mainMenuPanel.SetActive(true);  
+
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuBGM);
+            }
         }
     }
 

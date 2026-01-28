@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
 
+    [Header("Audio")]
+    public float stepRate = 0.5f;
+    private float nextStepTime;
     private Vector2 moveInput;
     private bool isFacingRight = true;
     private Rigidbody2D rb;
@@ -38,6 +41,14 @@ public class PlayerMovement : MonoBehaviour
 
         // Update walking animation
         animator.SetBool("isWalking", moveInput != Vector2.zero);
+
+                if (moveInput != Vector2.zero && Time.time >= nextStepTime)
+
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.sfxFootstep);
+            nextStepTime = Time.time + stepRate;
+        }
+
     }
 
     void FixedUpdate()
