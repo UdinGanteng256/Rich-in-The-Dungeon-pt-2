@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -22,7 +22,6 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-
         canvas = GetComponentInParent<Canvas>();
         myActiveSlot = GetComponentInParent<ActiveSlot>();
         inventoryUI = FindObjectOfType<InventoryUI>();
@@ -33,18 +32,49 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         return myActiveSlot;
     }
 
+    // --- FUNGSI KLIK KANAN (JUAL) ---
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            MerchantSystem merchant = FindObjectOfType<MerchantSystem>();
+            
+            if (merchant != null && merchant.isTradingActive)
+            {
+                ItemInstance item = myActiveSlot.GetItem();
+                
+                if (item != null)
+                {
+                    if (item.itemData.isSellable == false)
+                    {
+                        Debug.Log("Item ini tidak bisa dijual.");
+                        return; 
+                    }
+
+                    // --- PERBAIKAN DI SINI (Ganti .itemName jadi .name) ---
+                    Debug.Log("Menjual item: " + item.itemData.name); 
+                    // -----------------------------------------------------
+
+                    merchant.SellItem(item);
+
+                    myActiveSlot.ClearSlot(); 
+                    UpdatePlayerHand();
+
+                    if (inventoryUI != null) inventoryUI.RefreshInventoryItems();
+                }
+            }
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (myActiveSlot.GetItem() == null) return;
-
         dropSuccessful = false;
         isDragging = true;
         originalPos = rectTransform.anchoredPosition;
         originalParent = transform.parent;
-
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
-        
         transform.SetParent(canvas.transform, true);
     }
 
@@ -54,18 +84,16 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
-public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData)
     {
         isDragging = false;
-        
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
         if (dropSuccessful)
         {
-            transform.SetParent(originalParent); 
+            transform.SetParent(originalParent);
             rectTransform.anchoredPosition = Vector2.zero;
-            
             UpdatePlayerHand(); 
             return;
         }
@@ -75,16 +103,13 @@ public void OnEndDrag(PointerEventData eventData)
 
         if (item != null)
         {
-            bool success = inventoryUI.TryAddFromHotbar(item, mousePos);
-
+            bool success = inventoryUI != null && inventoryUI.TryAddFromHotbar(item, mousePos);
+            
             if (success)
             {
-                Debug.Log("Item dikembalikan ke Inventory.");
-                
-                transform.SetParent(originalParent); 
+                transform.SetParent(originalParent);
                 rectTransform.anchoredPosition = Vector2.zero;
-
-                myActiveSlot.ClearSlot(); 
+                myActiveSlot.ClearSlot();
                 UpdatePlayerHand();
             }
             else

@@ -6861,8 +6861,8 @@ MonoBehaviour:
   itemsForSale:
   - {fileID: 11400000, guid: f62dd5c81bfd743998467aca850b623a, type: 2}
   - {fileID: 11400000, guid: 889f96b68a4bc2c40a1b55a51d32900d, type: 2}
-  isTradingActive: 0
-  isSellingMode: 0
+  isTradingActive: 1
+  isSellingMode: 1
 --- !u!4 &1207115359
 Transform:
   m_ObjectHideFlags: 0
@@ -11228,6 +11228,50 @@ Transform:
   - {fileID: 398303861}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1963522588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963522590}
+  - component: {fileID: 1963522589}
+  m_Layer: 0
+  m_Name: MusicTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1963522589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963522588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c62afd59f8b096418ffe5581ddd88a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DungeonMusic
+--- !u!4 &1963522590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963522588}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970150648
 GameObject:
   m_ObjectHideFlags: 0
@@ -11611,7 +11655,6 @@ GameObject:
   - component: {fileID: 2010167525}
   - component: {fileID: 2010167524}
   - component: {fileID: 2010167523}
-  - component: {fileID: 2010167527}
   - component: {fileID: 2010167526}
   m_Layer: 0
   m_Name: Npc Merchant Asep
@@ -11757,27 +11800,6 @@ MonoBehaviour:
   interactHint: {fileID: 382552227}
   mainDialogPanel: {fileID: 479926902}
   sellOptionPanel: {fileID: 1450116400}
---- !u!114 &2010167527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010167522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1a5312e482cc4dc985d7c203b30f34c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MerchantSystem
-  merchantWindow: {fileID: 43691051}
-  shopContainer: {fileID: 1850871237}
-  shopItemPrefab: {fileID: 7985029982633383953, guid: 250b21ae334bd4d92b5ea974507e5cc9, type: 3}
-  feedbackText: {fileID: 1328922671}
-  itemsForSale:
-  - {fileID: 11400000, guid: f62dd5c81bfd743998467aca850b623a, type: 2}
-  - {fileID: 11400000, guid: 889f96b68a4bc2c40a1b55a51d32900d, type: 2}
-  isTradingActive: 1
-  isSellingMode: 1
 --- !u!1 &2013253267
 GameObject:
   m_ObjectHideFlags: 0
@@ -12541,3 +12563,4 @@ SceneRoots:
   - {fileID: 1597641334}
   - {fileID: 1320211556}
   - {fileID: 1094489955}
+  - {fileID: 1963522590}
