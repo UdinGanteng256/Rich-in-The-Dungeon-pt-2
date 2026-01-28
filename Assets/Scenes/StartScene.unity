@@ -3564,7 +3564,7 @@ MonoBehaviour:
   musicSource: {fileID: 1251439217}
   ambienceSource: {fileID: 1251439217}
   sfxSource: {fileID: 1251439217}
-  mainMenuBGM: {fileID: 8300000, guid: dd153d04f85d1d742a9ac887cf4745c0, type: 3}
+  mainMenuBGM: {fileID: 8300000, guid: c356658a8ab68c744ab17bb77da49478, type: 3}
   dungeonMusic: {fileID: 8300000, guid: dd153d04f85d1d742a9ac887cf4745c0, type: 3}
   softWindClip: {fileID: 8300000, guid: 6242139af775de044b425f85d7ede3cb, type: 3}
   sfxFootstep: {fileID: 8300000, guid: c188c715e9869af4d83ff738c4f22e02, type: 3}
@@ -5088,7 +5088,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1542006800}
   m_HandleRect: {fileID: 1101089601}
   m_Direction: 0
-  m_MinValue: 0.1
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.1
@@ -5178,7 +5178,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1726148935}
   m_HandleRect: {fileID: 1244954427}
   m_Direction: 0
-  m_MinValue: 0.1
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.1
