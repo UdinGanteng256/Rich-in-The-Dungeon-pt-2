@@ -109,6 +109,16 @@ public class PlayerAction : MonoBehaviour
     }
     #endregion
 
+    
+    public void ForceUpdateVisuals()
+    {
+        UpdatePlayerHand();
+        UpdateArmedState();
+
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        if (ui != null) ui.RefreshInventoryItems();
+    }
+
     #region Visual & Animation
     void UpdatePlayerHand()
     {
@@ -118,23 +128,32 @@ public class PlayerAction : MonoBehaviour
         playerVisual.UpdateHandSprite(item?.itemData);
     }
 
+    // Animasi Holding
     void UpdateArmedState()
     {
         if (animator == null) return;
 
-        bool isArmed =
-            GetCurrentActiveSlot()?.GetItem()?.itemData?.itemType == ItemType.Tool;
+        ItemInstance currentItem = GetCurrentActiveSlot()?.GetItem();
+        
+        float armedValue = 0f; 
 
-        animator.SetFloat("isArmed", isArmed ? 1f : 0f);
-    }
+        if (currentItem != null && currentItem.itemData != null)
+        {
+            switch (currentItem.itemData.itemType)
+            {
+                case ItemType.Tool:
+                    armedValue = 1f; 
+                    break;
 
-    public void ForceUpdateVisuals()
-    {
-        UpdatePlayerHand();
-        UpdateArmedState();
+                case ItemType.Food:
+                case ItemType.Resource:
+                    armedValue = 2f; 
+                    break;
+            }
+        }
 
-        InventoryUI ui = FindObjectOfType<InventoryUI>();
-        if (ui != null) ui.RefreshInventoryItems();
+        // Kirim angka 0, 1, atau 2 ke Animator
+        animator.SetFloat("isArmed", armedValue);
     }
     #endregion
 

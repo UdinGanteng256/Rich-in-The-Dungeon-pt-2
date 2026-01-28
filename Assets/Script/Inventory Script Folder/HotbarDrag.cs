@@ -54,7 +54,7 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+public void OnEndDrag(PointerEventData eventData)
     {
         isDragging = false;
         
@@ -63,7 +63,7 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (dropSuccessful)
         {
-            transform.SetParent(originalParent);
+            transform.SetParent(originalParent); 
             rectTransform.anchoredPosition = Vector2.zero;
             
             UpdatePlayerHand(); 
@@ -80,7 +80,11 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             if (success)
             {
                 Debug.Log("Item dikembalikan ke Inventory.");
-                myActiveSlot.ClearSlot();
+                
+                transform.SetParent(originalParent); 
+                rectTransform.anchoredPosition = Vector2.zero;
+
+                myActiveSlot.ClearSlot(); 
                 UpdatePlayerHand();
             }
             else
