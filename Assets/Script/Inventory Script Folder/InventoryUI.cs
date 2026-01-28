@@ -20,11 +20,21 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
-        GenerateGridVisuals();
-        RefreshInventoryItems();
+        if (inventoryBackend == null)
+        {
+            inventoryBackend = FindObjectOfType<InventoryGrid>();
+        }
+
+        // Cek koneksi
+        if (inventoryBackend != null)
+        {
+            GenerateGridVisuals();
+            RefreshInventoryItems();
+            UpdateTotalValueDisplay();
+        }
+        
         ToggleInventory(false);
     }
-
     public void ToggleInventoryButton()
     {
         ToggleInventory(!isInventoryOpen);

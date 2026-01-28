@@ -1,80 +1,79 @@
 using UnityEngine;
-using UnityEngine.UI; // Wajib untuk akses Image
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     [Header("Attributes")]
-    public int strength = 1;      
     public float maxStamina = 100f;
     public float currentStamina;
 
-    [Header("Settings")]
-    public float baseMiningCost = 10f; 
-
     [Header("Ekonomi")]
-    public int currentMoney = 0; 
+    public int currentMoney = 0;
 
-    [Header("UI Reference")]
-    public Image staminaBar;  
+    [Header("Settings")]
+    public int strength = 1;
+    public float baseMiningCost = 10f;
+    public Image staminaBar;
 
     void Start()
     {
-        currentStamina = maxStamina;
+        if (GlobalData.hasDataInitialized)
+        {
+            currentMoney = GlobalData.savedMoney;
+            currentStamina = Mathf.Clamp(GlobalData.savedStamina, 0, maxStamina);
+        }
+        else
+        {
+            currentStamina = maxStamina;
+            currentMoney = 0;
+        }
+
         UpdateUI();
     }
 
-    // --- Transaksi Duit ---
     public void AddMoney(int amount)
     {
         currentMoney += amount;
-        Debug.Log($"Uang bertambah: +${amount}. Total: ${currentMoney}");
+        GlobalData.savedMoney = currentMoney;
+
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        if (ui != null) ui.RefreshInventoryItems();
     }
 
     public bool SpendMoney(int amount)
     {
-        if (currentMoney >= amount)
-        {
-            currentMoney -= amount;
-            Debug.Log($"Belanja sukses: -${amount}. Sisa: ${currentMoney}");
-            return true;
-        }
-        else
-        {
-            Debug.Log("Uang tidak cukup!");
-            return false;
-        }
-    } 
+        if (currentMoney < amount) return false;
 
-    // --- Stamina System ---
+        currentMoney -= amount;
+        GlobalData.savedMoney = currentMoney;
+        return true;
+    }
+
     public void ConsumeStaminaForMining()
     {
-        float reduction = (strength - 1) * 1f; 
-        float finalCost = Mathf.Clamp(baseMiningCost - reduction, 1f, baseMiningCost);
+        float reduction = (strength - 1);
+        float cost = Mathf.Clamp(baseMiningCost - reduction, 1f, baseMiningCost);
 
-        currentStamina -= finalCost;
-        if (currentStamina < 0) currentStamina = 0;
-
+        currentStamina = Mathf.Max(0, currentStamina - cost);
+        GlobalData.savedStamina = currentStamina;
         UpdateUI();
     }
 
     public void EatFood(int healAmount)
     {
-        currentStamina += healAmount;
-        if (currentStamina > maxStamina) currentStamina = maxStamina;
-        
+        currentStamina = Mathf.Min(maxStamina, currentStamina + healAmount);
+        GlobalData.savedStamina = currentStamina;
         UpdateUI();
-    }
-
-    public bool HasStamina()
-    {
-        return currentStamina > 0;
     }
 
     void UpdateUI()
     {
         if (staminaBar != null)
-        {
             staminaBar.fillAmount = currentStamina / maxStamina;
-        }
+    }
+
+    public bool HasStamina()
+    {
+        return currentStamina > 0;
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 public class InventoryGrid : MonoBehaviour
 {
+    // --- SETTINGS ---
     [Header("Settings")]
     public int gridSizeWidth = 8;
     public int gridSizeHeight = 4;
 
-    [Header("Starter Pack (Wajib Isi)")]
+    [Header("Starter Pack")]
     public ItemData startingItem;
-
+    //Data base Lokal  pake global data
     private ItemInstance[,] inventoryGrid;
 
     private void Awake()
@@ -19,42 +20,89 @@ public class InventoryGrid : MonoBehaviour
 
     private void Start()
     {
-        if (startingItem != null)
+        if (GlobalData.hasDataInitialized)
         {
-            ItemInstance newItem = new ItemInstance(startingItem);
-            if (AutoAddItem(newItem))
+            inventoryGrid = GlobalData.savedInventoryGrid;
+        }
+        else
+        {
+            if (startingItem != null)
             {
-                Debug.Log($"item {startingItem.displayName} berhasil masuk inventory.");
-                InventoryUI ui = FindObjectOfType<InventoryUI>();
-                if (ui != null) ui.RefreshInventoryItems();
+                ItemInstance newItem = new ItemInstance(startingItem);
+                AutoAddItem(newItem);
             }
-            else
-            {
-                Debug.LogError("Gagal masuk! Inventory penuh atau error.");
-            }
+            
+            GlobalData.hasDataInitialized = true;
+            SaveToGlobal();
+        }
+
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        if (ui != null)
+        {
+            ui.inventoryBackend = this; 
+            ui.RefreshInventoryItems();
         }
     }
 
-    public List<ItemInstance> GetAllItems()
+    // --- FUNGSI SAVE ---
+    public void SaveToGlobal()
     {
-        List<ItemInstance> items = new List<ItemInstance>();
-        HashSet<string> processedIds = new HashSet<string>();
+        GlobalData.savedInventoryGrid = this.inventoryGrid;
+    }
 
-        for (int x = 0; x < gridSizeWidth; x++)
+    public ItemInstance GetItemAt(int x, int y)
+    {
+        if (x >= 0 && x < gridSizeWidth && y >= 0 && y < gridSizeHeight)
+            return inventoryGrid[x, y];
+        return null;
+    }
+
+    public void PlaceItem(ItemInstance item, int posX, int posY)
+    {
+        for (int x = 0; x < item.width; x++)
         {
-            for (int y = 0; y < gridSizeHeight; y++)
+            for (int y = 0; y < item.height; y++)
             {
-                ItemInstance item = inventoryGrid[x, y];
-                if (item != null && !processedIds.Contains(item.instanceId))
+                if (posX + x < gridSizeWidth && posY + y < gridSizeHeight)
+                    inventoryGrid[posX + x, posY + y] = item;
+            }
+        }
+        SaveToGlobal(); // Auto Save
+    }
+
+    public void RemoveItem(ItemInstance item, int oldX, int oldY)
+    {
+        if (item == null) return;
+
+        for (int x = 0; x < item.width; x++)
+        {
+            for (int y = 0; y < item.height; y++)
+            {
+                if (oldX + x < gridSizeWidth && oldY + y < gridSizeHeight)
                 {
-                    items.Add(item);
-                    processedIds.Add(item.instanceId);
+                    if (inventoryGrid[oldX + x, oldY + y] == item)
+                        inventoryGrid[oldX + x, oldY + y] = null;
                 }
             }
         }
-        return items;
+        SaveToGlobal(); // Auto Save
     }
-    // ------------------------------------------------
+
+    public bool CheckAvailableSpace(int posX, int posY, ItemInstance item)
+    {
+        if (posX < 0 || posY < 0) return false;
+        if (posX + item.width > gridSizeWidth) return false;
+        if (posY + item.height > gridSizeHeight) return false;
+
+        for (int x = 0; x < item.width; x++)
+        {
+            for (int y = 0; y < item.height; y++)
+            {
+                if (inventoryGrid[posX + x, posY + y] != null) return false;
+            }
+        }
+        return true;
+    }
 
     public bool AutoAddItem(ItemInstance item)
     {
@@ -79,74 +127,23 @@ public class InventoryGrid : MonoBehaviour
         return AutoAddItem(new ItemInstance(itemData));
     }
 
-    public bool CheckAvailableSpace(int posX, int posY, ItemInstance item)
+    public List<ItemInstance> GetAllItems()
     {
-        if (posX < 0 || posY < 0) return false;
-        if (posX + item.width > gridSizeWidth) return false;
-        if (posY + item.height > gridSizeHeight) return false;
-
-        for (int x = 0; x < item.width; x++)
-        {
-            for (int y = 0; y < item.height; y++)
-            {
-                if (inventoryGrid[posX + x, posY + y] != null) return false;
-            }
-        }
-        return true;
-    }
-
-    public void PlaceItem(ItemInstance item, int posX, int posY)
-    {
-        for (int x = 0; x < item.width; x++)
-        {
-            for (int y = 0; y < item.height; y++)
-            {
-                inventoryGrid[posX + x, posY + y] = item;
-            }
-        }
-    }
-
-    public ItemInstance GetItemAt(int x, int y)
-    {
-        if (x >= 0 && x < gridSizeWidth && y >= 0 && y < gridSizeHeight)
-            return inventoryGrid[x, y];
-        return null;
-    }
-
-    public void RemoveItem(ItemInstance item, int oldX, int oldY)
-    {
-        if (item == null) return;
-
-        for (int x = 0; x < item.width; x++)
-        {
-            for (int y = 0; y < item.height; y++)
-            {
-                if (oldX + x < gridSizeWidth && oldY + y < gridSizeHeight)
-                {
-                    if (inventoryGrid[oldX + x, oldY + y] == item)
-                        inventoryGrid[oldX + x, oldY + y] = null;
-                }
-            }
-        }
-    }
-
-    public int GetTotalInventoryValue()
-    {
-        HashSet<string> counted = new HashSet<string>();
-        int total = 0;
+        List<ItemInstance> items = new List<ItemInstance>();
+        HashSet<ItemInstance> processed = new HashSet<ItemInstance>();
 
         for (int x = 0; x < gridSizeWidth; x++)
         {
             for (int y = 0; y < gridSizeHeight; y++)
             {
                 ItemInstance item = inventoryGrid[x, y];
-                if (item != null && !counted.Contains(item.instanceId))
+                if (item != null && !processed.Contains(item))
                 {
-                    total += item.calculatedValue;
-                    counted.Add(item.instanceId);
+                    items.Add(item);
+                    processed.Add(item);
                 }
             }
         }
-        return total;
+        return items;
     }
 }

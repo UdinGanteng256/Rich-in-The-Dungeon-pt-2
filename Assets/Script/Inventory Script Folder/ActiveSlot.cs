@@ -25,6 +25,32 @@ public class ActiveSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
         if(highlightBorder != null) highlightBorder.enabled = false;
     }
 
+    public void SetItemSilent(ItemInstance item)
+    {
+        currentItem = item;
+        UpdateVisual();
+    }
+
+    public void SetItem(ItemInstance item)
+    {
+        currentItem = item;
+        UpdateVisual();
+        
+        // Lapor ke HotbarManager buat save
+        HotbarManager manager = FindObjectOfType<HotbarManager>();
+        if (manager != null) manager.SaveHotbar();
+    }
+
+    public void ClearSlot()
+    {
+        currentItem = null;
+        UpdateVisual();
+
+        // Lapor ke HotbarManager buat save
+        HotbarManager manager = FindObjectOfType<HotbarManager>();
+        if (manager != null) manager.SaveHotbar();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -66,20 +92,15 @@ public class ActiveSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
     void HandleHotbarSwap(HotbarDrag sourceDragScript)
     {
         ActiveSlot sourceSlot = sourceDragScript.GetSourceSlot();
-        
         if (sourceSlot == this) return;
-
-        Debug.Log($"Melakukan Swap: Slot {sourceSlot.slotIndex} <-> Slot {this.slotIndex}");
 
         ItemInstance itemAsal = sourceSlot.GetItem();  
         ItemInstance itemTujuan = this.GetItem();      
 
-        this.SetItem(itemAsal);
-
-        sourceSlot.SetItem(itemTujuan);
+        this.SetItem(itemAsal); // Ini trigger save
+        sourceSlot.SetItem(itemTujuan); // Ini trigger save
 
         sourceSlot.UpdateVisual();
-
         sourceDragScript.dropSuccessful = true;
 
         PlayerAction pa = FindObjectOfType<PlayerAction>();
@@ -105,7 +126,7 @@ public class ActiveSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
             }
         }
         
-        SetItem(newItem);
+        SetItem(newItem); // Ini trigger save
         dragScript.dropSuccessful = true; 
         
         InventoryUI ui = FindObjectOfType<InventoryUI>();
@@ -113,18 +134,6 @@ public class ActiveSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
         
         PlayerAction pa = FindObjectOfType<PlayerAction>();
         if (pa != null) pa.ForceUpdateVisuals();
-    }
-
-    public void SetItem(ItemInstance item)
-    {
-        currentItem = item;
-        UpdateVisual();
-    }
-
-    public void ClearSlot()
-    {
-        currentItem = null;
-        UpdateVisual();
     }
 
     public void SetHighlight(bool isActive)
