@@ -1,9 +1,17 @@
 using UnityEngine;
 
+[System.Serializable]
+public class OreSpawnData
+{
+    public string name; 
+    public GameObject prefab;
+    [Range(0, 100)] public float chance; 
+}
+
 public class RandomizeOre : MonoBehaviour
 {
-    [Header("Setting Batu")]
-    public GameObject[] rockPrefabs; 
+    [Header("Setting Batu & Persentase")]
+    public OreSpawnData[] oreList; 
 
     [Tooltip("Berapa banyak batu yang mau dimunculkan?")]
     public int totalRocksToSpawn = 5;
@@ -23,9 +31,12 @@ public class RandomizeOre : MonoBehaviour
     {
         if (spawnArea == null)
         {
-            Debug.LogError("Lupa masukin BoxCollider2D untuk area spawn!");
+            Debug.LogError("Mana Collidernya?");
             return;
         }
+
+        // Cek dulu apakah ada data ore?
+        if (oreList == null || oreList.Length == 0) return;
 
         int count = 0;
         int maxAttempts = 100; 
@@ -38,13 +49,41 @@ public class RandomizeOre : MonoBehaviour
 
             if (!Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer))
             {
-                int randomIndex = Random.Range(0, rockPrefabs.Length);
-                GameObject selectedPrefab = rockPrefabs[randomIndex];
+                // prefab berdasarkan persentase
+                GameObject selectedPrefab = GetRandomWeightedPrefab();
 
-                Instantiate(selectedPrefab, randomPos, Quaternion.identity);
-                count++;
+                if (selectedPrefab != null)
+                {
+                    Instantiate(selectedPrefab, randomPos, Quaternion.identity);
+                    count++;
+                }
             }
         }
+    }
+
+    GameObject GetRandomWeightedPrefab()
+    {
+        float totalWeight = 0f;
+        foreach (var ore in oreList)
+        {
+            totalWeight += ore.chance;
+        }
+
+        float randomPoint = Random.Range(0, totalWeight);
+
+        foreach (var ore in oreList)
+        {
+            if (randomPoint < ore.chance)
+            {
+                return ore.prefab;
+            }
+            else
+            {
+                randomPoint -= ore.chance;
+            }
+        }
+
+        return oreList[oreList.Length - 1].prefab;
     }
 
     Vector2 GetRandomPositionInBox()

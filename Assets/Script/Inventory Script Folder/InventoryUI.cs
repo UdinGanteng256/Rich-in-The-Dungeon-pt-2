@@ -96,34 +96,40 @@ public class InventoryUI : MonoBehaviour
         float totalWidth  = (item.width * sizeX) + ((item.width - 1) * gapX);
         float totalHeight = (item.height * sizeY) + ((item.height - 1) * gapY);
         rect.sizeDelta = new Vector2(totalWidth, totalHeight);
-
         rect.anchoredPosition = new Vector2(x * (sizeX + gapX), -y * (sizeY + gapY));
 
-        if (item.itemData.icon != null)
-            newItem.GetComponent<Image>().sprite = item.itemData.icon;
 
+        Transform iconTransform = newItem.transform.Find("Icon");
+        
+        if (iconTransform == null && newItem.transform.childCount > 0) 
+            iconTransform = newItem.transform.GetChild(0);
+
+        if (iconTransform != null)
+        {
+            Image iconImg = iconTransform.GetComponent<Image>();
+            if (iconImg != null && item.itemData.icon != null)
+            {
+                iconImg.sprite = item.itemData.icon;
+                iconImg.preserveAspect = true; 
+                iconImg.enabled = true;
+            }
+        }
+
+        else 
+        {
+            Image rootImg = newItem.GetComponent<Image>();
+            if (rootImg != null) 
+            {
+                rootImg.sprite = item.itemData.icon;
+                rootImg.preserveAspect = true; 
+            }
+        }
+        
         InventoryDrag dragScript = newItem.GetComponent<InventoryDrag>();
         if (dragScript != null)
         {
             dragScript.SetGridPosition(x, y);
             dragScript.SetItemInstance(item);
-        }
-
-        TextMeshProUGUI itemInfoText = newItem.GetComponentInChildren<TextMeshProUGUI>();
-        if (itemInfoText != null)
-        {
-            if (item.itemData.isSellable)
-            {
-                itemInfoText.text = $"${item.calculatedValue}";
-                itemInfoText.color = Color.white;
-            }
-            else
-            {
-                itemInfoText.text = ""; 
-            }
-            
-            itemInfoText.fontSize = 12;
-            itemInfoText.alignment = TextAlignmentOptions.Center;
         }
     }
 

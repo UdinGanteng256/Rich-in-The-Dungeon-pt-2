@@ -3778,7 +3778,7 @@ MonoBehaviour:
   - {fileID: 396551833}
   miningRange: 2
   playerBodyLocation: {fileID: 33328738}
-  hitDelay: 0.4
+  hitDelay: 0.7
   playerStats: {fileID: 743230394}
   playerVisual: {fileID: 33328737}
   miningLayer:
@@ -3802,7 +3802,7 @@ MonoBehaviour:
   currentMoney: 50
   strength: 1
   baseMiningCost: 10
-  staminaBar: {fileID: 665048591}
+  staminaBar: {fileID: 1449674425}
 --- !u!4 &743230395
 Transform:
   m_ObjectHideFlags: 0
