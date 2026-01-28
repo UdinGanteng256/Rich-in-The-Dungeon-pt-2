@@ -48,9 +48,7 @@ public class MerchantSystem : MonoBehaviour
             if (heldItem.itemData.isSellable)
             {
                 int price = heldItem.calculatedValue;
-
                 playerStats.AddMoney(price);
-
                 currentSlot.ClearSlot();
 
                 playerAction.ForceUpdateVisuals();
@@ -58,45 +56,39 @@ public class MerchantSystem : MonoBehaviour
 
                 UpdateFeedback($"Terjual: {heldItem.itemData.name} (+${price})");
             }
-            else
-            {
-                UpdateFeedback("Item ini tidak bisa dijual!");
-            }
+            else UpdateFeedback("Item ini tidak bisa dijual!");
         }
-        else
-        {
-            UpdateFeedback("Tangan kosong! Pegang item dulu.");
-        }
+        else UpdateFeedback("Tangan kosong!");
     }
 
     public void SellAllInventory()
     {
-        if (!isTradingActive) 
-        {
-            UpdateFeedback("Masuk menu Jual");
-            return;
-        }
 
         int totalEarnings = 0;
         int itemsSold = 0;
 
-        List<ItemInstance> allItems = inventoryGrid.GetAllItems();
-        for (int i = allItems.Count - 1; i >= 0; i--) 
+        if (inventoryGrid != null)
         {
-            ItemInstance item = allItems[i];
-            if (item.itemData.isSellable)
+            List<ItemInstance> allItems = inventoryGrid.GetAllItems();
+            for (int i = allItems.Count - 1; i >= 0; i--) 
             {
-                totalEarnings += item.calculatedValue;
-                itemsSold++;
-                RemoveItemFromGrid(item); 
+                ItemInstance item = allItems[i];
+                if (item.itemData.isSellable)
+                {
+                    totalEarnings += item.calculatedValue;
+                    itemsSold++;
+                    RemoveItemFromGrid(item); 
+                }
             }
         }
 
+        // 2. Jual Hotbar
         PlayerAction playerAction = FindFirstObjectByType<PlayerAction>();
         if (playerAction != null)
         {
             foreach (var slot in playerAction.hotbarSlots)
             {
+                if (slot == null) continue;
                 ItemInstance item = slot.GetItem();
                 if (item != null && item.itemData != null && item.itemData.isSellable)
                 {
@@ -108,11 +100,12 @@ public class MerchantSystem : MonoBehaviour
             playerAction.ForceUpdateVisuals();
         }
 
+        // 3. Kesimpulan
         if (itemsSold > 0)
         {
             playerStats.AddMoney(totalEarnings);
-            inventoryUI.RefreshInventoryItems();
-            UpdateFeedback($"Terjual {itemsSold} item seharga ${totalEarnings}");
+            if (inventoryUI != null) inventoryUI.RefreshInventoryItems();
+            UpdateFeedback($"Ludes! Terjual {itemsSold} item seharga ${totalEarnings}");
         }
         else
         {
@@ -122,7 +115,7 @@ public class MerchantSystem : MonoBehaviour
 
     public void SellItem(ItemInstance item)
     {
-        if (!isTradingActive) return;
+        if (!isTradingActive) return; 
 
         if (!item.itemData.isSellable)
         {
@@ -179,7 +172,7 @@ public class MerchantSystem : MonoBehaviour
         isSellingMode = true;
         merchantWindow.SetActive(false); 
         inventoryUI.ToggleInventory(true); 
-        UpdateFeedback("Pegang item lalu klik");
+        UpdateFeedback("Pegang item lalu klik 'Jual Held' atau Klik Kanan item di tas.");
     }
 
     public void CloseAllShops()
@@ -189,7 +182,7 @@ public class MerchantSystem : MonoBehaviour
 
         if(merchantWindow != null) merchantWindow.SetActive(false);
         if(inventoryUI != null) inventoryUI.ToggleInventory(false);
-        UpdateFeedback("Terima Kasih Sudah Membeli");
+        UpdateFeedback("");
     }
 
     void UpdateFeedback(string msg)

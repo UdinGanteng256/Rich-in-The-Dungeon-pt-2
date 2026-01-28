@@ -32,7 +32,6 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         return myActiveSlot;
     }
 
-    // --- FUNGSI KLIK KANAN (JUAL) ---
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
@@ -51,9 +50,7 @@ public class HotbarDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                         return; 
                     }
 
-                    // --- PERBAIKAN DI SINI (Ganti .itemName jadi .name) ---
                     Debug.Log("Menjual item: " + item.itemData.name); 
-                    // -----------------------------------------------------
 
                     merchant.SellItem(item);
 

@@ -3698,10 +3698,10 @@ MonoBehaviour:
   sfxSource: {fileID: 989549663}
   mainMenuBGM: {fileID: 8300000, guid: c356658a8ab68c744ab17bb77da49478, type: 3}
   dungeonMusic: {fileID: 8300000, guid: dd153d04f85d1d742a9ac887cf4745c0, type: 3}
-  softWindClip: {fileID: 0}
+  softWindClip: {fileID: 8300000, guid: 6242139af775de044b425f85d7ede3cb, type: 3}
   sfxFootstep: {fileID: 8300000, guid: c188c715e9869af4d83ff738c4f22e02, type: 3}
-  sfxButtonClick: {fileID: 0}
-  sfxBackpackOpen: {fileID: 0}
+  sfxButtonClick: {fileID: 8300000, guid: 62b43564e40c48047aeb8e8f03ee82a6, type: 3}
+  sfxBackpackOpen: {fileID: 8300000, guid: 4d291d6ae56c60b4ba092ad96b130cc6, type: 3}
   sfxEquipItem: {fileID: 8300000, guid: 49419ea71863f584ebd9a4a3873c1609, type: 3}
   sfxRockHit: {fileID: 8300000, guid: 131563f0fe39a614784df75ebe2d6dd6, type: 3}
   sfxRockBreak: {fileID: 8300000, guid: 38c079919265c6e43951c5212589936e, type: 3}
@@ -4671,7 +4671,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

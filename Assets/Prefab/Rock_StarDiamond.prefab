@@ -156,3 +156,5 @@ MonoBehaviour:
   randomSizeOnDrop: 1
   shakeAmount: 0.1
   spriteRenderer: {fileID: 4209113544018250882, guid: d87c739da78cd9f47a7202a44d3da56b, type: 3}
+  hitVFX: {fileID: 8913473385941523833, guid: 6f59dd1d7ef174e4582584e27e464d5e, type: 3}
+  breakVFX: {fileID: 8913473385941523833, guid: 0046850f7da572446bf10f0be0e623c5, type: 3}
