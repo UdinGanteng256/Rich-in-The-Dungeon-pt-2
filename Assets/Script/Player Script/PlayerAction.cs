@@ -96,7 +96,10 @@ public class PlayerAction : MonoBehaviour
             hotbarSlots[i].SetHighlight(i == selectedSlotIndex);
         }
 
-        AudioManager.instance.PlaySFX(AudioManager.instance.sfxEquipItem);
+        if (AudioManager.instance != null) 
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.sfxEquipItem);
+        }
 
         UpdatePlayerHand();
         UpdateArmedState();

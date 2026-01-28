@@ -5260,7 +5260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 3
   stepRate: 0.5
-  pickaxe: {fileID: 0}
+  pickaxe: {fileID: 11400000, guid: 3dbfa13e6a7d14e46bb4ecc569d4c16b, type: 2}
   animator: {fileID: 926478467}
 --- !u!95 &926478467
 Animator:
