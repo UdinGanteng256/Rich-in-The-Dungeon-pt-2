@@ -2274,7 +2274,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 815710025}
   introVideo: {fileID: 32900000, guid: 569377f50d7cf27439a5e106d96fd997, type: 3}
   badEndingVideo: {fileID: 32900000, guid: f836032c903553646a8c7ab04c2cfaa3, type: 3}
-  dungeonSceneName: Main1
+  dungeonSceneName: CutScene OP
 --- !u!328 &815710025
 VideoPlayer:
   m_ObjectHideFlags: 0
