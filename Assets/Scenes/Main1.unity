@@ -14128,7 +14128,7 @@ MonoBehaviour:
   introSceneName: CutScene OP
   normalEndingSceneName: CutScene ED
   goodEndingSceneName: GoodEnding
-  gameOverSceneName: CutScene ED 2
+  gameOverSceneName: Game Over
   dungeonSceneName: Main 1
 --- !u!4 &1958230067
 Transform:
