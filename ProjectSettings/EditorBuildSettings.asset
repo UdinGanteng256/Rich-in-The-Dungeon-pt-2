@@ -32,5 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutScene ED.unity
     guid: 1c5795d185d2af94e9fe09f9419b90d2
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
+    guid: 83c114bdf3d3edb43997be18cd9926f8
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
