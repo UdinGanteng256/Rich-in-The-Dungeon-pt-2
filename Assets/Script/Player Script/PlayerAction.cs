@@ -14,8 +14,12 @@ public class PlayerAction : MonoBehaviour
     public float miningRange = 2.5f;
     public Transform playerBodyLocation;
 
-    [Tooltip("Delay.")]
+    [Tooltip("Weda waktu sebelum damage masuk (sesuaikan animasi)")]
     public float hitDelay = 0.4f;
+
+    [Tooltip("Jeda waktu antar klik (biar ga spam)")]
+    public float actionCooldown = 0.7f;
+    private float lastActionTime;
 
     [Header("References")]
     public PlayerStats playerStats;
@@ -61,6 +65,13 @@ public class PlayerAction : MonoBehaviour
     {
         if (!Mouse.current.leftButton.wasPressedThisFrame) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        if (Time.time < lastActionTime + actionCooldown) 
+        {
+            return; 
+        }
+
+        lastActionTime = Time.time;
 
         PerformAction();
     }
@@ -114,7 +125,6 @@ public class PlayerAction : MonoBehaviour
     }
     #endregion
 
-    
     public void ForceUpdateVisuals()
     {
         UpdatePlayerHand();
@@ -241,7 +251,10 @@ public class PlayerAction : MonoBehaviour
         rock.TakeDamage();
         playerStats?.ConsumeStaminaForMining();
 
-        AudioManager.instance.PlaySFX(AudioManager.instance.sfxRockHit);
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.sfxRockHit);
+        }
     }
     #endregion
 }

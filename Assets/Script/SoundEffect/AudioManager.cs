@@ -25,7 +25,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfxFootstep;
     public AudioClip sfxButtonClick;
     public AudioClip sfxBackpackOpen;
+    public AudioClip sfxBackpackClose;
     public AudioClip sfxEquipItem;
+    public AudioClip sfxUnequipItem;
+    public AudioClip sfxUIHover; 
 
     [Header("SFX MINING")]
     public AudioClip sfxRockHit; 
