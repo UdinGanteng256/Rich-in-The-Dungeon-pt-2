@@ -4974,7 +4974,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -8455,7 +8455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.325012, y: 17.4}
+  m_AnchoredPosition: {x: -0.0000019073, y: 17.4}
   m_SizeDelta: {x: 490.134, y: 85.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027413458
@@ -8478,7 +8478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Music
+  m_text: Game Sound
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
@@ -9587,7 +9587,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -10647,7 +10647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7819914c6ab9c744b347f69ccbf709c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelRequirementTrigger
-  nextSceneName: CutScene ED 2
+  nextSceneName: CutScene ED
   foodRequired: 3
   warningPanel: {fileID: 417111770}
 --- !u!61 &1305955550
@@ -12494,7 +12494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8125105, y: 18.8}
+  m_AnchoredPosition: {x: 25.9, y: 18.8}
   m_SizeDelta: {x: 490.134, y: 85.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446759412
@@ -12517,7 +12517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Sound
+  m_text: Music
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
@@ -12583,7 +12583,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.000061035156, z: -0.00012207031, w: 0}
+  m_margin: {x: 0, y: 0.000061035156, z: 216.84146, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -14009,7 +14009,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -16124,7 +16124,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.1233692, y: 3.431944}
+  m_Offset: {x: 0.29740524, y: 3.431944}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -16134,7 +16134,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.2467384, y: 3.0818405}
+  m_Size: {x: 4.8986664, y: 3.0818405}
   m_EdgeRadius: 0
 --- !u!1 &1941151416
 GameObject:
