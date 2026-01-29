@@ -7,7 +7,6 @@ public class NPC : MonoBehaviour
     public GameObject promptUI;      
     public GameObject mysteriousPanel; 
 
-    // public KeyCode interactKey = KeyCode.E; // <--- INI DIHAPUS AJA (Ga kepake di New Input System)
 
     private bool isPlayerClose = false;
 
@@ -19,8 +18,6 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
-        // --- PERBAIKAN DISINI ---
-        // Ganti "Input.GetKeyDown" jadi "Keyboard.current.eKey.wasPressedThisFrame"
         
         if (isPlayerClose && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {

@@ -19,4 +19,6 @@ MonoBehaviour:
   width: 1
   height: 1
   itemType: 0
+  isSellable: 1
+  basePricePerSlot: 2
   valueAmount: 2

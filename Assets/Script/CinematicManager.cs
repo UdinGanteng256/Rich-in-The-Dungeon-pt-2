@@ -2,36 +2,58 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem; 
 
 public class CinematicManager : MonoBehaviour
 {
+    [Header("Mode")]
+    public bool isGameplayLevel = false; 
+
     [Header("UI References")]
     public GameObject mainMenuPanel; 
     public GameObject videoScreenObj; 
     public GameObject choicePanel;
     
-    [Header("Video Components")]
+    [Header("Video Collection")]
     public VideoPlayer videoPlayer;
-    public VideoClip introVideo;
-    public VideoClip badEndingVideo;
+    
+    [Tooltip("Video pembuka saat Start Game")]
+    public VideoClip introVideo;     
+    
+    [Tooltip("Ending 1: Player memilih Pulang (Normal Ending)")]
+    public VideoClip normalEndingVideo; 
+    
+    [Tooltip("Ending 2: Game Over karena Stamina/Uang habis (True Bad Ending)")]
+    public VideoClip gameOverVideo; 
+
+    [Tooltip("Ending 3: Player berhasil tamat (Good Ending)")]
+    public VideoClip goodEndingVideo; 
 
     [Header("Scene Names")]
     public string dungeonSceneName = "Level1"; 
 
     void Start()
     {
-        mainMenuPanel.SetActive(true);
-        videoScreenObj.SetActive(false);
-        choicePanel.SetActive(false);
         
-        if (AudioManager.instance != null)
-        {
-            AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuBGM);
-        }
-
+        if (videoScreenObj != null) videoScreenObj.SetActive(false);
+        if (choicePanel != null) choicePanel.SetActive(false);
+        
         videoPlayer.isLooping = false; 
         videoPlayer.loopPointReached += OnVideoFinished;
+
+        if (isGameplayLevel)
+        {
+            if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
+        }
+        else
+        {
+            if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+            
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuBGM);
+            }
+        }
     }
 
     void Update()
@@ -43,45 +65,100 @@ public class CinematicManager : MonoBehaviour
 
             if (pressedKey || clickedMouse)
             {
-                SkipCurrentVideo();
+                Debug.Log("Skip!");
+                videoPlayer.Stop();
+                OnVideoFinished(videoPlayer); 
             }
         }
     }
 
-    void SkipCurrentVideo()
-    {
-        Debug.Log("Skip");
-        videoPlayer.Stop(); 
-        OnVideoFinished(videoPlayer);
-    }
+    // --- BUTTON EVENTS ---
 
     public void OnClickStartGame()
     {
-        mainMenuPanel.SetActive(false); 
-        videoScreenObj.SetActive(true); 
-        
-        if (AudioManager.instance != null)
-        {
-            AudioManager.instance.StopAllMusic(); 
-        }
-        
+        PrepareVideoScreen();
         PlayVideo(introVideo); 
     }
 
+    public void OnButtonGoHome() 
+    {
+        if (choicePanel != null) choicePanel.SetActive(false); 
+        PrepareVideoScreen();
+        PlayVideo(normalEndingVideo);      
+    }
+
+    public void PlayGameOverCutscene()
+    {
+        PrepareVideoScreen();
+        PlayVideo(gameOverVideo);
+    }
+
+    public void PlayWinCutscene()
+    {
+        PrepareVideoScreen();
+        PlayVideo(goodEndingVideo);
+    }
+
+    // --- LOGIC VIDEO SELESAI ---
+
     void OnVideoFinished(VideoPlayer vp)
     {
+        vp.Stop(); 
+        if (videoScreenObj != null) videoScreenObj.SetActive(false); 
+
         if (vp.clip == introVideo)
         {
-            vp.Stop(); 
-            videoScreenObj.SetActive(false); 
-            choicePanel.SetActive(true);
+            if (choicePanel != null) choicePanel.SetActive(true);
         }
-        else if (vp.clip == badEndingVideo)
+        else if (vp.clip == gameOverVideo) 
         {
-            vp.Stop(); // Pastikan stop
-            videoScreenObj.SetActive(false); 
-            mainMenuPanel.SetActive(true);  
+            GlobalData.ResetData(); 
+            
+            BackToMainMenu();
+        }
+        else if (vp.clip == normalEndingVideo || vp.clip == goodEndingVideo)
+        {
+            GlobalData.ResetData(); 
+            
+            BackToMainMenu();
+        }
+    }
 
+    // --- UTILITIES ---
+
+    void PrepareVideoScreen()
+    {
+        if (AudioManager.instance != null) AudioManager.instance.StopAllMusic();
+
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(false); 
+        if (choicePanel != null) choicePanel.SetActive(false);
+        if (videoScreenObj != null) videoScreenObj.SetActive(true);
+    }
+
+    void PlayVideo(VideoClip clip)
+    {
+        if (clip != null)
+        {
+            videoPlayer.clip = clip;
+            videoPlayer.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Video Clip belum dipasang! Skip.");
+            OnVideoFinished(videoPlayer);
+        }
+    }
+
+    void BackToMainMenu()
+    {
+        if (isGameplayLevel)
+        {
+            SceneManager.LoadScene("StartScene");
+        }
+        else
+        {
+            if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+            
             if (AudioManager.instance != null)
             {
                 AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuBGM);
@@ -89,22 +166,8 @@ public class CinematicManager : MonoBehaviour
         }
     }
 
-    void PlayVideo(VideoClip clip)
-    {
-        videoPlayer.clip = clip;
-        videoPlayer.Play();
-    }
-
     public void OnButtonEnterDungeon()
     {
         SceneManager.LoadScene(dungeonSceneName);
-    }
-
-    public void OnButtonGoHome() 
-    {
-        choicePanel.SetActive(false); 
-        
-        videoScreenObj.SetActive(true); 
-        PlayVideo(badEndingVideo);      
     }
 }

@@ -24,38 +24,30 @@ public class InteractionUI : MonoBehaviour
 
     void Start()
     {
-        // Pastikan panel mati pas mulai
         ClosePanel();
         if(warningPanel) warningPanel.SetActive(false);
-
-        // Setup tombol Warning
+        
         if(closeWarningButton) 
             closeWarningButton.onClick.AddListener(() => warningPanel.SetActive(false));
     }
 
-    // Fungsi untuk memunculkan Panel Pilihan
     public void ShowPanel(string title, string body, UnityAction yesEvent, UnityAction noEvent)
     {
         dialoguePanel.SetActive(true);
         titleText.text = title;
         bodyText.text = body;
 
-        // Reset listener lama biar ga numpuk
         yesButton.onClick.RemoveAllListeners();
         noButton.onClick.RemoveAllListeners();
 
-        // Masukin fungsi baru
         yesButton.onClick.AddListener(yesEvent);
         noButton.onClick.AddListener(noEvent);
     }
 
-    // Fungsi Munculin Warning Gagal
     public void ShowWarning(string message)
     {
-        // Tutup panel dialog dulu
         ClosePanel(); 
 
-        // Buka warning
         if (warningPanel != null)
         {
             warningPanel.SetActive(true);

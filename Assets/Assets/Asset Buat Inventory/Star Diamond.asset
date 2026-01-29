@@ -20,5 +20,5 @@ MonoBehaviour:
   height: 1
   itemType: 0
   isSellable: 1
-  basePricePerSlot: 0
+  basePricePerSlot: 20
   valueAmount: 20
