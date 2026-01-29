@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Malas Ah Mending Balo
+  m_text: Kayaknya dungeonnya gak meyakinkan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
@@ -335,7 +335,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 815710024}
         m_TargetAssemblyTypeName: CinematicManager, Assembly-CSharp
-        m_MethodName: OnButtonEnterDungeon
+        m_MethodName: OnClickStartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -627,8 +627,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 604, y: 0}
-  m_SizeDelta: {x: 260, y: 60}
+  m_AnchoredPosition: {x: 575, y: -30.4327}
+  m_SizeDelta: {x: 370.65, y: 139.6302}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &205868778
 MonoBehaviour:
@@ -706,8 +706,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -2341807999280410684, guid: 1c34f861a5b9e0046882ddea20b53c7b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2273,11 +2273,11 @@ MonoBehaviour:
   videoScreenObj: {fileID: 765429125}
   choicePanel: {fileID: 2137576589}
   videoPlayer: {fileID: 815710025}
-  introVideo: {fileID: 0}
+  introVideo: {fileID: 32900000, guid: 569377f50d7cf27439a5e106d96fd997, type: 3}
   normalEndingVideo: {fileID: 0}
   gameOverVideo: {fileID: 0}
   goodEndingVideo: {fileID: 0}
-  dungeonSceneName: Main1
+  dungeonSceneName: CutScene OP
 --- !u!328 &815710025
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -4533,8 +4533,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 604, y: 90}
-  m_SizeDelta: {x: 260, y: 60}
+  m_AnchoredPosition: {x: 575, y: 157}
+  m_SizeDelta: {x: 370.6577, y: 146.4383}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1299381022
 MonoBehaviour:
@@ -4612,8 +4612,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -2341807999280410684, guid: 1c34f861a5b9e0046882ddea20b53c7b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4687,7 +4687,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Masuk ajalah Yoloo
+  m_text: Masuk ajalah kapan lagi kaya Instant
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
@@ -6664,7 +6664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4287705017827385571, guid: 87cb8675335434e51b7766ec35fadd4d, type: 3}
+  m_Sprite: {fileID: -5787760730467681579, guid: b0d42f73254abd143a19af5ceba04285, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
