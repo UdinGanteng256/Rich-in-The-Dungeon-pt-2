@@ -1,18 +1,25 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
     public float changeTime;
-    public string sceneName;
+    
+    [Header("UI References")]
+    public GameObject choicePanel; // Drag Choice Panel kamu ke sini
 
     // Update is called once per frame
     void Update()
     {
         changeTime -= Time.deltaTime;
+        
         if (changeTime <= 0)
         {
-            SceneManager.LoadScene(sceneName);
+            if (choicePanel != null)
+            {
+                choicePanel.SetActive(true);
+            }
+
+            this.enabled = false;
         }
     }
 }

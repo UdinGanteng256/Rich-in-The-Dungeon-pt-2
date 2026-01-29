@@ -1925,7 +1925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &765429126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2268,16 +2268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a528c1557e19844890d2e893fbfbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicManager
+  isMainMenu: 1
   isGameplayLevel: 0
   mainMenuPanel: {fileID: 714763118}
-  videoScreenObj: {fileID: 765429125}
-  choicePanel: {fileID: 2137576589}
-  videoPlayer: {fileID: 815710025}
-  introVideo: {fileID: 32900000, guid: 569377f50d7cf27439a5e106d96fd997, type: 3}
-  normalEndingVideo: {fileID: 0}
-  gameOverVideo: {fileID: 0}
-  goodEndingVideo: {fileID: 0}
-  dungeonSceneName: CutScene OP
+  introSceneName: CutScene OP
+  normalEndingSceneName: CutScene ED
+  goodEndingSceneName: CutScene ED 2
+  gameOverSceneName: GameOver
+  dungeonSceneName: Main1
 --- !u!328 &815710025
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -5542,7 +5540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1654865451
 MonoBehaviour:
   m_ObjectHideFlags: 0

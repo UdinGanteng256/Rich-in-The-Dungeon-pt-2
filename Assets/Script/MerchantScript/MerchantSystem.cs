@@ -54,11 +54,11 @@ public class MerchantSystem : MonoBehaviour
                 playerAction.ForceUpdateVisuals();
                 if(inventoryUI != null) inventoryUI.RefreshInventoryItems();
 
-                UpdateFeedback($"Terjual: {heldItem.itemData.name} (+${price})");
+                UpdateFeedback($"SoldOut: {heldItem.itemData.name} (+${price})");
             }
-            else UpdateFeedback("Item ini tidak bisa dijual!");
+            else UpdateFeedback("This item cannot be sold!");
         }
-        else UpdateFeedback("Tangan kosong!");
+        else UpdateFeedback("bare hand!");
     }
 
     public void SellAllInventory()
@@ -107,10 +107,6 @@ public class MerchantSystem : MonoBehaviour
             if (inventoryUI != null) inventoryUI.RefreshInventoryItems();
             UpdateFeedback($"Ludes! Terjual {itemsSold} item seharga ${totalEarnings}");
         }
-        else
-        {
-            UpdateFeedback("Tidak ada barang yang bisa dijual.");
-        }
     }
 
     public void SellItem(ItemInstance item)
@@ -119,13 +115,13 @@ public class MerchantSystem : MonoBehaviour
 
         if (!item.itemData.isSellable)
         {
-            UpdateFeedback("Item ini tidak bisa dijual!");
+            UpdateFeedback("This item cannot be sold!");
             return;
         }
 
         int sellPrice = item.calculatedValue;
         playerStats.AddMoney(sellPrice);
-        UpdateFeedback($"Terjual: {item.itemData.displayName} (+${sellPrice})");
+        UpdateFeedback($"SoldOut: {item.itemData.displayName} (+${sellPrice})");
     }
 
     void RemoveItemFromGrid(ItemInstance itemTarget)
@@ -153,9 +149,7 @@ public class MerchantSystem : MonoBehaviour
                 playerStats.SpendMoney(price);
                 inventoryUI.RefreshInventoryItems();
             }
-            else Debug.Log("Tas Penuh!");
         }
-        else Debug.Log("Uang tidak cukup!");
     }
 
     public void OpenBuyMode()
@@ -163,7 +157,7 @@ public class MerchantSystem : MonoBehaviour
         isTradingActive = true;
         isSellingMode = false;
         merchantWindow.SetActive(true);
-        UpdateFeedback("Pilih item untuk dibeli!");
+        UpdateFeedback("Select an item to purchase!");
     }
 
     public void OpenSellMode()
@@ -172,7 +166,7 @@ public class MerchantSystem : MonoBehaviour
         isSellingMode = true;
         merchantWindow.SetActive(false); 
         inventoryUI.ToggleInventory(true); 
-        UpdateFeedback("Pegang item lalu klik 'Jual Held' atau Klik Kanan item di tas.");
+        UpdateFeedback("Hold the item then click 'Sell Held' or Right Click the item in the bag.");
     }
 
     public void CloseAllShops()
