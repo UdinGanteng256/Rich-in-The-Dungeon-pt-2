@@ -7148,12 +7148,12 @@ GameObject:
   - component: {fileID: 986644954}
   - component: {fileID: 986644953}
   m_Layer: 0
-  m_Name: 
+  m_Name: LevelLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &981757027
 GameObject:
   m_ObjectHideFlags: 0
@@ -8318,7 +8318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelRequirementTrigger
   nextSceneName: Main2
-  foodRequired: 3
+  foodRequired: 0
   warningPanel: {fileID: 803316096}
 --- !u!1 &1200997484
 GameObject:

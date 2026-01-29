@@ -2524,8 +2524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7819914c6ab9c744b347f69ccbf709c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelRequirementTrigger
-  nextSceneName: Main2
-  foodRequired: 3
+  nextSceneName: Main4
+  foodRequired: 0
   warningPanel: {fileID: 541083770}
 --- !u!61 &275088023
 BoxCollider2D:
@@ -5158,7 +5158,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.8
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -15837,16 +15837,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RandomizeOre
   oreList:
-  - name: Diamond
-    prefab: {fileID: 8057046592617947070, guid: 42f9ca38f10de4b468163b0343bdd82e, type: 3}
-    chance: 0
   - name: Emerald
     prefab: {fileID: 6576011774376058864, guid: 8ae03b92323bcfa46aae952e46330c4f, type: 3}
-    chance: 0
-  - name: Emerald
-    prefab: {fileID: 4987951704847393025, guid: 815fcc62b4e97314c845647242aeb921, type: 3}
-    chance: 100
-  totalRocksToSpawn: 2
+    chance: 30
+  - name: Ruby
+    prefab: {fileID: 2446673356799835388, guid: 82de07fd872f2c24da908162d4013e3a, type: 3}
+    chance: 50
+  - name: Ametyst
+    prefab: {fileID: 595868788396993455, guid: b5f22c81a9987fb489816f0313da9a00, type: 3}
+    chance: 20
+  totalRocksToSpawn: 10
   spawnArea: {fileID: 140451413}
   obstacleLayer:
     serializedVersion: 2
@@ -15870,6 +15870,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 641754634}
+  - {fileID: 523962875}
   - {fileID: 1820161274}
   - {fileID: 595242840}
   - {fileID: 282546790}
@@ -15877,7 +15879,6 @@ SceneRoots:
   - {fileID: 1438219188}
   - {fileID: 554211993}
   - {fileID: 2132602465}
-  - {fileID: 523962875}
   - {fileID: 1342478392}
   - {fileID: 1841717659}
   - {fileID: 106746751}
@@ -15888,7 +15889,6 @@ SceneRoots:
   - {fileID: 275088025}
   - {fileID: 1106516503}
   - {fileID: 71701921}
-  - {fileID: 641754634}
   - {fileID: 1198214873}
   - {fileID: 1089511659}
   - {fileID: 1689830276}
