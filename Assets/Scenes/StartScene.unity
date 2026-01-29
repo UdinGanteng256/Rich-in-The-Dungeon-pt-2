@@ -335,7 +335,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 815710024}
         m_TargetAssemblyTypeName: CinematicManager, Assembly-CSharp
-        m_MethodName: OnClickStartGame
+        m_MethodName: OnButtonEnterDungeon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2268,13 +2268,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a528c1557e19844890d2e893fbfbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicManager
+  isGameplayLevel: 0
   mainMenuPanel: {fileID: 714763118}
   videoScreenObj: {fileID: 765429125}
   choicePanel: {fileID: 2137576589}
   videoPlayer: {fileID: 815710025}
-  introVideo: {fileID: 32900000, guid: 569377f50d7cf27439a5e106d96fd997, type: 3}
-  badEndingVideo: {fileID: 32900000, guid: f836032c903553646a8c7ab04c2cfaa3, type: 3}
-  dungeonSceneName: CutScene OP
+  introVideo: {fileID: 0}
+  normalEndingVideo: {fileID: 0}
+  gameOverVideo: {fileID: 0}
+  goodEndingVideo: {fileID: 0}
+  dungeonSceneName: Main1
 --- !u!328 &815710025
 VideoPlayer:
   m_ObjectHideFlags: 0
