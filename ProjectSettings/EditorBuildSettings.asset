@@ -4,44 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/StartScene.unity
-    guid: b1d4f0132653f4217994ba89f636a4d9
-  - enabled: 1
-    path: Assets/Scenes/CutScene OP.unity
-    guid: 2d0ce5b5134f2b14eaa2938cf36d8d02
-  - enabled: 1
-    path: Assets/Scenes/CutScene ED 2.unity
-    guid: 8ee801f125830bc4199f1a72df6c12f0
-  - enabled: 1
-    path: Assets/Scenes/Main1.unity
-    guid: 729517d0f5c7a4b33b8a572d51e702f7
-  - enabled: 1
-    path: Assets/Scenes/Main2.unity
-    guid: a23ae8354e1b7a544a24c73a17399506
-  - enabled: 1
-    path: Assets/Scenes/Main3.unity
-    guid: 223bbbf74a2e71740ab61ea5fdb3a3c0
-  - enabled: 1
-    path: Assets/Scenes/Main4.unity
-    guid: 3784f73e543486f4384061b1137f3acc
-  - enabled: 1
-    path: Assets/Scenes/Main5.unity
-    guid: d579a1d33c925b5419a07aa1627e8cf2
-  - enabled: 1
-<<<<<<< Updated upstream
-    path: Assets/Scenes/CutScene ED 2.unity
-    guid: 8ee801f125830bc4199f1a72df6c12f0
-=======
-    path: Assets/Scenes/CutScene ED.unity
-    guid: 1c5795d185d2af94e9fe09f9419b90d2
->>>>>>> Stashed changes
-  - enabled: 0
-    path: Assets/Scenes/MainScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: b7e587ca914102844a9f0fc8c62cfa8f, type: 2}
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-    com.unity.localization.settings: {fileID: 11400000, guid: 2c8e777059ff38d49b2db6634f5ef13f, type: 2}
+  m_Scenes: []
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

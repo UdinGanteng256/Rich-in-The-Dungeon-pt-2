@@ -4130,7 +4130,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-<<<<<<< Updated upstream
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.12941177, g: 0.83921576, b: 0.23137257, a: 1}
@@ -4152,7 +4151,6 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &499318125
 CanvasRenderer:
-=======
   m_EditorClassIdentifier: Assembly-CSharp::CinematicManager
   isGameplayLevel: 1
   mainMenuPanel: {fileID: 0}
@@ -4168,16 +4166,13 @@ CanvasRenderer:
   dungeonSceneName: Main1
 --- !u!328 &486841957
 VideoPlayer:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 499318122}
   m_CullTransparentMesh: 1
 --- !u!1 &502924033
-=======
   m_GameObject: {fileID: 486841954}
   m_Enabled: 1
   m_VideoClip: {fileID: 32900000, guid: 569377f50d7cf27439a5e106d96fd997, type: 3}
@@ -4315,7 +4310,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!1 &544158986
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5793,10 +5787,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
-<<<<<<< Updated upstream
 --- !u!81 &700851306
 AudioListener:
-=======
 --- !u!1 &713470255
 GameObject:
   m_ObjectHideFlags: 0
@@ -5890,7 +5882,6 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!1 &714812140
 GameObject:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8744,9 +8735,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
 --- !u!1 &1154665011
-=======
 --- !u!212 &1108711410
 SpriteRenderer:
   serializedVersion: 2
@@ -8807,7 +8796,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!1 &1119336461
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15449,9 +15437,7 @@ MonoBehaviour:
   - {x: 0.4157348, y: -0.27778515, z: 0}
   - {x: 0.46193978, y: -0.19134171, z: 0}
   - {x: 0.49039266, y: -0.09754512, z: 0}
-<<<<<<< Updated upstream
 --- !u!1 &2080036605
-=======
 --- !u!1 &2078381778
 GameObject:
   m_ObjectHideFlags: 0
@@ -15486,7 +15472,6 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2100461443
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16104,7 +16089,6 @@ SceneRoots:
   - {fileID: 1776214407}
   - {fileID: 1645691594}
   - {fileID: 1411912933}
-<<<<<<< Updated upstream
   - {fileID: 260250257}
   - {fileID: 1460430160}
   - {fileID: 1851140104}
@@ -16126,7 +16110,6 @@ SceneRoots:
   - {fileID: 922625717}
   - {fileID: 1602834417}
   - {fileID: 443134218}
-=======
   - {fileID: 982301971}
   - {fileID: 238996468}
   - {fileID: 316450263}
@@ -16134,4 +16117,3 @@ SceneRoots:
   - {fileID: 1562365545}
   - {fileID: 486841958}
   - {fileID: 2078381779}
->>>>>>> Stashed changes
