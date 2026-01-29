@@ -10647,7 +10647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7819914c6ab9c744b347f69ccbf709c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelRequirementTrigger
-  nextSceneName: CutScene ED 2
+  nextSceneName: CutScene ED
   foodRequired: 3
   warningPanel: {fileID: 417111770}
 --- !u!61 &1305955550
