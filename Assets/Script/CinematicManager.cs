@@ -30,7 +30,11 @@ public class CinematicManager : MonoBehaviour
     public VideoClip goodEndingVideo; 
 
     [Header("Scene Names")]
-    public string dungeonSceneName = "Level1"; 
+    public string introScene = "CutScene OP";
+
+    public string endingScene = "CutScene ED";
+
+    public string dungeonSceneName = "Main 1";
 
     void Start()
     {
@@ -76,15 +80,14 @@ public class CinematicManager : MonoBehaviour
 
     public void OnClickStartGame()
     {
-        PrepareVideoScreen();
-        PlayVideo(introVideo); 
+        SceneManager.LoadScene(introScene);
+        
     }
 
     public void OnButtonGoHome() 
     {
         if (choicePanel != null) choicePanel.SetActive(false); 
-        PrepareVideoScreen();
-        PlayVideo(normalEndingVideo);      
+        SceneManager.LoadScene(endingScene);     
     }
 
     public void PlayGameOverCutscene()

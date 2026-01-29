@@ -828,7 +828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0095378988d8f4c82f7a2630af234e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeScene
-  changeTime: 19
+  changeTime: 25
   sceneName: Main1
 --- !u!4 &1649173729
 Transform:
