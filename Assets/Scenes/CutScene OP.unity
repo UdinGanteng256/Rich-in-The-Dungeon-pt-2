@@ -1217,8 +1217,8 @@ MonoBehaviour:
   isGameplayLevel: 1
   mainMenuPanel: {fileID: 0}
   introSceneName: CutScene OP
-  normalEndingSceneName: CutScene ED
-  goodEndingSceneName: CutScene ED 2
+  normalEndingSceneName: CutScene ED 2
+  goodEndingSceneName: 'CutScene ED '
   gameOverSceneName: GameOver
   dungeonSceneName: Main1
 --- !u!328 &1224665456

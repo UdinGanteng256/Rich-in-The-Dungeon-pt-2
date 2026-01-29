@@ -841,12 +841,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinematicManager
   isMainMenu: 0
-  isGameplayLevel: 0
+  isGameplayLevel: 1
   mainMenuPanel: {fileID: 0}
   introSceneName: CutScene OP
   normalEndingSceneName: CutScene ED 2
   goodEndingSceneName: CutScene ED
-  gameOverSceneName: GameOver
+  gameOverSceneName: Game Over
   dungeonSceneName: Main 1
 --- !u!4 &1740669262
 Transform:
