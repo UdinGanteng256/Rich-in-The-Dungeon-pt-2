@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.EventSystems; // Wajib ada buat deteksi UI
+using UnityEngine.EventSystems; 
 
 public class UISound : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {

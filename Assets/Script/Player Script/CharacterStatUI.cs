@@ -5,10 +5,9 @@ using UnityEngine.UI;
 public class CharacterStatsUI : MonoBehaviour
 {
     [Header("UI References")]
-    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI[] allMoneyTexts; 
     
     public Image staminaImage; 
-    
     public TextMeshProUGUI staminaTextInfo; 
 
     [Header("Data Source")]
@@ -17,15 +16,23 @@ public class CharacterStatsUI : MonoBehaviour
     void Start()
     {
         if (playerStats == null) 
-            playerStats = FindObjectOfType<PlayerStats>();
+            playerStats = FindFirstObjectByType<PlayerStats>();
     }
 
     void Update()
     {
         if (playerStats == null) return;
 
-        if (moneyText != null)
-            moneyText.text = $"{playerStats.currentMoney}";
+        if (allMoneyTexts != null)
+        {
+            foreach (TextMeshProUGUI txt in allMoneyTexts)
+            {
+                if (txt != null)
+                {
+                    txt.text = $"{playerStats.currentMoney}";
+                }
+            }
+        }
 
         if (staminaImage != null)
         {

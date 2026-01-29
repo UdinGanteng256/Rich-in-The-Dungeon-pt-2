@@ -10,13 +10,14 @@ public class LevelLoader : MonoBehaviour
 
     public string triggerName = "Start";
 
-    public void LoadNextLevel(string sceneName)
+    public void LoadLevel(string sceneName)
     {
-        StartCoroutine(LoadLevel(sceneName));
+        StartCoroutine(BeginTransition(sceneName));
     }
 
-    IEnumerator LoadLevel(string sceneName)
+    public IEnumerator BeginTransition(string sceneName)
     {
+        // 1. Play Animasi Fade Out
         if (transitionAnim != null)
         {
             transitionAnim.SetTrigger(triggerName);

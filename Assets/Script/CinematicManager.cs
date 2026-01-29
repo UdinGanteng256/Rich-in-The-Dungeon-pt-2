@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class CinematicManager : MonoBehaviour
 {
@@ -33,6 +34,27 @@ public class CinematicManager : MonoBehaviour
         videoPlayer.loopPointReached += OnVideoFinished;
     }
 
+    void Update()
+    {
+        if (videoPlayer.isPlaying)
+        {
+            bool pressedKey = Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame;
+            bool clickedMouse = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
+
+            if (pressedKey || clickedMouse)
+            {
+                SkipCurrentVideo();
+            }
+        }
+    }
+
+    void SkipCurrentVideo()
+    {
+        Debug.Log("Skip");
+        videoPlayer.Stop(); 
+        OnVideoFinished(videoPlayer);
+    }
+
     public void OnClickStartGame()
     {
         mainMenuPanel.SetActive(false); 
@@ -56,7 +78,7 @@ public class CinematicManager : MonoBehaviour
         }
         else if (vp.clip == badEndingVideo)
         {
-
+            vp.Stop(); // Pastikan stop
             videoScreenObj.SetActive(false); 
             mainMenuPanel.SetActive(true);  
 

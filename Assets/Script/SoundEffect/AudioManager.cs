@@ -8,8 +8,10 @@ public class AudioManager : MonoBehaviour
     [Header("AUDIO SETTINGS")]
     public AudioMixer mainMixer;
 
+    // --- TAMBAHAN KEY BARU ---
     private const string MUSIC_KEY = "MusicVolume";
     private const string SFX_KEY = "SFXVolume";
+    private const string AMBIENCE_KEY = "AmbienceVolume"; // Key buat simpan data Ambience
 
     [Header("AUDIO SOURCES")]
     public AudioSource musicSource; 
@@ -53,14 +55,12 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-
         LoadVolume();
     }
 
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null) return;
-
         if (musicSource.clip == clip && musicSource.isPlaying) return;
 
         musicSource.clip = clip;
@@ -70,7 +70,6 @@ public class AudioManager : MonoBehaviour
     public void PlayAmbience(AudioClip clip)
     {
         if (clip == null) return;
-
         if (ambienceSource.clip == clip && ambienceSource.isPlaying) return;
 
         ambienceSource.clip = clip;
@@ -83,7 +82,6 @@ public class AudioManager : MonoBehaviour
         ambienceSource.Stop();
     }
 
-
     public void PlaySFX(AudioClip clip)
     {
         if (clip != null)
@@ -92,11 +90,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
     public void SetMusicVolume(float volume)
     {
         mainMixer.SetFloat("MusicVol", Mathf.Log10(volume) * 20);
-
         PlayerPrefs.SetFloat(MUSIC_KEY, volume);
         PlayerPrefs.Save(); 
     }
@@ -104,8 +100,15 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         mainMixer.SetFloat("SFXVol", Mathf.Log10(volume) * 20);
-
         PlayerPrefs.SetFloat(SFX_KEY, volume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetAmbienceVolume(float volume)
+    {
+        mainMixer.SetFloat("AmbienceVol", Mathf.Log10(volume) * 20);
+        
+        PlayerPrefs.SetFloat(AMBIENCE_KEY, volume);
         PlayerPrefs.Save();
     }
 
@@ -113,10 +116,12 @@ public class AudioManager : MonoBehaviour
     {
         float musicVol = PlayerPrefs.GetFloat(MUSIC_KEY, 1f);
         float sfxVol = PlayerPrefs.GetFloat(SFX_KEY, 1f);
+        float ambienceVol = PlayerPrefs.GetFloat(AMBIENCE_KEY, 1f); // Load Ambience
 
         mainMixer.SetFloat("MusicVol", Mathf.Log10(musicVol) * 20);
         mainMixer.SetFloat("SFXVol", Mathf.Log10(sfxVol) * 20);
+        mainMixer.SetFloat("AmbienceVol", Mathf.Log10(ambienceVol) * 20); // Set Ambience
         
-        Debug.Log("Volume Load Music" + musicVol + " | SFX " + sfxVol);
+        Debug.Log($"Volume Loaded: Music {musicVol} | SFX {sfxVol} | Ambience {ambienceVol}");
     }
 }

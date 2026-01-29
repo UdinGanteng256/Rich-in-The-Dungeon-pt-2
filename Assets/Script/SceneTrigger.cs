@@ -13,7 +13,7 @@ public class SceneTrigger : MonoBehaviour
             
             if (loader != null)
             {
-                loader.LoadNextLevel(targetSceneName);
+                loader.LoadLevel(targetSceneName);
             }
             else
             {

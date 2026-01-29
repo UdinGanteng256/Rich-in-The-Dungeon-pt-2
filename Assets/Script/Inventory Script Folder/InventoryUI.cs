@@ -185,7 +185,7 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
-        totalValueText.text = $"Total Value: ${totalValue}";
+        totalValueText.text = $"Total Backpack Value:  {totalValue}";
     }
 
     public bool TryAddFromHotbar(ItemInstance item, Vector2 screenPosition)
