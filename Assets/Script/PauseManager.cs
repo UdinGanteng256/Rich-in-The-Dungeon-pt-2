@@ -14,12 +14,14 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Time.timeScale = 0f;
         if (settingsPanel != null)
             settingsPanel.SetActive(true);
     }
 
     public void ResumeGame()
     {
+        Time.timeScale = 1f;
         if (settingsPanel != null)
             settingsPanel.SetActive(false);
     }
@@ -27,30 +29,20 @@ public class PauseManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-
-        // Untuk Reset MusicManager
-       // if (MusicManager.Instance != null)
-       // {
-       //     MusicManager.Instance.ResetStateOnRestart();
-       // }
-
-        //if (SceneBGMManager.Instance != null)
-        //{
-        //    SceneBGMManager.Instance.StopBGM();
-        //}
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Home()
     {
         Time.timeScale = 1f;
+        GlobalData.ResetData(); 
+        
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StopAllMusic();
+            AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuBGM);
+        }
 
-       // if (MusicManager.Instance != null)
-       // {
-       //     MusicManager.Instance.ResetStateOnRestart();
-       // }
-
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("StartScene"); 
     }
 }

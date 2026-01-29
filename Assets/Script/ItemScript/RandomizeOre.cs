@@ -35,7 +35,6 @@ public class RandomizeOre : MonoBehaviour
             return;
         }
 
-        // Cek dulu apakah ada data ore?
         if (oreList == null || oreList.Length == 0) return;
 
         int count = 0;

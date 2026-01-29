@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Collections; 
 public class PlayerStats : MonoBehaviour
 {
     [Header("Attributes")]
@@ -15,8 +15,12 @@ public class PlayerStats : MonoBehaviour
     public float baseMiningCost = 10f;
     public Image staminaBar;
 
+    private SurvivalSystem survivalSystem; 
+
     void Start()
     {
+        survivalSystem = FindFirstObjectByType<SurvivalSystem>();
+
         if (GlobalData.hasDataInitialized)
         {
             currentMoney = GlobalData.savedMoney;
@@ -31,12 +35,52 @@ public class PlayerStats : MonoBehaviour
         UpdateUI();
     }
 
+    public void ConsumeStamina(float amount)
+    {
+        if (currentStamina <= 0) return; 
+
+        currentStamina -= amount;
+        UpdateUI();
+        GlobalData.savedStamina = currentStamina;
+
+        if (currentStamina <= 0)
+        {
+            currentStamina = 0;
+            
+            StartCoroutine(WaitAndCheckSurvival());
+        }
+    }
+
+    IEnumerator WaitAndCheckSurvival()
+    {
+        yield return new WaitForSeconds(0.2f); 
+
+        if (survivalSystem != null)
+        {
+            survivalSystem.CheckSurvivalStatus();
+        }
+    }
+
+    public void ConsumeStaminaForMining()
+    {
+        float reduction = (strength - 1);
+        float cost = Mathf.Clamp(baseMiningCost - reduction, 1f, baseMiningCost);
+        ConsumeStamina(cost);
+    }
+
+    public void EatFood(int healAmount)
+    {
+        currentStamina = Mathf.Min(maxStamina, currentStamina + healAmount);
+        GlobalData.savedStamina = currentStamina;
+        UpdateUI();
+    }
+
     public void AddMoney(int amount)
     {
         currentMoney += amount;
         GlobalData.savedMoney = currentMoney;
 
-        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        InventoryUI ui = FindFirstObjectByType<InventoryUI>(); 
         if (ui != null) ui.RefreshInventoryItems();
     }
 
@@ -47,23 +91,6 @@ public class PlayerStats : MonoBehaviour
         currentMoney -= amount;
         GlobalData.savedMoney = currentMoney;
         return true;
-    }
-
-    public void ConsumeStaminaForMining()
-    {
-        float reduction = (strength - 1);
-        float cost = Mathf.Clamp(baseMiningCost - reduction, 1f, baseMiningCost);
-
-        currentStamina = Mathf.Max(0, currentStamina - cost);
-        GlobalData.savedStamina = currentStamina;
-        UpdateUI();
-    }
-
-    public void EatFood(int healAmount)
-    {
-        currentStamina = Mathf.Min(maxStamina, currentStamina + healAmount);
-        GlobalData.savedStamina = currentStamina;
-        UpdateUI();
     }
 
     void UpdateUI()
