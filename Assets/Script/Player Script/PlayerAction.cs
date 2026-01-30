@@ -13,11 +13,7 @@ public class PlayerAction : MonoBehaviour
     [Header("Action Settings")]
     public float miningRange = 2.5f;
     public Transform playerBodyLocation;
-
-    [Tooltip("Weda waktu sebelum damage masuk (sesuaikan animasi)")]
     public float hitDelay = 0.4f;
-
-    [Tooltip("Jeda waktu antar klik (biar ga spam)")]
     public float actionCooldown = 0.7f;
     private float lastActionTime;
 
@@ -59,6 +55,7 @@ public class PlayerAction : MonoBehaviour
         if (Keyboard.current.digit1Key.wasPressedThisFrame) ToggleSlot(0);
         if (Keyboard.current.digit2Key.wasPressedThisFrame) ToggleSlot(1);
         if (Keyboard.current.digit3Key.wasPressedThisFrame) ToggleSlot(2);
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) ToggleSlot(3); // Tambahin slot 4 biar lengkap
     }
 
     void HandleActionInput()
@@ -138,16 +135,13 @@ public class PlayerAction : MonoBehaviour
     void UpdatePlayerHand()
     {
         if (playerVisual == null) return;
-
         ItemInstance item = GetCurrentActiveSlot()?.GetItem();
         playerVisual.UpdateHandSprite(item?.itemData);
     }
 
-    // Animasi Holding
     void UpdateArmedState()
     {
         if (animator == null) return;
-
         ItemInstance currentItem = GetCurrentActiveSlot()?.GetItem();
         
         float armedValue = 0f; 
@@ -156,17 +150,11 @@ public class PlayerAction : MonoBehaviour
         {
             switch (currentItem.itemData.itemType)
             {
-                case ItemType.Tool:
-                    armedValue = 1f; 
-                    break;
-
+                case ItemType.Tool: armedValue = 1f; break;
                 case ItemType.Food:
-                case ItemType.Resource:
-                    armedValue = 2f; 
-                    break;
+                case ItemType.Resource: armedValue = 2f; break;
             }
         }
-
         animator.SetFloat("isArmed", armedValue);
     }
     #endregion
@@ -196,26 +184,25 @@ public class PlayerAction : MonoBehaviour
     {
         if (playerStats == null) return;
 
-        if (AudioManager.instance != null)
+        bool isEaten = playerStats.EatFood(item.calculatedValue);
+        if (isEaten)
         {
-            string foodName = item.itemData.name;
+            // Mainkan Suara
+            if (AudioManager.instance != null)
+            {
+                string foodName = item.itemData.name;
+                if (foodName == "Coklat") AudioManager.instance.PlaySFX(AudioManager.instance.sfxEatChocolate);
+                else if (foodName == "Mie Ayam") AudioManager.instance.PlaySFX(AudioManager.instance.sfxEatNoodle);
+            }
 
-            if (foodName == "Coklat")
-            {
-                AudioManager.instance.PlaySFX(AudioManager.instance.sfxEatChocolate);
-            }
-            else if (foodName == "Mie Ayam")
-            {
-                AudioManager.instance.PlaySFX(AudioManager.instance.sfxEatNoodle);
-            }
+            slot.ClearSlot();
+            
+            ForceUpdateVisuals();
+            
+            Debug.Log("Nyam! Stamina bertambah.");
         }
-
-        if (animator != null) animator.SetTrigger("Eat"); 
-
-        playerStats.EatFood(item.calculatedValue);
-        slot.ClearSlot();
-        ForceUpdateVisuals();
     }
+
 
     void UseTool()
     {

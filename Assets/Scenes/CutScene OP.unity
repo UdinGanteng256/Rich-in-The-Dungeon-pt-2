@@ -147,9 +147,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 70fe6f6cf8d07c445913e540a6a9edac, type: 3}
+  m_Resource: {fileID: 8300000, guid: 15d0c2da67c1056419fa163a348776ae, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -565,8 +565,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -583,8 +583,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 756211966}
   - component: {fileID: 756211965}
   - component: {fileID: 756211964}
+  - component: {fileID: 756211967}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -751,7 +752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2341807999280410684, guid: 1c34f861a5b9e0046882ddea20b53c7b, type: 3}
+  m_Sprite: {fileID: -766422060036826523, guid: 30520d7992e9ada4aa003911a87b827b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -769,6 +770,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756211962}
   m_CullTransparentMesh: 1
+--- !u!114 &756211967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756211962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ea1c48c8ee23442be107da51cbf44b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
 --- !u!1 &832928566
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,8 +925,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2067,6 +2080,7 @@ GameObject:
   - component: {fileID: 2030901181}
   - component: {fileID: 2030901180}
   - component: {fileID: 2030901179}
+  - component: {fileID: 2030901182}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -2170,7 +2184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2341807999280410684, guid: 1c34f861a5b9e0046882ddea20b53c7b, type: 3}
+  m_Sprite: {fileID: -766422060036826523, guid: 30520d7992e9ada4aa003911a87b827b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2188,6 +2202,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030901177}
   m_CullTransparentMesh: 1
+--- !u!114 &2030901182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030901177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ea1c48c8ee23442be107da51cbf44b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
 --- !u!1 &2102778501
 GameObject:
   m_ObjectHideFlags: 0

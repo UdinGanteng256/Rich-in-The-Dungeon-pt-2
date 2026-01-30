@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class LevelRequirementTrigger : MonoBehaviour
 {
@@ -23,12 +24,12 @@ public class LevelRequirementTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Cek apakah yang mendekat itu Player?
         if (collision.CompareTag("Player"))
         {
             CheckAndReact();
         }
     }
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -44,6 +45,8 @@ public class LevelRequirementTrigger : MonoBehaviour
     {
         int currentFood = CountFood();
 
+        Debug.Log($"Total Makanan (Tas + Hotbar): {currentFood}/{foodRequired}");
+
         if (currentFood >= foodRequired)
         {
             Debug.Log("Syarat Lolos! Otw pindah level...");
@@ -54,7 +57,7 @@ public class LevelRequirementTrigger : MonoBehaviour
             }
             else
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(nextSceneName);
+                SceneManager.LoadScene(nextSceneName);
             }
         }
         else
@@ -70,15 +73,32 @@ public class LevelRequirementTrigger : MonoBehaviour
 
     int CountFood()
     {
-        if (inventoryGrid == null) return 0;
-        int count = 0;
-        List<ItemInstance> allItems = inventoryGrid.GetAllItems();
-        
-        foreach (var item in allItems)
+        int totalCount = 0;
+
+        if (inventoryGrid != null)
         {
-            if (item != null && item.itemData.itemType == ItemType.Food) 
-                count++; 
+            List<ItemInstance> allItems = inventoryGrid.GetAllItems();
+            foreach (var item in allItems)
+            {
+                if (item != null && item.itemData.itemType == ItemType.Food) 
+                    totalCount++; 
+            }
         }
-        return count;
+
+        if (GlobalData.savedHotbarItems != null)
+        {
+            foreach (var item in GlobalData.savedHotbarItems)
+            {
+                if (item != null && item.itemData != null)
+                {
+                    if (item.itemData.itemType == ItemType.Food)
+                    {
+                        totalCount++;
+                    }
+                }
+            }
+        }
+
+        return totalCount;
     }
 }

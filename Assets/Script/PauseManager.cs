@@ -3,12 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    [Header("Settings")]
+    public string firstLevelName = "Main1"; 
+
     [SerializeField] private GameObject settingsPanel;
 
     void Start()
     {
         if (settingsPanel != null)
             settingsPanel.SetActive(false);
+        
         Time.timeScale = 1f;
     }
 
@@ -29,12 +33,17 @@ public class PauseManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        GlobalData.ResetData(); 
+
+        SceneManager.LoadScene(firstLevelName);
     }
 
     public void Home()
     {
         Time.timeScale = 1f;
+        
+        // Reset Data juga kalau balik ke Home
         GlobalData.ResetData(); 
         
         if (AudioManager.instance != null)

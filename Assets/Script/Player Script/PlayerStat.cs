@@ -68,11 +68,19 @@ public class PlayerStats : MonoBehaviour
         ConsumeStamina(cost);
     }
 
-    public void EatFood(int healAmount)
+    public bool EatFood(int healAmount)
     {
+        if (currentStamina >= maxStamina)
+        {
+            return false; 
+        }
+
         currentStamina = Mathf.Min(maxStamina, currentStamina + healAmount);
+        
         GlobalData.savedStamina = currentStamina;
         UpdateUI();
+
+        return true;
     }
 
     public void AddMoney(int amount)
