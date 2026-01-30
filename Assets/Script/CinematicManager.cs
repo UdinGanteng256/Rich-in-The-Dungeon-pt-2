@@ -33,9 +33,10 @@ public class CinematicManager : MonoBehaviour
                 mainMenuPanel.SetActive(false);
         }
 
+        // Logic Gameplay
         if (isGameplayLevel)
         {
-            // reserved
+
         }
     }
 
@@ -47,8 +48,12 @@ public class CinematicManager : MonoBehaviour
         SceneManager.LoadScene(introSceneName);
     }
 
+
     public void OnButtonGoHome()
     {
+        if (AudioManager.instance != null)
+            AudioManager.instance.StopAllMusic();
+
         GlobalData.ResetData();
         SceneManager.LoadScene(normalEndingSceneName);
     }
@@ -63,12 +68,18 @@ public class CinematicManager : MonoBehaviour
 
     public void PlayGameOverCutscene()
     {
+        if (AudioManager.instance != null)
+            AudioManager.instance.StopAllMusic();
+
         GlobalData.ResetData();
         SceneManager.LoadScene(gameOverSceneName);
     }
 
     public void PlayWinCutscene()
     {
+        if (AudioManager.instance != null)
+            AudioManager.instance.StopAllMusic();
+
         GlobalData.ResetData();
         SceneManager.LoadScene(goodEndingSceneName);
     }

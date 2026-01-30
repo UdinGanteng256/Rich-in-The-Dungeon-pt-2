@@ -41,17 +41,23 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-    public void ToggleInventory(bool status)
-    
+   public void ToggleInventory(bool status)
     {
         isInventoryOpen = status;
 
         if (inventoryWindowObj != null)
             inventoryWindowObj.SetActive(isInventoryOpen);
         
-        if (status == true && AudioManager.instance != null)
+        if (AudioManager.instance != null)
         {
-            AudioManager.instance.PlaySFX(AudioManager.instance.sfxBackpackOpen);
+            if (status == true)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.instance.sfxBackpackOpen);
+            }
+            else
+            {
+                AudioManager.instance.PlaySFX(AudioManager.instance.sfxBackpackClose);
+            }
         }
     }
 
